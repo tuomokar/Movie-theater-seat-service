@@ -1,0 +1,104 @@
+package seatservice.filehandling;
+
+import seatservice.domain.Hall;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * This class is responsible for reading and parsing through the database file
+ * containing the information on the halls of the movie theater and creates hall
+ * objects out of the information
+ */
+public class HallParser {
+
+    private String name;
+    private List<Hall> halls;
+
+    /**
+     * The constructor receives the file path as the parameter and sets it as
+     * the value of the 'name' instance variable
+     *
+     * @param filePath
+     */
+    public HallParser(String filePath) {
+        this.name = filePath;
+        this.halls = new ArrayList<>();
+        readFile();
+    }
+
+    /**
+     * This method reads the file in the given path and parses it in order
+     * to create hall objects from the information within the file.
+     * The method goes through each line and at each line, it first checks
+     * if the line is one that is between the informations of each hall. If it
+     * is, then the reader moves on the next line, but if it is not, the line
+     * is split, with the second index (index 1) being the one with the raw
+     * info on the hall (name, amount of rows or amount of seats in a row).
+     * Then this info is put on the "hallInformation" array.
+     * If the line is the last of the information required to create a hall,
+     * a new hall is created and the "hallInformation" array is reseted for use
+     * in another one.
+     * @return true if the file reading and parsing succeeded
+     */
+    public boolean readFile() {
+        String[] hallInformation = new String[3];
+        int i = 0;
+        try {
+            Scanner reader = new Scanner(new File(name));
+
+            while (reader.hasNext()) {
+                String line = reader.nextLine();
+                if (lineMarksSpaceBetweenHalls(line)) {
+                    continue;
+                }
+
+                String[] lineSplit = line.split(": ");
+                hallInformation[i] = lineSplit[1];
+
+                i++;
+                if (lineIsTheLastNeededForAHall(line)) {
+
+                    i = 0;
+                    halls.add(createNewHall(hallInformation));
+                    hallInformation = new String[3];
+                }
+
+            }
+        } catch (FileNotFoundException ex) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
+     * Returns the halls that were parsed when the file was read.
+     * @return the halls as a list
+     */
+    public List<Hall> getHalls() {
+        return halls;
+    }
+
+    private boolean lineIsTheLastNeededForAHall(String line) {
+        return line.contains("seats in a row");
+    }
+
+    private boolean lineMarksSpaceBetweenHalls(String line) {
+        return line.contains(";");
+    }
+
+    private Hall createNewHall(String[] hallInformation) {
+        String hallName = hallInformation[0];
+        int rows = Integer.parseInt(hallInformation[1]);
+        int seatsInARow = Integer.parseInt(hallInformation[2]);
+
+        Hall hall = new Hall(hallName, rows, seatsInARow);
+        return hall;
+    }
+
+}
