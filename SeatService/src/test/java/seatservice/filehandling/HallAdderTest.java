@@ -47,6 +47,7 @@ public class HallAdderTest {
     /**
      * Some of the methods use a test file. This test file's content is
      * reseted after each test method
+     * 
      * @throws IOException 
      */
     @After

@@ -17,4 +17,4 @@ Started the project:
   - added a couple of domain classes (Seat and Hall)
   - added a couple of file handling classes (HallAdder and HallParser)
   - created javadoc comments for them at the same time
-  - created tests for the domain classes and tested those classes thoroughly
+  - created tests for the domain classes and tested them thoroughly

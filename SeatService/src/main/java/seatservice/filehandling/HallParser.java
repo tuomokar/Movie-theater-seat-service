@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class is responsible for reading and parsing through the database file
@@ -16,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class HallParser {
 
-    private String name;
+    private String filePath;
     private List<Hall> halls;
 
     /**
@@ -26,7 +24,7 @@ public class HallParser {
      * @param filePath
      */
     public HallParser(String filePath) {
-        this.name = filePath;
+        this.filePath = filePath;
         this.halls = new ArrayList<>();
         readFile();
     }
@@ -39,17 +37,19 @@ public class HallParser {
      * is, then the reader moves on the next line, but if it is not, the line
      * is split, with the second index (index 1) being the one with the raw
      * info on the hall (name, amount of rows or amount of seats in a row).
-     * Then this info is put on the "hallInformation" array.
+     * Then this info is put on the "hallInformation" array, which has room
+     * for three elements (name, rows and amount of seats within a row).
      * If the line is the last of the information required to create a hall,
      * a new hall is created and the "hallInformation" array is reseted for use
      * in another one.
+     * 
      * @return true if the file reading and parsing succeeded
      */
     public boolean readFile() {
         String[] hallInformation = new String[3];
         int i = 0;
         try {
-            Scanner reader = new Scanner(new File(name));
+            Scanner reader = new Scanner(new File(filePath));
 
             while (reader.hasNext()) {
                 String line = reader.nextLine();
@@ -59,10 +59,9 @@ public class HallParser {
 
                 String[] lineSplit = line.split(": ");
                 hallInformation[i] = lineSplit[1];
-
                 i++;
-                if (lineIsTheLastNeededForAHall(line)) {
 
+                if (lineIsTheLastNeededForAHall(line)) {
                     i = 0;
                     halls.add(createNewHall(hallInformation));
                     hallInformation = new String[3];
@@ -78,10 +77,29 @@ public class HallParser {
 
     /**
      * Returns the halls that were parsed when the file was read.
+     * 
      * @return the halls as a list
      */
     public List<Hall> getHalls() {
         return halls;
+    }
+    
+    /**
+     * Returns the file path
+     * 
+     * @return the file path
+     */
+    public String getFilePath() {
+        return filePath;
+    }
+    
+    /**
+     * Changes the current file path to the new path given as the parameter
+     * 
+     * @param newPath 
+     */
+    public void changeFilePath(String newPath) {
+        filePath = newPath;
     }
 
     private boolean lineIsTheLastNeededForAHall(String line) {
