@@ -48,5 +48,17 @@ public class HallAdder {
     private boolean checkParameters(String name, int rows, int seatsInARow) {
         return name != null && !name.isEmpty() && rows > 0 && seatsInARow > 0;
     }
+    
+    public void changeFilePath(String newPath) {
+        fileName = newPath;
+    }
+    
+    /**
+     * Returns the current file path of the file
+     * @return file
+     */
+    public String getFilePath() {
+        return fileName;
+    }
 
 }

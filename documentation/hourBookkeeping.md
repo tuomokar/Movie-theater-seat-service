@@ -14,7 +14,7 @@ Started the project:
 
 - thought about some of the basic functionality more thoroughly
 - started actually coding
-	- added a couple of domain classes (Seat and Hall)
-	- added a couple of file handling classes (HallAdder and HallParser)
-	- created javadoc comments for them at the same time
-	- created tests for the domain classes and tested those classes thoroughly
+  - added a couple of domain classes (Seat and Hall)
+  - added a couple of file handling classes (HallAdder and HallParser)
+  - created javadoc comments for them at the same time
+  - created tests for the domain classes and tested those classes thoroughly

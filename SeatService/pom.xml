@@ -44,11 +44,11 @@
                 <configuration>
                     <targetClasses>
                         <param>seatservice.domain.*</param>
-                        <param>seatservice.domain.*</param>
+                        <param>seatservice.filehandling.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>seatservice.domain.*</param>
-                        <param>seatservice.domain.*</param>
+                        <param>seatservice.filehandling.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
