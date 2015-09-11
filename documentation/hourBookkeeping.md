@@ -27,3 +27,9 @@ Started the project:
 
 - wrote tests for the HallAdder and HallParser classes
 (noteworthy that this took some time as there was some stuff with the files that was a little hard to test and I couldn't get some things to work properly)
+
+**Friday 11/9/2015, 1 hour**
+
+- initial draft of class diagram added
+- some minor changes to javadoc
+- some general pondering about some things related to certain parts of the project (e.g. perhaps Seat class should just inherit from JButton and how this would affect things)
