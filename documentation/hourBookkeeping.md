@@ -7,13 +7,15 @@
 
 **Wednesday 2/9/2015, 1 hour**
 
-Started the project: 
+Started the project:
 - made the repository
 - made the project in Netbeans
 - started the basic documentation of the project
 
 **Monday 7/9/2015, 5 hours**
 
+- configured Pit to test only certain classes (not Main)
+- added checkstyle
 - thought about some of the basic functionality more thoroughly
 - started actually coding
   - added a couple of domain classes (Seat and Hall)

@@ -49,6 +49,10 @@ public class HallAdder {
         return name != null && !name.isEmpty() && rows > 0 && seatsInARow > 0;
     }
     
+    /**
+     * Changes the current file path to a new one that is given as the parameter
+     * @param newPath 
+     */
     public void changeFilePath(String newPath) {
         fileName = newPath;
     }

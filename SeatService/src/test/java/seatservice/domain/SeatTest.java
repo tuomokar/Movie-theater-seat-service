@@ -36,16 +36,27 @@ public class SeatTest {
     public void tearDown() {
     }
 
+    /**
+     * Checks that the button's color is green after being created
+     */
     @Test
     public void checkTheButtonIsGreenColorAfterBeingCreated() {
         assertEquals(Color.green, seat.getButton().getBackground());
     }
     
+    /**
+     * Checks that the seat's state of availability is set to available at
+     * creation
+     */
     @Test
     public void checkTheSeatIsAvailableAfterBeingCreated() {
         assertEquals(true, seat.isAvailable());
     }
     
+    /**
+     * Checks that setting the seat unavailable and then back to available
+     * works
+     */
     @Test
     public void settingToUnavailableAndBackToAvailableWorks() {
         seat.setToUnavailable();
