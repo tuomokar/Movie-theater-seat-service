@@ -20,6 +20,7 @@ public class HallParserTest {
 
     private HallParser hallParser;
     private HallAdder hallAdder;
+    private String filePath = "src/test/testFile.txt";
 
     public HallParserTest() {
     }
@@ -33,18 +34,17 @@ public class HallParserTest {
     }
 
     /**
-     * Before each test, initializes the hallParser instance variable
-     * and the hallAdder instance variable.
-     * The hallAdder writes information of one hall to the test file so that
-     * it can be used to check that the hallParser reads the file correctly.
+     * Before each test, initializes the hallParser and hallAdder instance
+     * variables. The default filePath is the same for both.
+     * The method also resets the text file's content in case aanother 
+     * test method has written something in it.
      * @throws IOException
      */
     @Before
     public void setUp() throws IOException {
-        this.hallParser = new HallParser("src/test/testFile.txt");
-        hallAdder = new HallAdder();
-        hallAdder.changeFilePath("src/test/testFile.txt");
-        hallAdder.createNewHall("name", 3, 3);       
+        this.hallParser = new HallParser(filePath);
+        hallAdder = new HallAdder(filePath);
+        resetFileContent();
     }
 
     /**
@@ -59,17 +59,17 @@ public class HallParserTest {
      * Checks that the readFile method returns false if file path is false,
      * meaning the file isn't found
      */
-//    @Test
-    public void wrongPathGivenToTheConstructorReturnsFalse() {
-        HallParser testParser = new HallParser("falsePath");
-        assertFalse(new HallParser("falsePath").readFile());
+    @Test
+    public void readFileReturnsFalseWithWrongFilePath() {
+        hallParser.changeFilePath("false path");
+        assertFalse(hallParser.readFile());
     }
     
     /**
      * Checks that the readFile method finds the file in the path that is given
      * to the class in its constructor. Meaning, the method returns true.
      */
-//    @Test
+    @Test
     public void fileIsFoundWithTheCorrectPath() {
         assertTrue(hallParser.readFile());
     }
@@ -79,9 +79,10 @@ public class HallParserTest {
      * from the info in the text file
      * @throws IOException 
      */
-//    @Test
+    @Test
     public void hallIsParsedAndCreatedCorrectly() throws IOException {
-        hallParser.readFile();
+        hallAdder.createNewHall("name", 3, 3);
+        assertTrue(hallParser.readFile());
         assertTrue(hallParser.getHalls().size() == 1);
     }
     
@@ -91,14 +92,12 @@ public class HallParserTest {
      * hallAdder instance variable to create a random amount of halls into
      * the file, and then reads the file and checks that the amount of halls
      * matches the amount of halls written into the file.
-     * The method starts out by reseting the file's content as on the set up of
-     * the method one hall is created by default.
      * 
      * @throws IOException 
      */
-//    @Test
+    @Test
     public void multipleHallsAreCreatedCorrectly() throws IOException {
-        resetFileContent();
+
         Random random = new Random();
         int manyHalls = random.nextInt(8) + 2;
         
@@ -108,16 +107,16 @@ public class HallParserTest {
         }
 
         hallParser.readFile();
+        
         assertTrue(hallParser.getHalls().size() == manyHalls);
     }
     
     /**
      * Checks that the file path change works properly
      */
-//    @Test
-    public void channgingOfFilePathWorks() {
-        String newPath = "newPath";
-        hallParser.changeFilePath(newPath);
+    @Test
+    public void changingOfFilePathWorks() {
+        hallParser.changeFilePath("newPath");
         
         assertEquals("newPath", hallParser.getFilePath());
     }

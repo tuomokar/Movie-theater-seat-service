@@ -9,13 +9,13 @@ import java.io.IOException;
  */
 public class HallAdder {
 
-    private String fileName;
+    private String filePath;
 
     /**
      * Sets name of the text file containing the information on the halls
      */
-    public HallAdder() {
-        fileName = "Hall_Database.txt";
+    public HallAdder(String filePath) {
+        this.filePath = filePath;
     }
       
     /**
@@ -34,7 +34,7 @@ public class HallAdder {
             return false;
         }
         
-        FileWriter writer = new FileWriter(fileName, true);
+        FileWriter writer = new FileWriter(filePath, true);
         
         writer.write("name: " + hallName + "\n");
         writer.write("rows: " + rows + "\n");
@@ -54,7 +54,7 @@ public class HallAdder {
      * @param newPath 
      */
     public void changeFilePath(String newPath) {
-        fileName = newPath;
+        filePath = newPath;
     }
     
     /**
@@ -62,7 +62,7 @@ public class HallAdder {
      * @return file
      */
     public String getFilePath() {
-        return fileName;
+        return filePath;
     }
 
 }

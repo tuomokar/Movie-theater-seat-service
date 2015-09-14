@@ -18,10 +18,9 @@ public class HallParser {
     private List<Hall> halls;
 
     /**
-     * The constructor receives the file path as the parameter and sets it as
-     * the value of the 'name' instance variable
+     * The constructor sets the default filepath for the text file functioning
+     * as the database for the halls. Then parses the database file.
      *
-     * @param filePath
      */
     public HallParser(String filePath) {
         this.filePath = filePath;
@@ -118,5 +117,5 @@ public class HallParser {
         Hall hall = new Hall(hallName, rows, seatsInARow);
         return hall;
     }
-
+     
 }
