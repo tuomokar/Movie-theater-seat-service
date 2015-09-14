@@ -2,3 +2,7 @@ name: testName
 rows: 3
 seats in a row: 3
 ;
+name: testName
+rows: 3
+seats in a row: 3
+;

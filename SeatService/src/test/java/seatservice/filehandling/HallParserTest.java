@@ -122,7 +122,7 @@ public class HallParserTest {
     }
     
     private void resetFileContent() throws IOException {
-        FileWriter writer = new FileWriter(new File("src/test/testFile.txt"));
+        FileWriter writer = new FileWriter(new File(filePath));
         writer.close();
     }
 }

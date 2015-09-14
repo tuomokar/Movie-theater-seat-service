@@ -13,6 +13,7 @@ public class HallAdder {
 
     /**
      * Sets name of the text file containing the information on the halls
+     * @param filePath
      */
     public HallAdder(String filePath) {
         this.filePath = filePath;

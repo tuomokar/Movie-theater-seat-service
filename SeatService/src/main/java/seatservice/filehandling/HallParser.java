@@ -19,13 +19,14 @@ public class HallParser {
 
     /**
      * The constructor sets the default filepath for the text file functioning
-     * as the database for the halls. Then parses the database file.
+     * as the database for the halls and initializes the halls instance variable
+     * that will contain any halls parsed while reading through the file.
      *
+     * @param filePath
      */
     public HallParser(String filePath) {
         this.filePath = filePath;
-        this.halls = new ArrayList<>();
-        readFile();
+        this.halls = new ArrayList<>();      
     }
 
     /**
