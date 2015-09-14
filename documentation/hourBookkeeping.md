@@ -33,3 +33,8 @@ Started the project:
 - initial draft of class diagram added
 - some minor changes to javadoc
 - some general pondering about some things related to certain parts of the project (e.g. perhaps Seat class should just inherit from JButton and how this would affect things)
+
+**Monday 14/9/2015, 2 hours**
+
+- refactored HallAdder and HallParser classes and their tests a little (and extensively checked that the tests were still functional)
+- made class HallHandler and a test class for it (and again, checked that the tests functioned well)
