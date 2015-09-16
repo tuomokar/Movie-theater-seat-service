@@ -41,14 +41,20 @@ public class HallHandlerTest {
         resetFileContent();
     }
 
-//    @Test
+    /**
+     * Checks that the file path is correct after creation
+     */
+    @Test
     public void filePathIsCorrectAtStart() {
         assertEquals(filePath, hallHandler.getFilePath());
         assertEquals(filePath, hallHandler.getHallAdder().getFilePath());
         assertEquals(filePath, hallHandler.getHallParser().getFilePath());
     }
     
-//    @Test
+    /**
+     * Checks that changing the file path works correctly
+     */
+    @Test
     public void filePathIsChangedCorrectly() {
         String newPath = "newPath";
         hallHandler.changeFilePath(newPath);
@@ -58,12 +64,11 @@ public class HallHandlerTest {
         assertEquals(newPath, hallHandler.getHallParser().getFilePath());
     }
 
+    /**
+     * Checks that there are no halls at creation
+     */
     @Test
     public void noInformationOnHallsAtCreation() {
-//        System.out.println("current file path is: " + hallHandler.getFilePath());
-//        System.out.println("current file of the parser is: " + hallHandler.getHallParser().getFilePath());
-//        System.out.println("current file of the adder is: " + hallHandler.getHallAdder().getFilePath());
-//        System.out.println("hall list at the moment: " + hallHandler.getHalls());
         assertTrue(hallHandler.getHalls().isEmpty());
     }
 
