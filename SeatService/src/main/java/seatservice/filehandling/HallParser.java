@@ -58,13 +58,17 @@ public class HallParser {
                 }
 
                 String[] lineSplit = line.split(": ");
-                hallInformation[i] = lineSplit[1];
+                hallInformation[i] = separateTheRawInfo(lineSplit);
                 i++;
 
                 if (lineIsTheLastNeededForAHall(line)) {
                     i = 0;
-                    halls.add(createNewHall(hallInformation));
-                    hallInformation = new String[3];
+                    
+                    Hall hall = createNewHall(hallInformation);
+                    if (hallIsNotYetOnTheList(hall)) {
+                        halls.add(hall);
+                    }
+                    hallInformation = resetHallInformation();
                 }
 
             }
@@ -74,6 +78,7 @@ public class HallParser {
         
         return true;
     }
+ 
 
     /**
      * Returns the halls that were parsed when the file was read.
@@ -117,6 +122,18 @@ public class HallParser {
 
         Hall hall = new Hall(hallName, rows, seatsInARow);
         return hall;
+    }
+    
+    private String[] resetHallInformation() {
+        return new String[3];
+    }
+    
+    private boolean hallIsNotYetOnTheList(Hall hall) {
+        return !halls.contains(hall);
+    }
+    
+    private String separateTheRawInfo(String[] lineSplit) {
+        return lineSplit[1];
     }
      
 }

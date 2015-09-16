@@ -24,9 +24,6 @@ public class HallAdderTest {
     private HallAdder hallAdder;
     private String filePath = "src/test/testFile.txt";
 
-    // doesn't work for some reason
-//    @Rule
-//    public TemporaryFolder tempFolder = new TemporaryFolder();
     public HallAdderTest() {
     }
 
@@ -79,13 +76,6 @@ public class HallAdderTest {
      */
     @Test
     public void fileWritingIsSuccessful() throws IOException {
-
-        // doesn't work for some reason (i.e. the createNewHall method of the Hall
-        // either doesn't use this existing temporary file or uses it
-        // but for some reason the test doesn't discard the file after this method
-//        File temp = tempFolder.newFile("src/test/testFile.txt");
-        
-        // this works normally of course
         assertTrue(hallAdder.createNewHall("testHall", 2, 3));
     }
 
@@ -101,8 +91,8 @@ public class HallAdderTest {
     public void correctTextIsWritten() throws IOException {
         hallAdder.changeFilePath(filePath);
         String name = "testHall";
-        int rows = 4;
-        int seatsAtARow = 5;
+        int rows = 2;
+        int seatsAtARow = 3;
 
         assertTrue(hallAdder.createNewHall(name, rows, seatsAtARow));
 
@@ -127,7 +117,6 @@ public class HallAdderTest {
         Object[][] hallInfo = infoOnMultipleTestHalls();
 
         for (int i = 0; i < 5; i++) {
-                
                 assertTrue(hallAdder.createNewHall((String) hallInfo[i][0],
                         (int) hallInfo[i][1], (int) hallInfo[i][2]));
                 
@@ -163,7 +152,7 @@ public class HallAdderTest {
     }
 
     private int getRandomNumber() {
-        return new Random().nextInt(100000);
+        return new Random().nextInt(10) + 1;
     }
 
     private StringBuilder parseFile() throws FileNotFoundException {
@@ -180,7 +169,7 @@ public class HallAdderTest {
 
     private boolean hasTheRightInfo(StringBuilder sb,
             String name, int rows, int seatsAtARow) {
-
+        
         return sb.toString().contains("name: " + name + "\n"
                 + "rows: " + rows + "\nseats in a row: " + seatsAtARow + "\n;");
 

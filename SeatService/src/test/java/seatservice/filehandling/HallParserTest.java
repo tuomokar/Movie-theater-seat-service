@@ -10,8 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.Random;
+import seatservice.domain.Hall;
 import seatservice.filehandling.HallAdder;
 import seatservice.filehandling.HallParser;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Tests the HallParser class
@@ -76,7 +79,9 @@ public class HallParserTest {
     
     /**
      * Checks that the readFile method correctly creates a Hall object
-     * from the info in the text file
+     * from the info in the text file. In practice, it checks that the
+     * hallParser has info on one hall and that the hall's info matches
+     * the one just written into the file.
      * @throws IOException 
      */
     @Test
@@ -84,14 +89,21 @@ public class HallParserTest {
         hallAdder.createNewHall("name", 3, 3);
         assertTrue(hallParser.readFile());
         assertTrue(hallParser.getHalls().size() == 1);
+        
+        String toStringShouldBe = "name: name\nrows: " + 3 + 
+                "\nseats in a row: " + 3 + "\n";
+        
+        assertEquals(toStringShouldBe, hallParser.getHalls().get(0).toString());
     }
     
     /**
      * Checks that the readFile method correctly creates multiple Hall objects
      * from the info in the text file. For this to happen, it first uses the
      * hallAdder instance variable to create a random amount of halls into
-     * the file, and then reads the file and checks that the amount of halls
-     * matches the amount of halls written into the file.
+     * the file and with each hall written, it's checked that the hall's
+     * info (parsed from the file) matches the info just written into the file.
+     * At the end it's checked that the amount of halls written into the file
+     * matches the amount of halls parsed from the file.
      * 
      * @throws IOException 
      */
@@ -104,11 +116,16 @@ public class HallParserTest {
         for (int i = 1; i <= manyHalls; i++) {
             int value = random.nextInt(4) + 1;
             hallAdder.createNewHall("name", value, i);
+            hallParser.readFile();
+            List<Hall> halls = hallParser.getHalls();
+            
+            String info = "name: name\nrows: " + value + "\nseats in a row: " +
+                    i + "\n";
+            assertEquals(info, halls.get(i - 1).toString());
         }
-
-        hallParser.readFile();
         
         assertTrue(hallParser.getHalls().size() == manyHalls);
+
     }
     
     /**

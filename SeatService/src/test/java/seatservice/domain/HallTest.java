@@ -103,4 +103,14 @@ public class HallTest {
         assertEquals(3, hall.getSeatsWithinARow(1).size());
         assertEquals(3, hall.getSeatsWithinARow(2).size());
     }
+    
+    /**
+     * Checks that the toString method works correctly
+     */
+    @Test
+    public void toStringWorksCorrectly() {
+        String toStringShouldBe = "name: name\nrows: " + amountOfRows +
+                "\nseats in a row: " + amountOfSeatsWithinRow + "\n";
+        assertEquals(toStringShouldBe, hall.toString());
+    }
 }

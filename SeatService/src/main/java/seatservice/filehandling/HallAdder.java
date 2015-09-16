@@ -2,6 +2,7 @@ package seatservice.filehandling;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import seatservice.domain.Hall;
 
 /**
  * This class is responsible for adding new halls to the movie theater's
@@ -34,12 +35,11 @@ public class HallAdder {
         if (!checkParameters(hallName, rows, seatsInARow)) {
             return false;
         }
-        
+
+        Hall hall = new Hall(hallName, rows, seatsInARow);
         FileWriter writer = new FileWriter(filePath, true);
         
-        writer.write("name: " + hallName + "\n");
-        writer.write("rows: " + rows + "\n");
-        writer.write("seats in a row: " + seatsInARow + "\n");
+        writer.write(hall.toString());
         writer.write(";\n");
         writer.close();
         

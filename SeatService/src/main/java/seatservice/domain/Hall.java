@@ -2,6 +2,7 @@ package seatservice.domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * This class presents a single hall in the movie theater. Each hall has a name
@@ -119,12 +120,53 @@ public class Hall {
     }
 
     /**
-     * Returns some of the hall's basic info as a string, containing the name 
-     * and the amount of seats still available.
-     * @return the hall's name and the amount of seats available
+     * Returns the hall's basic info, i.e. name, amount of rows and the
+     * amount of seats in a row
+     * @return a string containing the hall's name, amount of rows and the
+     * amount of seats in a row
      */
     @Override
     public String toString() {
-        return name + ", seats available: " + getTheAmountOfAvailableSeats();
+        StringBuilder sb = new StringBuilder();
+        sb.append("name: ").append(name).append("\n");
+        sb.append("rows: ").append(seats.size()).append("\n");
+        sb.append("seats in a row: ").append(seats.get(1).size()).append("\n");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the hashcode for the object
+     * @return 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.seats);
+        return hash;
+    }
+
+    /**
+     * Compares this hall to another hall to see if they're the same
+     * The primary check for it is to see if the string returned by their
+     * toString() methods are the same.
+     * @param obj
+     * @return true if this object is the same as the one as the one given as
+     * the parameter
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hall other = (Hall) obj;
+        if (!this.toString().equals(other.toString())) {
+            return false;
+        }
+
+        return true;
     }
 }
