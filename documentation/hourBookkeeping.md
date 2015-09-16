@@ -38,3 +38,13 @@ Started the project:
 
 - refactored HallAdder and HallParser classes and their tests a little (and extensively checked that the tests were still functional)
 - made class HallHandler and a test class for it (and again, checked that the tests functioned well)
+
+**Wednesday 16/9/2015, 3 hours**
+
+- refactored Hall class a little and other classes and tests to fit that
+- added HallRemover class and some tests for it (and tested them)
+- refactored the other classes dealing with files slightly
+- added the functionality for HallRemover to HallHandler class
+- started the foundations of the employee UI
+  - created some classes for it
+  - added some very basic functionality for it at least on the managing side so that you can now actually run the software
