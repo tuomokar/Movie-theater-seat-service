@@ -28,6 +28,7 @@ public class HallRemover {
      */
     public HallRemover(HallParser hallParser,
             String filePath) {
+        
         this.hallParser = hallParser;
         this.filePath = filePath;
     }
