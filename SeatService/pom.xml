@@ -45,10 +45,12 @@
                     <targetClasses>
                         <param>seatservice.domain.*</param>
                         <param>seatservice.filehandling.*</param>
+                        <param>seatservice.logic.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>seatservice.domain.*</param>
                         <param>seatservice.filehandling.*</param>
+                        <param>seatservice.logic.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
