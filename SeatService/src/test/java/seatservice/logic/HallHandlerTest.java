@@ -71,6 +71,32 @@ public class HallHandlerTest {
     public void noInformationOnHallsAtCreation() {
         assertTrue(hallHandler.getHalls().isEmpty());
     }
+    
+    /**
+     * Checks that adding a hall works
+     * @throws IOException 
+     */
+    @Test
+    public void addingHallWorks() throws IOException {
+        hallHandler.addNewHall("name", 2, 3);
+        hallHandler.readFile();
+        
+        assertEquals(1, hallHandler.getHalls().size());
+    }
+    
+    /**
+     * Checks that removing a hall works
+     * @throws IOException 
+     */
+    @Test
+    public void removingHallWorks() throws IOException {
+        hallHandler.addNewHall("name", 4, 3);
+        hallHandler.readFile();
+        assertEquals(1, hallHandler.getHalls().size());
+        
+        hallHandler.removeHall("name");       
+        assertTrue(hallHandler.getHalls().isEmpty());
+    }
 
     private void resetFileContent() throws IOException {
         FileWriter writer = new FileWriter(new File(filePath));

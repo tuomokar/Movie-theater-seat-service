@@ -118,6 +118,10 @@ public class Hall {
     public Map<Integer, Seat> getSeatsWithinARow(int row) {
         return seats.get(row);
     }
+    
+    public String getName() {
+        return name;
+    }
 
     /**
      * Returns the hall's basic info, i.e. name, amount of rows and the

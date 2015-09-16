@@ -6,16 +6,17 @@ import seatservice.domain.Hall;
 import seatservice.filehandling.HallAdder;
 import seatservice.filehandling.HallParser;
 import java.util.List;
+import seatservice.filehandling.HallRemover;
 
 /**
- * This class abstracts the HallAdder and HallParser classes so that they're
- * used through this class
- * @author tuomo_000
+ * This class abstracts the HallAdder, HallParser and HallRemover classes so 
+ * that they're all used through this single class
  */
 public class HallHandler {
     
     private HallAdder hallAdder;
     private HallParser hallParser;
+    private HallRemover hallRemover;
     private String filePath;
     
     /**
@@ -27,6 +28,7 @@ public class HallHandler {
         
         this.hallAdder = new HallAdder(filePath);
         this.hallParser = new HallParser(filePath);
+        this.hallRemover = new HallRemover(hallParser, filePath);
     }
     
     /**
@@ -40,6 +42,7 @@ public class HallHandler {
         
         this.hallAdder.changeFilePath(filePath);
         this.hallParser.changeFilePath(filePath);
+        this.hallRemover.changeFilePath(filePath);
     }
     
     /**
@@ -92,6 +95,29 @@ public class HallHandler {
      */
     public String getFilePath() {
         return filePath;
+    }
+    
+    /**
+     * Removes a hall. The hall to be removed is decided by the name given
+     * as the parameter. The method finds the matching hall, which is null in
+     * case a matching hall isn't found. In that case, the method returns false
+     * and doesn't do anything. If the hall is found, the hall is removed
+     * and the method returns true.
+     * @param name
+     * @return true if the hall is found and removed successfully
+     * @throws IOException 
+     */
+    public boolean removeHall(String name) throws IOException {
+        Hall hall = hallParser.getHall(name);
+        
+        if (hall == null) {
+            return false;
+        }
+        
+        hallRemover.removeHall(hall);
+        return true;
+            
+            
     }
     
 }

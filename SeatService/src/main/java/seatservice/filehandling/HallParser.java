@@ -106,6 +106,15 @@ public class HallParser {
     public void changeFilePath(String newPath) {
         filePath = newPath;
     }
+    
+    public Hall getHall(String name) {
+        for (Hall hall : halls) {
+            if (hall.getName().equals(name)) {
+                return hall;
+            }
+        }
+        return null;
+    }
 
     private boolean lineIsTheLastNeededForAHall(String line) {
         return line.contains("seats in a row");
