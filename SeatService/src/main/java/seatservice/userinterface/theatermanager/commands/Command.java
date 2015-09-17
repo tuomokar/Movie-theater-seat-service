@@ -36,6 +36,10 @@ public abstract class Command {
         return name;
     }
     
+    protected boolean wantsToAbort(String name) {
+        return name.equals("/abort");
+    }
+    
     /**
      * Runs this command
      * @return true if the program is supposed to continue after the command

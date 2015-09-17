@@ -73,7 +73,11 @@ public class HallParser {
 
             }
         } catch (FileNotFoundException ex) {
+            System.out.println("File was not found for some reason");
             return false;
+        } catch (NumberFormatException exc) {
+            throw new NumberFormatException("Ran into an error while parsing "
+                    + " the file, please check the database's integrity");
         }
         
         return true;

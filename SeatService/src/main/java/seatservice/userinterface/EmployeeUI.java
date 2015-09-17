@@ -17,7 +17,8 @@ public class EmployeeUI {
         this.hallHandler = new HallHandler();
         this.reader = new Scanner(System.in);
         this.theaterManagingUI = new TheaterManagingUI(hallHandler, reader);
-        this.customerServingUI = new CustomerServingUI(hallHandler);       
+        this.customerServingUI = new CustomerServingUI(hallHandler);
+        readHalls();
     }
 
     public void start() {
@@ -60,6 +61,10 @@ public class EmployeeUI {
 
     public void serveCustomers() {
         customerServingUI.start();
+    }
+    
+    private void readHalls() {
+        hallHandler.readFile();
     }
 
 }

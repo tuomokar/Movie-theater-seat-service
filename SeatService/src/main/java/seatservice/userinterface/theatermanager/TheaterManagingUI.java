@@ -38,6 +38,7 @@ public class TheaterManagingUI {
         boolean continuing = true;
         while (continuing) {
 
+            
             System.out.println();
             
             System.out.println("[1] Add a hall");
@@ -56,6 +57,8 @@ public class TheaterManagingUI {
             } else {
                 System.out.println("Incorrect input");
             }
+            
+            readHalls();
         }
     }
     
@@ -69,6 +72,10 @@ public class TheaterManagingUI {
     
     private void createCommand(Command command) {
         commands.put(command.getName(), command);
+    }
+    
+    private void readHalls() {
+        hallHandler.readFile();
     }
     
     
