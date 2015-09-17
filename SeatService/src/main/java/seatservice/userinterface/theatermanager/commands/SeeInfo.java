@@ -14,7 +14,7 @@ public class SeeInfo extends Command {
     }
 
     /**
-     * shows any info the employee wants and then returns true
+     * Shows any info the employee wants and then returns true
      * @return true
      */
     @Override

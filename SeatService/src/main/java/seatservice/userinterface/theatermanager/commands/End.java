@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package seatservice.userinterface.theatermanager.commands;
 
 import java.util.Scanner;
 import seatservice.logic.HallHandler;
 
-
+/**
+ * This class is responsible for ending the loop in the TheaterManagingUI
+ */
 public class End extends Command {
 
     public End(Scanner reader, HallHandler hallHandler, String name) {

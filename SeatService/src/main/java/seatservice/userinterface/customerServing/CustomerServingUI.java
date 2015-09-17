@@ -5,7 +5,6 @@ import seatservice.logic.HallHandler;
 
 /**
  * This class is responsible for handling the UI for customer
- * @author tuomo_000
  */
 public class CustomerServingUI {
 

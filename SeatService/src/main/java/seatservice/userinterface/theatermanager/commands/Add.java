@@ -5,8 +5,6 @@ import seatservice.logic.HallHandler;
 
 /**
  * This class is responsible for adding a hall or halls
- *
- * @author tuomo_000
  */
 public class Add extends Command {
 
@@ -24,7 +22,9 @@ public class Add extends Command {
      * inputs. With each input it's checked that it's not the command to abort.
      * If it is, then the method returns true (i.e. the thread goes out from the
      * class). If it's not the abort command, in the case of the hall's name
-     * it's checked that the name isn't empty
+     * it's checked that the name isn't empty and that there's no hall yet
+     * with the same name. In the case of rows and seats it's checked that
+     * they're both above zero and that they're both numbers.
      *
      * @return
      */
@@ -56,14 +56,11 @@ public class Add extends Command {
 
         hallHandler.addNewHall(hallsName, rows, seats);
 
+        System.out.println();
         System.out.println("hall was created successfully");
         System.out.println();
 
         return true;
-    }
-
-    private boolean wantsToAbort(int number) {
-        return number == 666;
     }
 
     private int parseToInt(String input) {
@@ -99,6 +96,7 @@ public class Add extends Command {
                 System.out.println("Hall with that name already exists");
                 continue;
             }
+            
             hallsName = name;
             break;
         }
@@ -118,9 +116,8 @@ public class Add extends Command {
             } else if (rowsAsInt == -100000) {
                 System.out.println("Please give a number");
                 continue;
-            } else if (this.wantsToAbort(rows)) {
-
             }
+            
             this.rows = rowsAsInt;
             break;
 

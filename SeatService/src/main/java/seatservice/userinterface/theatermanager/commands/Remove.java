@@ -6,7 +6,6 @@ import seatservice.logic.HallHandler;
 
 /**
  * This class is responsible for removing a hall or halls
- * @author tuomo_000
  */
 public class Remove extends Command {
 
