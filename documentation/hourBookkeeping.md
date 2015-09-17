@@ -48,3 +48,9 @@ Started the project:
 - started the foundations of the employee UI
   - created some classes for it
   - added some very basic functionality for it at least on the managing side so that you can now actually run the software
+  
+**Thursday 17/9/2015, 3 hours**
+
+- made command class Add (for theaterManagingUI) functional
+- spent time testing it extensively and squashed a lot of bugs
+- made some minor adjustments to other classes
