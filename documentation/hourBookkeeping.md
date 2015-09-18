@@ -54,3 +54,10 @@ Started the project:
 - made command class Add (for theaterManagingUI) functional
 - spent time testing it extensively and squashed a lot of bugs
 - made some minor adjustments to other classes
+
+**Friday 18/9/2015, 2 hours**
+
+- read about XML and did some simple practicing with it
+  - how to parse it in java and create objects out of it
+  - how to write it in java
+- updated the class diagram
