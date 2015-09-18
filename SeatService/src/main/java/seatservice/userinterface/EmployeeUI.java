@@ -6,6 +6,10 @@ import seatservice.userinterface.theatermanager.TheaterManagingUI;
 
 import java.util.Scanner;
 
+/**
+ * This class is responsible for handling the user interface and all of its
+ * aspects
+ */
 public class EmployeeUI {
 
     private HallHandler hallHandler;
@@ -13,6 +17,12 @@ public class EmployeeUI {
     private CustomerServingUI customerServingUI;
     private Scanner reader;
 
+    /**
+     * The constructor creates the hallHandler and reader along with the
+     * UI classes for managing the theater and serving customers.
+     * At the end of the constructor it parses any existing halls in the 
+     * database
+     */
     public EmployeeUI() {
         this.hallHandler = new HallHandler();
         this.reader = new Scanner(System.in);
@@ -21,6 +31,10 @@ public class EmployeeUI {
         readHalls();
     }
 
+    /**
+     * Starts the general UI. The user has options to manage theater and 
+     * serve customers and can choose to quit the program.
+     */
     public void start() {
         System.out.println("-------------------------------------------");
         System.out.println("------------------WELCOME------------------");
@@ -55,11 +69,11 @@ public class EmployeeUI {
         System.out.println("-------------------------------------------");
     }
 
-    public void manageTheater() {
+    private void manageTheater() {
         theaterManagingUI.start();
     }
 
-    public void serveCustomers() {
+    private void serveCustomers() {
         customerServingUI.start();
     }
     
