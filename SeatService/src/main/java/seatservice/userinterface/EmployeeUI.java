@@ -46,10 +46,19 @@ public class EmployeeUI {
         while (true) {
             System.out.println("Do you wish to manage the theater or serve "
                     + "customers?");
+            System.out.println("Please give a number corresponding to the"
+                    + "thing you wish do to");
+            
+            System.out.println();
+            System.out.println();
+            
             System.out.println("[1] Manage theater");
             System.out.println("[2] Serve customers");
             System.out.println("[3] End program");
 
+            System.out.println();
+            
+            System.out.print("? ");
             String choice = reader.nextLine();
 
             if (choice.equals("1")) {
@@ -59,8 +68,12 @@ public class EmployeeUI {
             } else if (choice.equals("3")) {
                 break;
             } else {
-                System.out.println("Wrong input");
+                System.out.println("Incorrect input, please give a number"
+                        + "corresponding to the thing you wish to do");
             }
+            
+            System.out.println();
+            System.out.println();
 
         }
         

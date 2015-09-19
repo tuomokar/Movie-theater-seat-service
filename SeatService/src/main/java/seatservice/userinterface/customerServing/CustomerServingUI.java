@@ -15,7 +15,7 @@ public class CustomerServingUI {
     }
         
     public void start() {
-
+        System.out.println("functionality for this isn't implemented yet");
     }
     
 }

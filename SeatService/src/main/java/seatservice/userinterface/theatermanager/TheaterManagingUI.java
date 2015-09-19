@@ -54,12 +54,12 @@ public class TheaterManagingUI {
         System.out.println("--You started the theater managing service--");
         System.out.println("--------------------------------------------");
 
-        System.out.println();
 
         boolean continuing = true;
         while (continuing) {
 
             
+            System.out.println();
             System.out.println();
             
             System.out.println("[1] Add a hall");
@@ -77,7 +77,8 @@ public class TheaterManagingUI {
                 Command command = commands.get(choice);
                 continuing = command.run();
             } else {
-                System.out.println("Incorrect input");
+                System.out.println("Incorrect input, please give a number"
+                        + "corresponding to the thing you wish to do");
             }
             
             readHalls();
