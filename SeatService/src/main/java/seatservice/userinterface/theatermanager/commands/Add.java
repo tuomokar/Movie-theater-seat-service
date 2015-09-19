@@ -34,21 +34,21 @@ public class Add extends Command {
         printOutBeginning();
 
         System.out.println();
-        System.out.println("New hall's name: ");
+        System.out.println("New hall's name:");
         readName();
         if (abort) {
             return abort();
         }
 
         System.out.println();
-        System.out.println("Amount of rows: ");
+        System.out.println("Amount of rows:");
         readRows();
         if (abort) {
             return abort();
         }
 
         System.out.println();
-        System.out.println("Amount of seats on a row: ");
+        System.out.println("Amount of seats on a row:");
         readSeats();
         if (abort) {
             return abort();
@@ -110,11 +110,11 @@ public class Add extends Command {
             if (wantsToAbort(rows)) {
                 this.abort = true;
                 return;
-            } else if (rowsAsInt <= 0) {
-                System.out.println("Halls must have at least 1 row");
-                continue;
             } else if (rowsAsInt == -100000) {
                 System.out.println("Please give a number");
+                continue;
+            } else if (rowsAsInt <= 0) {
+                System.out.println("Halls must have at least 1 row");
                 continue;
             }
             
@@ -132,11 +132,11 @@ public class Add extends Command {
             if (wantsToAbort(seats)) {
                 this.abort = true;
                 return;
-            } else if (seatsAsInt <= 0) {
-                System.out.println("Rows must have at least 1 seat");
-                continue;
             } else if (seatsAsInt == -100000) {
                 System.out.println("Please give a number");
+                continue;
+            } else if (seatsAsInt <= 0) {
+                System.out.println("Rows must have at least 1 seat");
                 continue;
             }
             this.seats = seatsAsInt;
