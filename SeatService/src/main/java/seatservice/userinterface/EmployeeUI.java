@@ -1,7 +1,7 @@
 package seatservice.userinterface;
 
 import seatservice.logic.HallHandler;
-import seatservice.userinterface.customerServing.CustomerServingUI;
+import seatservice.userinterface.customerserving.CustomerServingUI;
 import seatservice.userinterface.theatermanager.TheaterManagingUI;
 
 import java.util.Scanner;

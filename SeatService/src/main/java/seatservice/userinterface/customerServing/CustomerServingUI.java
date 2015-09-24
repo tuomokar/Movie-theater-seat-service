@@ -1,5 +1,5 @@
 
-package seatservice.userinterface.customerServing;
+package seatservice.userinterface.customerserving;
 
 import seatservice.logic.HallHandler;
 
