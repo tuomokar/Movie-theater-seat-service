@@ -29,7 +29,7 @@ public class Add extends Command {
      * @return
      */
     @Override
-    public boolean run() {
+    public boolean run() throws Exception {
         abort = false;
         printOutBeginning();
 

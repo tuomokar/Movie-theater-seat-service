@@ -45,5 +45,5 @@ public abstract class Command {
      * @return true if the program is supposed to continue after the command
      * is run
      */
-    public abstract boolean run();
+    public abstract boolean run() throws Exception ;
 }

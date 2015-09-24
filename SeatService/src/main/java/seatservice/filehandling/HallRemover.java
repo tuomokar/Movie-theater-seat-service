@@ -49,7 +49,7 @@ public class HallRemover {
     private void writeRemainingHalls() throws IOException {
         FileWriter writer = new FileWriter(filePath);
         
-        List<Hall> halls = hallParser.getHalls();
+        List<Hall> halls = hallParser.getHalls().getHalls();
         
         for (Hall hall : halls) {
             writeHall(hall, writer);
@@ -62,7 +62,7 @@ public class HallRemover {
     }
     
     private void removeHallFromList(Hall hall) {
-        hallParser.getHalls().remove(hall);
+        hallParser.getHalls().getHalls().remove(hall);
     }
     
     private void readCurrentHalls() {

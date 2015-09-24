@@ -46,7 +46,7 @@ public class TheaterManagingUI {
      * At the end of the loop the information on the halls is always read in
      * case there have been any changes.
      */
-    public void start() {
+    public void start() throws Exception {
         System.out.println();
         System.out.println();
         

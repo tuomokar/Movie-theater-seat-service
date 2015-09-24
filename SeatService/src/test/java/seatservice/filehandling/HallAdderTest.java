@@ -35,11 +35,11 @@ public class HallAdderTest {
     public static void tearDownClass() {
     }
 
-    @Before
-    public void setUp() {
-        hallAdder = new HallAdder(filePath);
-
-    }
+//    @Before
+//    public void setUp() {
+//        hallAdder = new HallAdder(filePath);
+//
+//    }
 
     /**
      * Some of the methods use a test file. This test file's content is reseted
@@ -75,7 +75,7 @@ public class HallAdderTest {
      * @throws java.io.IOException
      */
     @Test
-    public void fileWritingIsSuccessful() throws IOException {
+    public void fileWritingIsSuccessful() throws IOException, Exception {
         assertTrue(hallAdder.createNewHall("testHall", 2, 3));
     }
 
@@ -88,7 +88,7 @@ public class HallAdderTest {
      * @throws IOException
      */
     @Test
-    public void correctTextIsWritten() throws IOException {
+    public void correctTextIsWritten() throws IOException, Exception {
         hallAdder.changeFilePath(filePath);
         String name = "testHall";
         int rows = 2;
@@ -113,7 +113,7 @@ public class HallAdderTest {
      * @throws IOException
      */
     @Test
-    public void multipleHallsAreWrittenCorrectly() throws IOException {
+    public void multipleHallsAreWrittenCorrectly() throws IOException, Exception {
         Object[][] hallInfo = infoOnMultipleTestHalls();
 
         for (int i = 0; i < 5; i++) {

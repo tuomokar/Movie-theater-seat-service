@@ -35,7 +35,7 @@ public class EmployeeUI {
      * Starts the general UI. The user has options to manage theater and 
      * serve customers and can choose to quit the program.
      */
-    public void start() {
+    public void start() throws Exception {
         System.out.println("-------------------------------------------");
         System.out.println("------------------WELCOME------------------");
         System.out.println("-------------------------------------------");
@@ -82,7 +82,7 @@ public class EmployeeUI {
         System.out.println("-------------------------------------------");
     }
 
-    private void manageTheater() {
+    private void manageTheater() throws Exception  {
         theaterManagingUI.start();
     }
 

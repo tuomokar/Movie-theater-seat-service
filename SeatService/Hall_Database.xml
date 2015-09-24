@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<halls>
+    <hall>
+        <name>hall1</name>
+        <amountOfRows>3</amountOfRows>
+        <amountOfSeatsWithinRow>5</amountOfSeatsWithinRow>
+    </hall>
+    <hall>
+        <name>hall2</name>
+        <amountOfRows>3</amountOfRows>
+        <amountOfSeatsWithinRow>4</amountOfSeatsWithinRow>
+    </hall>
+</halls>

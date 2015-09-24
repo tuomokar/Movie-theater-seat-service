@@ -1,8 +1,14 @@
 package seatservice.filehandling;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import seatservice.domain.Hall;
+//import seatservice.domain.Halls;
+import seatservice.domain.Halls;
 
 /**
  * This class is responsible for adding new halls to the movie theater's
@@ -11,14 +17,17 @@ import seatservice.domain.Hall;
 public class HallAdder {
 
     private String filePath;
+    private Halls halls;
 
     /**
      * Sets name of the text file containing the information on the halls
      *
      * @param filePath
+     * @param halls
      */
-    public HallAdder(String filePath) {
+    public HallAdder(String filePath, Halls halls) {
         this.filePath = filePath;
+        this.halls = halls;
     }
 
     /**
@@ -32,23 +41,22 @@ public class HallAdder {
      * @param seatsInARow
      * @return whether or not the writing to the file succeeded
      */
-    public boolean createNewHall(String hallName, int rows, int seatsInARow) {
-        if (!checkParameters(hallName, rows, seatsInARow)) {
-            return false;
-        }
+    public boolean createNewHall(String hallName, int rows, int seatsInARow) throws JAXBException {
+//        try {
+            Hall hall = new Hall(hallName, rows, seatsInARow);
+            halls.addHall(hall);
 
-        Hall hall = new Hall(hallName, rows, seatsInARow);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-        try {
-            FileWriter writer = new FileWriter(filePath, true);
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-            writer.write(hall.toString());
-            writer.write(";\n");
-            writer.close();
-        } catch (IOException exc) {
-            System.out.println("writing to the file was unsuccessful");
-        }
-
+            jaxbMarshaller.marshal(halls, new File(filePath));
+//        } catch (JAXBException exc) {
+//            throw new JAXBException("didn't succeed");
+//            System.out.println("didn't succeed");
+//            return false;
+//        }
         return true;
     }
 

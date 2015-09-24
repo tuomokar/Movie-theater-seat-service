@@ -5,6 +5,8 @@ import seatservice.domain.Hall;
 import seatservice.filehandling.HallAdder;
 import seatservice.filehandling.HallParser;
 import java.util.List;
+import javax.xml.bind.JAXBException;
+import seatservice.domain.Halls;
 import seatservice.filehandling.HallRemover;
 
 /**
@@ -17,16 +19,18 @@ public class HallHandler {
     private HallParser hallParser;
     private HallRemover hallRemover;
     private String filePath;
+    private Halls halls;
 
     /**
      * Sets the default file path and creates the hallAdder and hallParser
      * instance variables with that file path
      */
     public HallHandler() {
-        filePath = "Hall_Database.txt";
+        filePath = "Hall_Database.xml";
 
-        this.hallAdder = new HallAdder(filePath);
-        this.hallParser = new HallParser(filePath);
+        this.halls = new Halls();
+        this.hallAdder = new HallAdder(filePath, halls);
+        this.hallParser = new HallParser(filePath, halls);
         this.hallRemover = new HallRemover(hallParser, filePath);
     }
 
@@ -52,9 +56,8 @@ public class HallHandler {
      * @param rows
      * @param seatsOnARow
      */
-    public void addNewHall(String name, int rows, int seatsOnARow) {
+    public void addNewHall(String name, int rows, int seatsOnARow) throws JAXBException {
         hallAdder.createNewHall(name, rows, seatsOnARow);
-
     }
 
     /**
@@ -71,8 +74,12 @@ public class HallHandler {
      *
      * @return list of halls in the database
      */
-    public List<Hall> getHalls() {
-        return hallParser.getHalls();
+    public List<Hall> getHallsAsList() {
+        return hallParser.getHalls().getHalls();
+    }
+    
+    public Halls getHalls() {
+        return halls;
     }
 
     /**
@@ -131,7 +138,7 @@ public class HallHandler {
      * @return 
      */
     public boolean hallExists(String name) {
-        List<Hall> halls = getHalls();
+        List<Hall> halls = getHalls().getHalls();
         for (Hall hall : halls) {
             if (hall.getName().equals(name)) {
                 return true;

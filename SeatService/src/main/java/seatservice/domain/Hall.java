@@ -3,16 +3,30 @@ package seatservice.domain;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * This class presents a single hall in the movie theater. Each hall has a name
  * and a certain amount of seats. The hall gets this information from another
  * class that reads a text file for the information.
  */
+@XmlRootElement(name = "hall")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Hall {
 
     private String name;
+
+    private int amountOfRows;
+    private int amountOfSeatsWithinRow;
+    @XmlTransient
     private Map<Integer, Map<Integer, Seat>> seats;
+
+    public Hall() {
+        this.seats = new HashMap<>();
+    }
 
     /**
      * Creates a hashmap that represents the seats within the hall. The key of
@@ -20,20 +34,23 @@ public class Hall {
      * another map, the key of which is the number of seats at the row, with the
      * value being the seat. As such, the seats are identified through their row
      * and seat number at the row. The hall must be given at least one row and
-     * each row must have at least one seat.
-     * Otherwise the constructor will throw an illegalArgumentException.
+     * each row must have at least one seat. Otherwise the constructor will
+     * throw an illegalArgumentException.
      *
      * @param name The name of the hall
      * @param amountOfRows, the amount of rows in the theater
      * @param amountOfSeatsWithinRow the amount of seats within a given row
      */
     public Hall(String name, int amountOfRows, int amountOfSeatsWithinRow) {
+        this();
         checkThatParametersAreCorrect(amountOfRows, amountOfSeatsWithinRow);
-        this.name = name;
-        this.seats = new HashMap<>();
-        createSeats(amountOfRows, amountOfSeatsWithinRow);
+        this.name = name;   
+        this.amountOfRows = amountOfRows;
+        this.amountOfSeatsWithinRow = amountOfSeatsWithinRow;
+        createSeats();
+
     }
-    
+
     private void checkThatParametersAreCorrect(int amountOfRows, int amountOfSeatsWithinRow) {
         if (amountOfRows < 1 || amountOfSeatsWithinRow < 1) {
             throw new IllegalArgumentException("a hall can't have zero or a negative amount of rows"
@@ -41,7 +58,7 @@ public class Hall {
         }
     }
 
-    private void createSeats(int amountOfRows, int amountOfSeatsWithinRow) {
+    public void createSeats() {
         for (int row = 1; row <= amountOfRows; row++) {
             createASingleRow(row, amountOfSeatsWithinRow);
         }
@@ -118,14 +135,15 @@ public class Hall {
     public Map<Integer, Seat> getSeatsWithinARow(int row) {
         return seats.get(row);
     }
-    
+
     public String getName() {
         return name;
     }
 
     /**
-     * Returns the hall's basic info, i.e. name, amount of rows and the
-     * amount of seats in a row
+     * Returns the hall's basic info, i.e. name, amount of rows and the amount
+     * of seats in a row
+     *
      * @return a string containing the hall's name, amount of rows and the
      * amount of seats in a row
      */
@@ -140,7 +158,8 @@ public class Hall {
 
     /**
      * Returns the hashcode for the object
-     * @return 
+     *
+     * @return
      */
     @Override
     public int hashCode() {
@@ -151,9 +170,10 @@ public class Hall {
     }
 
     /**
-     * Compares this hall to another hall to see if they're the same
-     * The primary check for it is to see if the string returned by their
-     * toString() methods are the same.
+     * Compares this hall to another hall to see if they're the same The primary
+     * check for it is to see if the string returned by their toString() methods
+     * are the same.
+     *
      * @param obj
      * @return true if this object is the same as the one as the one given as
      * the parameter

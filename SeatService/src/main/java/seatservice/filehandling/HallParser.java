@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import seatservice.domain.Halls;
 
 /**
  * This class is responsible for reading and parsing through the database file
@@ -15,7 +19,7 @@ import java.io.FileNotFoundException;
 public class HallParser {
 
     private String filePath;
-    private List<Hall> halls;
+    private Halls halls;
 
     /**
      * The constructor sets the default filepath for the text file functioning
@@ -24,9 +28,9 @@ public class HallParser {
      *
      * @param filePath
      */
-    public HallParser(String filePath) {
+    public HallParser(String filePath, Halls halls) {
         this.filePath = filePath;
-        this.halls = new ArrayList<>();      
+        this.halls = halls;      
     }
 
     /**
@@ -46,40 +50,15 @@ public class HallParser {
      * @return true if the file reading and parsing succeeded
      */
     public boolean readFile() {
-        String[] hallInformation = new String[3];
-        int i = 0;
         try {
-            Scanner reader = new Scanner(new File(filePath));
-
-            while (reader.hasNext()) {
-                String line = reader.nextLine();
-                if (lineMarksSpaceBetweenHalls(line)) {
-                    continue;
-                }
-
-                String[] lineSplit = line.split(": ");
-                hallInformation[i] = separateTheRawInfo(lineSplit);
-                i++;
-
-                if (lineIsTheLastNeededForAHall(line)) {
-                    i = 0;
-                    
-                    Hall hall = createNewHall(hallInformation);
-                    if (hallIsNotYetOnTheList(hall)) {
-                        halls.add(hall);
-                    }
-                    hallInformation = resetHallInformation();
-                }
-
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println("File was not found for some reason");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            halls = (Halls) jaxbUnmarshaller.unmarshal(new File("src/test.xml"));
+            halls.createSeatsForHalls();
+        } catch (JAXBException exc) {
             return false;
-        } catch (NumberFormatException exc) {
-            throw new NumberFormatException("Ran into an error while parsing "
-                    + " the file, please check the database's integrity");
         }
-        
+
         return true;
     }
  
@@ -89,7 +68,7 @@ public class HallParser {
      * 
      * @return the halls as a list
      */
-    public List<Hall> getHalls() {
+    public Halls getHalls() {
         return halls;
     }
     
@@ -112,7 +91,7 @@ public class HallParser {
     }
     
     public Hall getHall(String name) {
-        for (Hall hall : halls) {
+        for (Hall hall : halls.getHalls()) {
             if (hall.getName().equals(name)) {
                 return hall;
             }

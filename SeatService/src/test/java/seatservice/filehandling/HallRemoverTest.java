@@ -35,8 +35,8 @@ public class HallRemoverTest {
 
     @Before
     public void setUp() throws IOException {
-        hallRemover = new HallRemover(new HallParser(filePath), filePath);
-        hallAdder = new HallAdder(filePath);
+//        hallRemover = new HallRemover(new HallParser(filePath), filePath);
+//        hallAdder = new HallAdder(filePath);
         resetFileContent();
     }
 
@@ -62,15 +62,15 @@ public class HallRemoverTest {
     }
     
     @Test
-    public void removingHallWorks() throws IOException {
+    public void removingHallWorks() throws IOException, Exception {
         hallAdder.createNewHall("name", 2, 3);
         hallAdder.createNewHall("name2", 3, 4);
         hallRemover.getHallParser().readFile();
-        assertEquals(2, hallRemover.getHallParser().getHalls().size());
+        assertEquals(2, hallRemover.getHallParser().getHalls().getHalls().size());
         
         hallRemover.removeHall(new Hall("name", 2, 3));
         
-        assertEquals(1, hallRemover.getHallParser().getHalls().size());    
+        assertEquals(1, hallRemover.getHallParser().getHalls().getHalls().size());    
     }
     
     private void resetFileContent() throws IOException {
