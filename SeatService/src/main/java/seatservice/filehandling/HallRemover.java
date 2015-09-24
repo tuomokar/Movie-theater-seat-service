@@ -17,7 +17,6 @@ import java.io.IOException;
 public class HallRemover {
     
     private HallParser hallParser;
-    private HallAdder hallAdder;
     private String filePath;
 
     /**
@@ -42,12 +41,12 @@ public class HallRemover {
      * @throws IOException 
      */
     public void removeHall(Hall hall) throws IOException {
-        readFile();
+        readCurrentHalls();
         removeHallFromList(hall);
-        writeHalls();
+        writeRemainingHalls();
     }
     
-    private void writeHalls() throws IOException {
+    private void writeRemainingHalls() throws IOException {
         FileWriter writer = new FileWriter(filePath);
         
         List<Hall> halls = hallParser.getHalls();
@@ -66,7 +65,7 @@ public class HallRemover {
         hallParser.getHalls().remove(hall);
     }
     
-    private void readFile() {
+    private void readCurrentHalls() {
         hallParser.readFile();
     }
     
@@ -88,6 +87,7 @@ public class HallRemover {
     
     /**
      * Returns the hallParser
+     * @return hallParser
      */
     public HallParser getHallParser() {
         return hallParser;
