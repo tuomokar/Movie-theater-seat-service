@@ -57,7 +57,20 @@ Started the project:
 
 **Friday 18/9/2015, 2 hours**
 
-- read about XML and did some simple practicing with it
+- read about xml and did some simple practicing with it
   - how to parse it in java and create objects out of it
   - how to write it in java
 - updated the class diagram
+
+**Wednesday 23/9/2015, 1 hour**
+- thought through and designed the needed changes to the code in order to be able to change the project's file system from simple text files to xml files
+
+**Thursday 24/9/2015, 2 hours**
+- changed the file system of the project to xml
+  - created a new class Halls for it
+  - changed the methods responsible for writing to the file and reading from the file
+  - did a lot of other minor changes to the code
+  - fixed any now failing (due to the file system change) tests and tested the project (though not quite enough yet to be anywhere close to being actually sure it works completely)
+ 
+
+
