@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import seatservice.domain.Hall;
+import seatservice.domain.Halls;
 
 /**
  * Tests the HallRemover class
@@ -20,7 +21,7 @@ public class HallRemoverTest {
 
     private HallRemover hallRemover;
     private HallAdder hallAdder;
-    private String filePath = "src/test/testFile.txt";
+    private String filePath = "src/test/testFile.xml";
     
     public HallRemoverTest() {
     }
@@ -35,8 +36,9 @@ public class HallRemoverTest {
 
     @Before
     public void setUp() throws IOException {
-//        hallRemover = new HallRemover(new HallParser(filePath), filePath);
-//        hallAdder = new HallAdder(filePath);
+        Halls halls = new Halls();
+        hallAdder = new HallAdder(filePath, halls);
+        hallRemover = new HallRemover(new HallParser(filePath, halls), filePath, hallAdder, halls);
         resetFileContent();
     }
 

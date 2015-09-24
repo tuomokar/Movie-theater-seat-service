@@ -15,6 +15,8 @@ import seatservice.filehandling.HallAdder;
 import seatservice.filehandling.HallParser;
 import java.util.List;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBException;
+import seatservice.domain.Halls;
 
 /**
  * Tests the HallParser class
@@ -23,7 +25,7 @@ public class HallParserTest {
 
     private HallParser hallParser;
     private HallAdder hallAdder;
-    private String filePath = "src/test/testFile.txt";
+    private String filePath = "src/test/testFile.xml";
 
     public HallParserTest() {
     }
@@ -46,9 +48,9 @@ public class HallParserTest {
      */
     @Before
     public void setUp() throws IOException {
-//        this.hallParser = new HallParser(filePath);
-//        hallAdder = new HallAdder(filePath);
-//        resetFileContent();
+        Halls halls = new Halls();
+        this.hallParser = new HallParser(filePath, halls);
+        hallAdder = new HallAdder(filePath, halls);
     }
 
     /**
@@ -74,7 +76,7 @@ public class HallParserTest {
      * to the class in its constructor. Meaning, the method returns true.
      */
     @Test
-    public void fileIsFoundWithTheCorrectPath() {
+    public void fileIsFoundWithTheCorrectPath() throws JAXBException {
         assertTrue(hallParser.readFile());
     }
 
@@ -90,7 +92,8 @@ public class HallParserTest {
     public void hallIsParsedAndCreatedCorrectly() throws IOException, Exception {
         hallAdder.createNewHall("name", 3, 3);
         assertTrue(hallParser.readFile());
-//        assertTrue(hallParser.getHalls().size() == 1);
+
+        assertTrue(hallParser.getHalls().getHalls().size() == 1);
 
         String toStringShouldBe = "name: name\nrows: " + 3
                 + "\nseats in a row: " + 3 + "\n";
@@ -119,30 +122,30 @@ public class HallParserTest {
             int value = random.nextInt(4) + 1;
             hallAdder.createNewHall("name", value, i);
             hallParser.readFile();
-//            List<Hall> halls = hallParser.getHalls();
+            List<Hall> halls = hallParser.getHalls().getHalls();
 //            
-//            String info = "name: name\nrows: " + value + "\nseats in a row: " +
-//                    i + "\n";
-//            assertEquals(info, halls.get(i - 1).toString());
-//        }
-//        
-//        assertTrue(hallParser.getHalls().size() == manyHalls);
-
+            String info = "name: name\nrows: " + value + "\nseats in a row: "
+                    + i + "\n";
+            assertEquals(info, halls.get(i - 1).toString());
         }
+
+        assertTrue(hallParser.getHalls().getHalls().size() == manyHalls);
+
     }
 
-    /**
-     * Checks that the file path change works properly
-     */
-//    @Test
-//    public void changingOfFilePathWorks() {
-//        hallParser.changeFilePath("newPath");
-//        
-//        assertEquals("newPath", hallParser.getFilePath());
-//    }
-//    
-//    private void resetFileContent() throws IOException {
-//        FileWriter writer = new FileWriter(new File(filePath));
-//        writer.close();
-//    }
+
+/**
+ * Checks that the file path change works properly
+ */
+    @Test
+    public void changingOfFilePathWorks() {
+        hallParser.changeFilePath("newPath");
+        
+        assertEquals("newPath", hallParser.getFilePath());
+    }
+    
+    private void resetFileContent() throws IOException {
+        FileWriter writer = new FileWriter(new File(filePath));
+        writer.close();
+    }
 }

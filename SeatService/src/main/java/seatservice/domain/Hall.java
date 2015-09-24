@@ -51,6 +51,24 @@ public class Hall {
 
     }
 
+    public int getAmountOfRows() {
+        return amountOfRows;
+    }
+
+    public int getAmountOfSeatsWithinRow() {
+        return amountOfSeatsWithinRow;
+    }
+
+    public void setAmountOfRows(int amountOfRows) {
+        this.amountOfRows = amountOfRows;
+    }
+
+    public void setAmountOfSeatsWithinRow(int amountOfSeatsWithinRow) {
+        this.amountOfSeatsWithinRow = amountOfSeatsWithinRow;
+    }
+    
+    
+
     private void checkThatParametersAreCorrect(int amountOfRows, int amountOfSeatsWithinRow) {
         if (amountOfRows < 1 || amountOfSeatsWithinRow < 1) {
             throw new IllegalArgumentException("a hall can't have zero or a negative amount of rows"

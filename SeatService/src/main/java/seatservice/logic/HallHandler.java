@@ -31,7 +31,7 @@ public class HallHandler {
         this.halls = new Halls();
         this.hallAdder = new HallAdder(filePath, halls);
         this.hallParser = new HallParser(filePath, halls);
-        this.hallRemover = new HallRemover(hallParser, filePath);
+        this.hallRemover = new HallRemover(hallParser, filePath, hallAdder, halls);
     }
 
     /**
@@ -120,8 +120,9 @@ public class HallHandler {
      * @return true if the hall is found and removed successfully
      * @throws IOException
      */
-    public boolean removeHall(String name) throws IOException {
+    public boolean removeHall(String name) throws IOException, JAXBException {
         Hall hall = hallParser.getHall(name);
+        System.out.println(hall.getName());
 
         if (hall == null) {
             return false;

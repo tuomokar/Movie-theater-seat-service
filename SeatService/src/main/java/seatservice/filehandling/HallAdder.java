@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 import seatservice.domain.Hall;
 //import seatservice.domain.Halls;
 import seatservice.domain.Halls;
@@ -58,6 +59,17 @@ public class HallAdder {
 //            return false;
 //        }
         return true;
+    }
+    
+    public boolean writeMultipleHallsAtOnce(Halls halls) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            jaxbMarshaller.marshal(halls, new File(filePath));
+            
+            return true;
     }
 
     private boolean checkParameters(String name, int rows, int seatsInARow) {

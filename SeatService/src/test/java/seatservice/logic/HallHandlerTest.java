@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class HallHandlerTest {
 
     private HallHandler hallHandler;
-    private String filePath = "src/test/testFile.txt";
+    private String filePath = "src/test/testFile.xml";
 
     public HallHandlerTest() {
     }
@@ -69,7 +69,7 @@ public class HallHandlerTest {
      */
     @Test
     public void noInformationOnHallsAtCreation() {
-//        assertTrue(hallHandler.getHalls().isEmpty());
+        assertTrue(hallHandler.getHalls().getHalls().isEmpty());
     }
     
     /**
@@ -94,7 +94,7 @@ public class HallHandlerTest {
         hallHandler.readFile();
         assertEquals(1, hallHandler.getHalls().getHalls().size());
         
-        hallHandler.removeHall("name");       
+        hallHandler.removeHall("name");
         assertTrue(hallHandler.getHalls().getHalls().isEmpty());
     }
 

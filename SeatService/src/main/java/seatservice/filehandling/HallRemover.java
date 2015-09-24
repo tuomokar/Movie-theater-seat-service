@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.xml.bind.JAXBException;
+import seatservice.domain.Halls;
 
 /**
  * This class is responsible for removing any wanted halls from the
@@ -18,6 +20,8 @@ public class HallRemover {
     
     private HallParser hallParser;
     private String filePath;
+    private HallAdder hallAdder;
+    private Halls halls;
 
     /**
      * Creates a new instance of HallRemover. Takes an instance of HallParser
@@ -26,10 +30,12 @@ public class HallRemover {
      * @param filePath 
      */
     public HallRemover(HallParser hallParser,
-            String filePath) {
+            String filePath, HallAdder hallAdder, Halls halls) {
         
         this.hallParser = hallParser;
         this.filePath = filePath;
+        this.hallAdder = hallAdder;
+        this.halls = halls;
     }
 
     /**
@@ -40,20 +46,15 @@ public class HallRemover {
      * @param hall
      * @throws IOException 
      */
-    public void removeHall(Hall hall) throws IOException {
+    public void removeHall(Hall hall) throws IOException, JAXBException {
+        halls.getHalls().clear();
         readCurrentHalls();
         removeHallFromList(hall);
         writeRemainingHalls();
     }
     
-    private void writeRemainingHalls() throws IOException {
-        FileWriter writer = new FileWriter(filePath);
-        
-        List<Hall> halls = hallParser.getHalls().getHalls();
-        
-        for (Hall hall : halls) {
-            writeHall(hall, writer);
-        }
+    private void writeRemainingHalls() throws IOException, JAXBException {
+        hallAdder.writeMultipleHallsAtOnce(halls);
     }
     
     private void writeHall(Hall hall, FileWriter writer) throws IOException {
