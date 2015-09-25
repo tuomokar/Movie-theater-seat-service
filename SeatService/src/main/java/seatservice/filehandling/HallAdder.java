@@ -72,7 +72,6 @@ public class HallAdder {
         } catch (JAXBException exc) {
             return false;
         }
-        System.out.println("succeed");
         return true;
     }
 
