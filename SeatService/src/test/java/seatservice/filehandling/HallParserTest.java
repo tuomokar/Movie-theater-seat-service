@@ -26,21 +26,11 @@ public class HallParserTest {
     private HallParser hallParser;
     private HallAdder hallAdder;
     private String filePath = "src/test/testFile.xml";
-
-    public HallParserTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private Halls halls;
 
     @Before
     public void setUp() throws IOException {
-        Halls halls = new Halls();
+        this.halls = new Halls();
         this.hallParser = new HallParser(filePath, halls);
         hallAdder = new HallAdder(filePath, halls);
         resetFileContent();
@@ -98,7 +88,7 @@ public class HallParserTest {
      * @throws IOException
      */
     @Test
-    public void multipleHallsAreCreatedCorrectly() throws IOException, Exception {
+    public void multipleHallsAreCreatedCorrectly() throws IOException {
 
         Random random = new Random();
         int manyHalls = random.nextInt(8) + 2;
@@ -107,7 +97,7 @@ public class HallParserTest {
             int value = random.nextInt(4) + 1;
             hallAdder.createNewHall("name", value, i);
             hallParser.readFile();
-            List<Hall> halls = hallParser.getHalls().getHalls();
+            List<Hall> halls = this.halls.getHalls();
 //            
             String info = "name: name\nrows: " + value + "\nseats in a row: "
                     + i + "\n";
