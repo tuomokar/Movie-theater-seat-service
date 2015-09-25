@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import seatservice.domain.Hall;
 
 /**
  * Tests the HallHandler class
@@ -48,40 +49,42 @@ public class HallHandlerTest {
         assertEquals(newPath, hallHandler.getHallParser().getFilePath());
     }
 
-    /**
-     * Checks that there are no halls at creation
-     */
     @Test
     public void noInformationOnHallsAtCreation() {
         assertTrue(hallHandler.getHalls().getHalls().isEmpty());
     }
     
-    /**
-     * Checks that adding a hall works
-     * @throws IOException 
-     */
     @Test
-    public void addingHallWorks() throws IOException, Exception {
+    public void addingHallWorks() {
         hallHandler.addNewHall("name", 2, 3);
         hallHandler.readFile();
         
         assertTrue(hallHandler.getHalls().getHalls().size() == 1);
     }
     
-    /**
-     * Checks that removing a hall works
-     * @throws IOException 
-     */
     @Test
-    public void removingHallWorks() throws IOException, Exception {
+    public void removingHallWorks() {
         hallHandler.addNewHall("name", 4, 3);
-        hallHandler.readFile();
-        assertTrue(hallHandler.getHalls().getHalls().size() == 1);
         
         hallHandler.removeHall("name");
         assertTrue(hallHandler.getHalls().getHalls().isEmpty());
     }
-
+    
+    @Test
+    public void removingMultipleHallsWorks() {
+        hallHandler.addNewHall("name", 3, 2);
+        hallHandler.addNewHall("name2", 3, 4);
+        hallHandler.addNewHall("name3", 5, 4);
+        
+        hallHandler.removeHall("name");
+        hallHandler.removeHall("name2");
+        
+        assertTrue(hallHandler.getHalls().getHalls().size() == 1);
+        assertTrue(hallHandler.findHallByName("name") == null);
+        assertTrue(hallHandler.findHallByName("name2") == null);
+        assertEquals("name3", hallHandler.findHallByName("name3").getName());     
+    }
+    
     private void resetFileContent() throws IOException {
         FileWriter writer = new FileWriter(new File(filePath));
         writer.close();
