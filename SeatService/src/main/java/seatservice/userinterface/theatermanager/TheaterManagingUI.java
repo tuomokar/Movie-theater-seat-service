@@ -43,10 +43,8 @@ public class TheaterManagingUI {
      * and then the user can pick from those. The input is read and it's
      * checked which command the input matches. If the input doesn't match
      * any known command, then the user is told that the input was incorrect.
-     * At the end of the loop the information on the halls is always read in
-     * case there have been any changes.
      */
-    public void start() throws Exception {
+    public void start() {
         System.out.println();
         System.out.println();
         
@@ -57,7 +55,6 @@ public class TheaterManagingUI {
 
         boolean continuing = true;
         while (continuing) {
-
             
             System.out.println();
             System.out.println();
@@ -81,7 +78,6 @@ public class TheaterManagingUI {
                         + "corresponding to the thing you wish to do");
             }
             
-            readHalls();
         }
     }
     
@@ -95,11 +91,6 @@ public class TheaterManagingUI {
     
     private void createCommand(Command command) {
         commands.put(command.getName(), command);
-    }
-    
-    private void readHalls() {
-        hallHandler.readFile();
-    }
-    
+    }  
     
 }
