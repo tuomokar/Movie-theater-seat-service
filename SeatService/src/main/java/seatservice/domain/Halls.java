@@ -52,5 +52,21 @@ public class Halls {
     public boolean contains(Hall hall) {
         return halls.contains(hall);
     }
+    
+    /**
+     * Searches for a hall that would have the name that is the search parameter
+     * In case a matching hall is found, that hall is returned. If no matching
+     * hall is found, the method returns null.
+     * @param name
+     * @return 
+     */
+    public Hall findByName(String name) {
+        for (Hall hall : halls) {
+            if (hall.getName().equals(name)) {
+                return hall;
+            }
+        }
+        return null;
+    }
  
 }
