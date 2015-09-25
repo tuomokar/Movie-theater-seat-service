@@ -38,45 +38,30 @@ public class HallParserTest {
     public static void tearDownClass() {
     }
 
-    /**
-     * Before each test, initializes the hallParser and hallAdder instance
-     * variables. The default filePath is the same for both. The method also
-     * resets the text file's content in case aanother test method has written
-     * something in it.
-     *
-     * @throws IOException
-     */
     @Before
     public void setUp() throws IOException {
         Halls halls = new Halls();
         this.hallParser = new HallParser(filePath, halls);
         hallAdder = new HallAdder(filePath, halls);
+        resetFileContent();
     }
 
-    /**
-     * Resets the test file's content after each method
-     */
+
     @After
     public void tearDown() throws IOException {
-//        resetFileContent();
+        resetFileContent();
     }
 
-    /**
-     * Checks that the readFile method returns false if file path is false,
-     * meaning the file isn't found
-     */
+
     @Test
     public void readFileReturnsFalseWithWrongFilePath() {
         hallParser.changeFilePath("false path");
         assertFalse(hallParser.readFile());
     }
 
-    /**
-     * Checks that the readFile method finds the file in the path that is given
-     * to the class in its constructor. Meaning, the method returns true.
-     */
     @Test
-    public void fileIsFoundWithTheCorrectPath() throws JAXBException {
+    public void fileIsFoundWithTheCorrectPath() {
+        hallAdder.createNewHall("name", 2, 2);
         assertTrue(hallParser.readFile());
     }
 
@@ -133,10 +118,6 @@ public class HallParserTest {
 
     }
 
-
-/**
- * Checks that the file path change works properly
- */
     @Test
     public void changingOfFilePathWorks() {
         hallParser.changeFilePath("newPath");
