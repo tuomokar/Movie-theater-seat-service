@@ -15,23 +15,12 @@ public abstract class Command {
     protected HallHandler hallHandler;
     protected String name;
 
-    /**
-     * Creates a new command. The class receives a scanner, hallHandler and
-     * the command's name as parameters
-     * @param reader
-     * @param hallHandler
-     * @param name 
-     */
     public Command(Scanner reader, HallHandler hallHandler, String name) {
         this.reader = reader;
         this.hallHandler = hallHandler;
         this.name = name;
     }
     
-    /**
-     * Returns this command's name
-     * @return 
-     */
     public String getName() {
         return name;
     }
@@ -45,5 +34,5 @@ public abstract class Command {
      * @return true if the program is supposed to continue after the command
      * is run
      */
-    public abstract boolean run() throws Exception ;
+    public abstract boolean run();
 }
