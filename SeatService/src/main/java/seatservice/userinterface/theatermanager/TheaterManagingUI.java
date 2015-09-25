@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 import seatservice.logic.HallHandler;
 import java.util.Scanner;
+import seatservice.domain.Hall;
 import seatservice.userinterface.theatermanager.commands.Add;
 import seatservice.userinterface.theatermanager.commands.Change;
 import seatservice.userinterface.theatermanager.commands.Command;
@@ -71,8 +72,9 @@ public class TheaterManagingUI {
             String choice = reader.nextLine();
 
             if (commands.containsKey(choice)) {
+                
                 Command command = commands.get(choice);
-                continuing = command.run();
+                continuing = command.run();               
             } else {
                 System.out.println("Incorrect input, please give a number"
                         + "corresponding to the thing you wish to do");

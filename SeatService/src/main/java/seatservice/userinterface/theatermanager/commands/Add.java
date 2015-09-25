@@ -33,7 +33,6 @@ public class Add extends Command {
         abort = false;
         printOutBeginning();
 
-        System.out.println();
         System.out.println("New hall's name:");
         readName();
         if (abort) {
@@ -156,6 +155,9 @@ public class Add extends Command {
         System.out.println();
 
         System.out.println("Abort any time by typing /abort");
+        
+        System.out.println();
+        System.out.println();
     }
 
 }

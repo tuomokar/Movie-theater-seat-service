@@ -23,12 +23,13 @@ public class HallHandler {
 
     /**
      * Sets a default file path and initializes all the other instance
-     * variables
+     * variables. Note that the 'halls' instance variable is not initialized
+     * here, but the value for it is set only when the file is read elsewhere.
      */
     public HallHandler() {
         filePath = "Hall_Database.xml";
-
         this.halls = new Halls();
+
         this.hallAdder = new HallAdder(filePath, halls);
         this.hallParser = new HallParser(filePath, halls);
         this.hallRemover = new HallRemover(hallAdder, halls);
@@ -73,7 +74,7 @@ public class HallHandler {
      * @return list of halls in the database
      */
     public List<Hall> getHallsAsList() {
-        return hallParser.getHalls().getHalls();
+        return halls.getHalls();
     }
     
     public Halls getHalls() {

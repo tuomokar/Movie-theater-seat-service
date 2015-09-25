@@ -17,23 +17,28 @@ import seatservice.domain.Hall;
 public class Halls {
     
     @XmlElement(name = "hall")
-    private List<Hall> halls;
+    private ArrayList<Hall> halls;
 
     public Halls() {
         this.halls = new ArrayList<>();
     }
     
-    public List<Hall> getHalls() {
+    public ArrayList<Hall> getHalls() {
         return halls;
     }
 
-    public void setHalls(List<Hall> halls) {
+    public void setHalls(ArrayList<Hall> halls) {
         this.halls = halls;
     }
     
+    /**
+     * Adds a hall to the database
+     * @param hall 
+     */
     public void addHall(Hall hall) {
         halls.add(hall);
     }
+    
     
     /**
      * Creates the seats for all the halls in case there's need for it
@@ -47,7 +52,8 @@ public class Halls {
     /**
      * Checks if the list of the halls contains the hall given as the parameter
      * @param hall
-     * @return 
+     * @return Returns true if the list of the halls contains the hall given
+     * as the parameter
      */
     public boolean contains(Hall hall) {
         return halls.contains(hall);
@@ -58,7 +64,7 @@ public class Halls {
      * In case a matching hall is found, that hall is returned. If no matching
      * hall is found, the method returns null.
      * @param name
-     * @return 
+     * @return Returns true if a hall is found with the given name
      */
     public Hall findByName(String name) {
         for (Hall hall : halls) {

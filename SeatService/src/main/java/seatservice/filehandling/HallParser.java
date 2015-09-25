@@ -56,7 +56,6 @@ public class HallParser {
             JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            jaxbUnmarshaller.unmarshal(new File(filePath));
             halls = (Halls) jaxbUnmarshaller.unmarshal(new File(filePath));
 
             createSeatsForUnmarshalledHalls();
