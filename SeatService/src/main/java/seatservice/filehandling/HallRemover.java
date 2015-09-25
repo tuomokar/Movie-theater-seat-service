@@ -18,16 +18,10 @@ import seatservice.domain.Halls;
  */
 public class HallRemover {
     
-    private HallParser hallParser;
-    private String filePath;
     private HallAdder hallAdder;
     private Halls halls;
 
-    public HallRemover(HallParser hallParser,
-            String filePath, HallAdder hallAdder, Halls halls) {
-        
-        this.hallParser = hallParser;
-        this.filePath = filePath;
+    public HallRemover(HallAdder hallAdder, Halls halls) {  
         this.hallAdder = hallAdder;
         this.halls = halls;
     }
@@ -49,23 +43,7 @@ public class HallRemover {
     }
     
     private void removeHallFromList(Hall hall) {
-        hallParser.getHalls().getHalls().remove(hall);
+        halls.getHalls().remove(hall);
     }
     
-    
-    /**
-     * Changes the current file path to the new one given as the parameter
-     * @param newPath 
-     */
-    public void changeFilePath(String newPath) {
-        this.filePath = newPath;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-    
-    public HallParser getHallParser() {
-        return hallParser;
-    }
 }
