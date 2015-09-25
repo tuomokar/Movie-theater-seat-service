@@ -20,8 +20,8 @@ public class EmployeeUI {
     /**
      * The constructor creates the hallHandler and reader along with the
      * UI classes for managing the theater and serving customers.
-     * At the end of the constructor it parses any existing halls in the 
-     * database
+     * At the end of the constructor it parses any possibly existing halls
+     * in the database so that the software will know them all from now on.
      */
     public EmployeeUI() {
         this.hallHandler = new HallHandler();
@@ -35,7 +35,7 @@ public class EmployeeUI {
      * Starts the general UI. The user has options to manage theater and 
      * serve customers and can choose to quit the program.
      */
-    public void start() throws Exception {
+    public void start() {
         System.out.println("-------------------------------------------");
         System.out.println("------------------WELCOME------------------");
         System.out.println("-------------------------------------------");
@@ -82,7 +82,7 @@ public class EmployeeUI {
         System.out.println("-------------------------------------------");
     }
 
-    private void manageTheater() throws Exception  {
+    private void manageTheater()  {
         theaterManagingUI.start();
     }
 
