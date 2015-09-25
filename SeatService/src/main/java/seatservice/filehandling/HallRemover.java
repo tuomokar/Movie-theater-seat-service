@@ -29,17 +29,21 @@ public class HallRemover {
     /**
      * Removes a single hall from the database. In practice, the method
      * simply removes the wanted hall from the list of the halls and rewrites
-     * all the remaining halls to the file.
+     * all the remaining halls to the file. The method returns true if
+     * the writing of the remaining halls was successful
      * 
      * @param hall
+     * @return 
      */
-    public void removeHall(Hall hall) {
+    public boolean removeHall(Hall hall) {
         removeHallFromList(hall);
-        writeRemainingHalls();
+        boolean success = writeRemainingHalls();
+        return success;
     }
     
-    private void writeRemainingHalls() {
-        hallAdder.writeAllTheHallsToTheFile();
+    private boolean writeRemainingHalls() {
+        boolean success = hallAdder.writeAllTheHallsToTheFile();
+        return success;
     }
     
     private void removeHallFromList(Hall hall) {
