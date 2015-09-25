@@ -22,8 +22,8 @@ public class HallHandler {
     private Halls halls;
 
     /**
-     * Sets the default file path and creates the hallAdder and hallParser
-     * instance variables with that file path
+     * Sets a default file path and initializes all the other instance
+     * variables
      */
     public HallHandler() {
         filePath = "Hall_Database.xml";
@@ -31,11 +31,11 @@ public class HallHandler {
         this.halls = new Halls();
         this.hallAdder = new HallAdder(filePath, halls);
         this.hallParser = new HallParser(filePath, halls);
-        this.hallRemover = new HallRemover(hallParser, filePath, hallAdder, halls);
+        this.hallRemover = new HallRemover(hallAdder, halls);
     }
 
     /**
-     * The method changes the current file path to a new one that is given as
+     * The method changes the current file path to the new one given as
      * the parameter. The file path is changed for both hallAdder and
      * hallParser.
      *
@@ -46,7 +46,6 @@ public class HallHandler {
 
         this.hallAdder.changeFilePath(filePath);
         this.hallParser.changeFilePath(filePath);
-        this.hallRemover.changeFilePath(filePath);
     }
 
     /**
@@ -56,21 +55,20 @@ public class HallHandler {
      * @param rows
      * @param seatsOnARow
      */
-    public void addNewHall(String name, int rows, int seatsOnARow) throws JAXBException {
+    public void addNewHall(String name, int rows, int seatsOnARow) {
         hallAdder.createNewHall(name, rows, seatsOnARow);
     }
 
     /**
-     * Reads the file containing the information the information on the halls
-     * and adds each parsed hall to the list encapsuulated in the hallParser
-     * class
+     * Unmarshals the xml file to hall objects and adds them all to the list
+     * encapculated by the 'halls' instance variable.
      */
     public void readFile() {
         hallParser.readFile();
     }
 
     /**
-     * Returns the list of halls in thd database;
+     * Returns the list of halls in the database;
      *
      * @return list of halls in the database
      */
@@ -82,29 +80,15 @@ public class HallHandler {
         return halls;
     }
 
-    /**
-     * Returns the hallAdder
-     *
-     * @return hallAdder
-     */
     public HallAdder getHallAdder() {
         return hallAdder;
     }
 
-    /**
-     * Returns the hallParser
-     *
-     * @return hallParser
-     */
     public HallParser getHallParser() {
         return hallParser;
     }
 
-    /**
-     * Returns the current file path
-     *
-     * @return file path
-     */
+
     public String getFilePath() {
         return filePath;
     }
@@ -113,39 +97,33 @@ public class HallHandler {
      * Removes a hall. The hall to be removed is decided by the name given as
      * the parameter. The method finds the matching hall, which is null in case
      * a matching hall isn't found. In that case, the method returns false and
-     * doesn't do anything. If the hall is found, the hall is removed and the
-     * method returns true.
+     * doesn't do anything. If the hall is found, the hall is removed and if
+     * the removing works, true is returned.
      *
      * @param name
-     * @return true if the hall is found and removed successfully
-     * @throws IOException
+     * @return true if the hall is found and removed successfully. If there
+     * was found no hall matching the name searched by or if the removing isn't
+     * successful other, false is returned
      */
-    public boolean removeHall(String name) throws IOException, JAXBException {
-        Hall hall = hallParser.getHall(name);
-        System.out.println(hall.getName());
+    public boolean removeHall(String name) {
+        Hall hall = halls.findByName(name);
 
         if (hall == null) {
             return false;
         }
 
-        hallRemover.removeHall(hall);
-        return true;
+        boolean success = hallRemover.removeHall(hall);
+        return success;
 
     }
     
     /**
-     * Checks that that there is no hall with the given name yet
+     * Checks that that there is no hall with the given name yet.
      * @param name
-     * @return 
+     * @return true if there exists a hall with the given name
      */
     public boolean hallExists(String name) {
-        List<Hall> halls = getHalls().getHalls();
-        for (Hall hall : halls) {
-            if (hall.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+        return halls.findByName(name) != null;
     }
 
 }
