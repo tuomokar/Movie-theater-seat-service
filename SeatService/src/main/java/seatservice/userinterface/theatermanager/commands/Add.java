@@ -29,7 +29,7 @@ public class Add extends Command {
      * @return
      */
     @Override
-    public boolean run() throws Exception {
+    public boolean run() {
         abort = false;
         printOutBeginning();
 
@@ -37,21 +37,24 @@ public class Add extends Command {
         System.out.println("New hall's name:");
         readName();
         if (abort) {
-            return abort();
+            abortMessage();
+            return true;
         }
 
         System.out.println();
         System.out.println("Amount of rows:");
         readRows();
         if (abort) {
-            return abort();
+            abortMessage();
+            return true;
         }
 
         System.out.println();
         System.out.println("Amount of seats on a row:");
         readSeats();
         if (abort) {
-            return abort();
+            abortMessage();
+            return true;
         }
 
         hallHandler.addNewHall(hallsName, rows, seats);
@@ -74,11 +77,10 @@ public class Add extends Command {
         return value;
     }
 
-    private boolean abort() {
+    private void abortMessage() {
         System.out.println();
         System.out.println("Aborting..");
         System.out.println();
-        return true;
     }
 
     private void readName() {
