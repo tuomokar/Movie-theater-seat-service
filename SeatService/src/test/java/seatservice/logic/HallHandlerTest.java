@@ -18,17 +18,6 @@ public class HallHandlerTest {
     private HallHandler hallHandler;
     private String filePath = "src/test/testFile.xml";
 
-    public HallHandlerTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() throws IOException {
         this.hallHandler = new HallHandler();
@@ -41,9 +30,6 @@ public class HallHandlerTest {
         resetFileContent();
     }
 
-    /**
-     * Checks that the file path is correct after creation
-     */
     @Test
     public void filePathIsCorrectAtStart() {
         assertEquals(filePath, hallHandler.getFilePath());
@@ -51,9 +37,7 @@ public class HallHandlerTest {
         assertEquals(filePath, hallHandler.getHallParser().getFilePath());
     }
     
-    /**
-     * Checks that changing the file path works correctly
-     */
+
     @Test
     public void filePathIsChangedCorrectly() {
         String newPath = "newPath";
@@ -81,7 +65,7 @@ public class HallHandlerTest {
         hallHandler.addNewHall("name", 2, 3);
         hallHandler.readFile();
         
-        assertEquals(1, hallHandler.getHalls().getHalls().size());
+        assertTrue(hallHandler.getHalls().getHalls().size() == 1);
     }
     
     /**
@@ -92,7 +76,7 @@ public class HallHandlerTest {
     public void removingHallWorks() throws IOException, Exception {
         hallHandler.addNewHall("name", 4, 3);
         hallHandler.readFile();
-        assertEquals(1, hallHandler.getHalls().getHalls().size());
+        assertTrue(hallHandler.getHalls().getHalls().size() == 1);
         
         hallHandler.removeHall("name");
         assertTrue(hallHandler.getHalls().getHalls().isEmpty());
