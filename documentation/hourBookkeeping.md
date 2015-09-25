@@ -72,5 +72,14 @@ Started the project:
   - did a lot of other minor changes to the code
   - fixed any now failing (due to the file system change) tests and tested the project (though not quite enough yet to be anywhere close to being actually sure it works completely)
  
-
-
+**Friday 25/9/2015, 6 hours**
+- refactored a lot of classes
+  - cleaned out any unneeded methods after the xml change (and some otherwise unneeded ones)
+  - added some methods to be more clear
+  - updated the tests and added some tests
+- wrote some tests for the Halls class
+- wrote the basic functionality for SeeInfo command class
+- encountered either some goofy JAXB behavior or a bug and hit my head on the table because of that for quite a while (not really, well a little, but mostly spent a lot of time trying to debug it)
+  - (the problem being that at the moment it seems to unmarshal the halls currently in the xml file correctly, but for some reason all of the classes don't realize it and for example when writing new 
+  halls into the xml file for the first time after the software is turned on, the already existing halls aren't remembered anymore and thus the content is reseted)
+  - (was unsuccessful with fixing the problem so will keep on bumping my head to the table later)
