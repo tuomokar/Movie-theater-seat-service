@@ -46,33 +46,22 @@ public class HallTest {
     public void tearDown() {
     }
 
-    /**
-     * Checks that an illegal argument exception is thrown when the Hall's
-     * constructor is given false parameters
-     */
-    @Test(expected=IllegalArgumentException.class)
-    public void throwsExceptionWithFalseParameters() {
-        assertEquals(new IllegalArgumentException(), new Hall("name", 0, 0));
-    }
-    
-    /**
-     * Checks that the hall's seats are actually in a map
-     */
+
+
     @Test
     public void seatsAreActuallyInAMap() {
         assertThat(hall.getSeats(), instanceOf(Map.class));
     }
     
-    /**
-     * The method checks that the hall has the correct amount of seats after being created
-     */
+
     @Test
     public void hasTheCorrectAmountOfSeats() {        
         assertEquals(totalAmountOfSeats, hall.getTheTotalAmountOfSeats());
     }
     
     /**
-     * The method checks that each seat is set to available after the hall is created
+     * The method checks that each seat is set to available after the hall is 
+     * created
      */
     @Test
     public void hasTheCorrectAmountOfAvailableSeatsAtStart() {
