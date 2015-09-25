@@ -2,7 +2,6 @@ package seatservice.domain;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,8 +9,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * This class presents a single hall in the movie theater. Each hall has a name
- * and a certain amount of seats. The hall gets this information from another
- * class that reads a text file for the information.
+ * and a certain amount of seats, which is known through the amount of rows
+ * and amount of seats on the rows. 
  */
 @XmlRootElement(name = "hall")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -43,7 +42,6 @@ public class Hall {
      */
     public Hall(String name, int amountOfRows, int amountOfSeatsWithinRow) {
         this();
-        checkThatParametersAreCorrect(amountOfRows, amountOfSeatsWithinRow);
         this.name = name;   
         this.amountOfRows = amountOfRows;
         this.amountOfSeatsWithinRow = amountOfSeatsWithinRow;
@@ -66,16 +64,14 @@ public class Hall {
     public void setAmountOfSeatsWithinRow(int amountOfSeatsWithinRow) {
         this.amountOfSeatsWithinRow = amountOfSeatsWithinRow;
     }
-    
-    
 
-    private void checkThatParametersAreCorrect(int amountOfRows, int amountOfSeatsWithinRow) {
-        if (amountOfRows < 1 || amountOfSeatsWithinRow < 1) {
-            throw new IllegalArgumentException("a hall can't have zero or a negative amount of rows"
-                    + " and rows can't have zero or a negative amount of seats ");
-        }
-    }
-
+    /**
+     * Creates seats for this hall. Meaning, the method uses the information
+     * on the amount of rows and the amount of seats on each row to put
+     * in the 'seats' hashmap the rows as keys and another hashmap inside
+     * it as the value, with the amount of seats as the key and an instance
+     * of the Seat class as the value.
+     */
     public void createSeats() {
         for (int row = 1; row <= amountOfRows; row++) {
             createASingleRow(row, amountOfSeatsWithinRow);
@@ -174,11 +170,7 @@ public class Hall {
         return sb.toString();
     }
 
-    /**
-     * Returns the hashcode for the object
-     *
-     * @return
-     */
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -187,15 +179,6 @@ public class Hall {
         return hash;
     }
 
-    /**
-     * Compares this hall to another hall to see if they're the same The primary
-     * check for it is to see if the string returned by their toString() methods
-     * are the same.
-     *
-     * @param obj
-     * @return true if this object is the same as the one as the one given as
-     * the parameter
-     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -205,7 +188,7 @@ public class Hall {
             return false;
         }
         final Hall other = (Hall) obj;
-        if (!this.toString().equals(other.toString())) {
+        if (!this.name.equals(other.getName())) {
             return false;
         }
 
