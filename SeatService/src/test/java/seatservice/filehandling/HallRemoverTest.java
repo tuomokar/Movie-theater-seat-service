@@ -14,8 +14,6 @@ import seatservice.domain.Halls;
 
 /**
  * Tests the HallRemover class
- *
- * @author tuomo_000
  */
 public class HallRemoverTest {
 
@@ -24,17 +22,6 @@ public class HallRemoverTest {
     private HallParser hallParser;
     private Halls halls;
     private String filePath = "src/test/testFile.xml";
-    
-    public HallRemoverTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     @Before
     public void setUp() throws IOException {
@@ -55,9 +42,24 @@ public class HallRemoverTest {
         hallAdder.createNewHall("name", 2, 3);
         hallAdder.createNewHall("name2", 3, 4);
         hallParser.readFile();
-        assertEquals(2, hallParser.getHalls().getHalls().size());
+        assertTrue(halls.getHalls().size() == 2);
         
         hallRemover.removeHall(new Hall("name", 2, 3));
+        
+        assertTrue(halls.getHalls().size() == 1);
+    }
+    
+    @Test
+    public void removingMultipleHallsWorks() {
+        hallAdder.createNewHall("name1", 2, 3);
+        hallAdder.createNewHall("name2", 3, 4);
+        hallAdder.createNewHall("name3", 5, 6);
+        hallParser.readFile();
+        
+        assertTrue(halls.getHalls().size() == 3);
+        
+        hallRemover.removeHall(new Hall("name1", 2, 3));
+        hallRemover.removeHall(new Hall("name2", 3, 4));
         
         assertTrue(halls.getHalls().size() == 1);
     }
