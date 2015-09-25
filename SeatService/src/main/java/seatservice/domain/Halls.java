@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import seatservice.domain.Hall;
 
+/**
+ * This class encapsulates the halls as a list.
+ */
 @XmlRootElement(name = "halls")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Halls {
@@ -32,12 +35,20 @@ public class Halls {
         halls.add(hall);
     }
     
+    /**
+     * Creates the seats for all the halls in case there's need for it
+     */
     public void createSeatsForHalls() {
         for (Hall hall : halls) {
             hall.createSeats();
         }
     }
     
+    /**
+     * Checks if the list of the halls contains the hall given as the parameter
+     * @param hall
+     * @return 
+     */
     public boolean contains(Hall hall) {
         return halls.contains(hall);
     }

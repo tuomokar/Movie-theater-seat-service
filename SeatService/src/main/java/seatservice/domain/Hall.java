@@ -2,6 +2,7 @@ package seatservice.domain;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,6 +24,11 @@ public class Hall {
     @XmlTransient
     private Map<Integer, Map<Integer, Seat>> seats;
 
+    /**
+     * This constructor is used only when the xml file functioning as the
+     * database for halls is unmarshalled into objects of this class. The
+     * constructor initializes the 'seats' hashmap.
+     */
     public Hall() {
         this.seats = new HashMap<>();
     }
@@ -32,9 +38,7 @@ public class Hall {
      * the hashmap is the number of the row the seats are on. The value is
      * another map, the key of which is the number of seats at the row, with the
      * value being the seat. As such, the seats are identified through their row
-     * and seat number at the row. The hall must be given at least one row and
-     * each row must have at least one seat. Otherwise the constructor will
-     * throw an illegalArgumentException.
+     * and seat number at the row.
      *
      * @param name The name of the hall
      * @param amountOfRows, the amount of rows in the theater
