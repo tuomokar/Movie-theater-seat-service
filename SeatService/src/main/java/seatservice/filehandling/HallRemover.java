@@ -14,7 +14,7 @@ import seatservice.domain.Halls;
 
 /**
  * This class is responsible for removing any wanted halls from the
- * text file database
+ * xml file database
  */
 public class HallRemover {
     
@@ -23,12 +23,6 @@ public class HallRemover {
     private HallAdder hallAdder;
     private Halls halls;
 
-    /**
-     * Creates a new instance of HallRemover. Takes an instance of HallParser
-     * as a parameter.
-     * @param hallParser
-     * @param filePath 
-     */
     public HallRemover(HallParser hallParser,
             String filePath, HallAdder hallAdder, Halls halls) {
         
@@ -40,35 +34,24 @@ public class HallRemover {
 
     /**
      * Removes a single hall from the database. In practice, the method
-     * reads through the file to get all the current halls, then removes the
-     * hall given as the parameter and writes the remaining halls to the 
-     * database
+     * simply removes the wanted hall from the list of the halls and rewrites
+     * all the remaining halls to the file.
+     * 
      * @param hall
-     * @throws IOException 
      */
-    public void removeHall(Hall hall) throws IOException, JAXBException {
-        halls.getHalls().clear();
-        readCurrentHalls();
+    public void removeHall(Hall hall) {
         removeHallFromList(hall);
         writeRemainingHalls();
     }
     
-    private void writeRemainingHalls() throws IOException, JAXBException {
-        hallAdder.writeMultipleHallsAtOnce(halls);
-    }
-    
-    private void writeHall(Hall hall, FileWriter writer) throws IOException {
-        writer.append(hall.toString());
-        writer.append(";\n");
+    private void writeRemainingHalls() {
+        hallAdder.writeAllTheHallsToTheFile();
     }
     
     private void removeHallFromList(Hall hall) {
         hallParser.getHalls().getHalls().remove(hall);
     }
     
-    private void readCurrentHalls() {
-        hallParser.readFile();
-    }
     
     /**
      * Changes the current file path to the new one given as the parameter
@@ -78,18 +61,10 @@ public class HallRemover {
         this.filePath = newPath;
     }
 
-    /**
-     * Returns the current file path
-     * @return 
-     */
     public String getFilePath() {
         return filePath;
     }
     
-    /**
-     * Returns the hallParser
-     * @return hallParser
-     */
     public HallParser getHallParser() {
         return hallParser;
     }
