@@ -125,5 +125,9 @@ public class HallHandler {
     public boolean hallExists(String name) {
         return halls.findByName(name) != null;
     }
+    
+    public Hall findHallByName(String name) {
+        return halls.findByName(name);
+    }
 
 }
