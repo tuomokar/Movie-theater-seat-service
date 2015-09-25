@@ -16,7 +16,7 @@ import java.nio.file.FileSystems;
 import java.io.IOException;
 
 /**
- * This class is responsible for unmarshalling the xml file
+ * This class is responsible for unmarshalling the xml file.
  */
 public class HallParser {
 
@@ -47,13 +47,12 @@ public class HallParser {
      *
      * @return true if the file unmarshalling succeeded
      */
-    public boolean readFile() {     
-        if (databaseHasHalls()) {
+    public boolean readFile() {
+        if (!databaseHasHalls()) {
             return false;
         }
 
         try {
-
             JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
@@ -67,7 +66,7 @@ public class HallParser {
         }
         return true;
     }
-    
+
     private void createSeatsForUnmarshalledHalls() {
         halls.createSeatsForHalls();
     }
