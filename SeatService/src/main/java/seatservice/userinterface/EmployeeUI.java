@@ -1,6 +1,6 @@
 package seatservice.userinterface;
 
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 import seatservice.userinterface.customerserving.CustomerServingUI;
 import seatservice.userinterface.theatermanager.TheaterManagingUI;
 

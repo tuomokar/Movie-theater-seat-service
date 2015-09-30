@@ -1,7 +1,7 @@
 package seatservice.userinterface.theatermanager.commands;
 
 import java.util.Scanner;
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 
 /**
  * This class is responsible for adding a hall or halls

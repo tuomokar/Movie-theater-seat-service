@@ -2,7 +2,7 @@ package seatservice.userinterface.theatermanager.commands;
 
 import java.util.Scanner;
 import seatservice.domain.Hall;
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 
 /**
  * This command is responsible for showing any info on the halls

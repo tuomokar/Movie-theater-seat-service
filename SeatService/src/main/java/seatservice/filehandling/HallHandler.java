@@ -1,4 +1,4 @@
-package seatservice.logic;
+package seatservice.filehandling;
 
 import java.io.IOException;
 import seatservice.domain.Hall;

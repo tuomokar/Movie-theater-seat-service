@@ -3,7 +3,7 @@ package seatservice.userinterface.theatermanager;
 
 import java.util.Map;
 import java.util.HashMap;
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 import java.util.Scanner;
 import seatservice.domain.Hall;
 import seatservice.userinterface.theatermanager.commands.Add;

@@ -1,7 +1,7 @@
 
 package seatservice.userinterface.customerserving;
 
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 
 /**
  * This class is responsible for handling the UI for customer

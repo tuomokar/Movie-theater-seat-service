@@ -1,5 +1,6 @@
-package seatservice.logic;
 
+
+import seatservice.filehandling.HallHandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

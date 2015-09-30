@@ -3,7 +3,7 @@ package seatservice.userinterface.theatermanager.commands;
 
 
 import java.util.Scanner;
-import seatservice.logic.HallHandler;
+import seatservice.filehandling.HallHandler;
 
 /**
  * This abstract class works as a parent class for all the commands for 
