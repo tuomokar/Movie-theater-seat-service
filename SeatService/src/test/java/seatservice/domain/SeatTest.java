@@ -41,7 +41,7 @@ public class SeatTest {
      */
     @Test
     public void checkTheButtonIsGreenColorAfterBeingCreated() {
-        assertEquals(Color.green, seat.getButton().getBackground());
+        assertEquals(Color.green, seat.getBackground());
     }
     
     /**

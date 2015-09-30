@@ -9,16 +9,12 @@ import java.awt.Color;
 * The seat is represented as a button, which changes its color depending on its
 * state of availability
 */
-public class Seat {
-    
-    private JButton button;
-    
+public class Seat extends JButton {
+      
     /**
-     * Creates the button representing the seat, and sets its default state to
-     * available
+     * The consturctor sets the default state of this seat to available
      */
     public Seat() {
-        button = new JButton();
         setToAvailable();
     }   
     
@@ -27,22 +23,14 @@ public class Seat {
      * color red
      */
     public void setToUnavailable() {
-        button.setBackground(Color.red);
+        setBackground(Color.red);
     }
     
     /**
      * Sets the seat available, which is represented in the color green.
      */
     public void setToAvailable() {
-        button.setBackground(Color.green);
-    }
-    
-    /**
-     * Returns the button representing the seat
-     * @return JButton
-     */
-    public JButton getButton() {
-        return button;
+        setBackground(Color.green);
     }
     
     /**
@@ -51,6 +39,6 @@ public class Seat {
      * @return the state of availability of the seat
      */
     public boolean isAvailable() {
-        return button.getBackground().equals(Color.green);
+        return getBackground().equals(Color.green);
     }
 }
