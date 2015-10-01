@@ -174,6 +174,15 @@ public class Hall {
         return sb.toString();
     }
 
+    /**
+     * Returns the seat at the given coordinates
+     * @param row the row the seat searched for is
+     * @param seatsPlaceOnArow the place of the seat on the given row
+     * @return the seat at the given row and place on the row
+     */
+    public Seat getSeat(int row, int seatsPlaceOnArow) {
+        return seats.get(row).get(seatsPlaceOnArow);
+    }
 
     @Override
     public int hashCode() {
