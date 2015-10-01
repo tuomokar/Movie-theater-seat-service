@@ -12,7 +12,7 @@ import java.awt.Color;
 public class Seat extends JButton {
       
     /**
-     * The consturctor sets the default state of this seat to available
+     * The constructor sets the default state of this seat to available
      */
     public Seat() {
         setToAvailable();
