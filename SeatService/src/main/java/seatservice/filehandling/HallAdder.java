@@ -1,14 +1,10 @@
 package seatservice.filehandling;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import seatservice.domain.Hall;
-//import seatservice.domain.Halls;
 import seatservice.domain.Halls;
 
 /**
@@ -24,8 +20,8 @@ public class HallAdder {
      * Sets name of the xml file containing the information on the halls and
      * also sets the 'halls' instance variable to the one given as the parameter
      *
-     * @param filePath
-     * @param halls
+     * @param filePath the file path that the class uses
+     * @param halls an instance of the Halls class
      */
     public HallAdder(String filePath, Halls halls) {
         this.filePath = filePath;
@@ -39,9 +35,9 @@ public class HallAdder {
      * In case there's an error, the method returns false, but otherwise the
      * method returns true.
      *
-     * @param hallName
-     * @param rows
-     * @param seatsInARow
+     * @param hallName the hall's name
+     * @param rows the amount of rows of seats in the hall
+     * @param seatsInARow the amount of seats on the rows
      * @return whether or not the writing to the file succeeded
      */
     public boolean createNewHall(String hallName, int rows, int seatsInARow) {
@@ -56,10 +52,9 @@ public class HallAdder {
      * Writes all the halls currently in the list of the halls into the
      * xml file by using JAXB. Returns false if an error is encountered during
      * the marshalling and otherwise returns true.
-     *
-     * @param halls
-     * @return
-     * @throws JAXBException
+     * 
+     * @return returns true if marshalling all the currently known files was 
+     * successful and false if an error was encountered
      */
     public boolean writeAllTheHallsToTheFile() {
         try {
@@ -78,7 +73,7 @@ public class HallAdder {
     /**
      * Changes the current file path to a new one that is given as the parameter
      *
-     * @param newPath
+     * @param newPath the path that the class will use from now on
      */
     public void changeFilePath(String newPath) {
         filePath = newPath;
