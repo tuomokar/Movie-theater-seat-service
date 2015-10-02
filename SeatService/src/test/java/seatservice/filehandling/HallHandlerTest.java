@@ -1,20 +1,13 @@
+package seatservice.filehandling;
 
-
-import seatservice.filehandling.HallHandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import seatservice.domain.Hall;
 
-/**
- * Tests the HallHandler class
- */
 public class HallHandlerTest {
 
     private HallHandler hallHandler;
