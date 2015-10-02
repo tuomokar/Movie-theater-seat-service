@@ -1,39 +1,21 @@
 
 package seatservice.domain;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.UUID;
-import java.util.Map;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-/**
- * Tests the Halls class
- */
 public class HallsTest {
     
-    private Halls halls;
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private Halls halls;   
     
     @Before
     public void setUp() {
         this.halls = new Halls();
     }
     
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void hallIsEmptyAtStart() {
