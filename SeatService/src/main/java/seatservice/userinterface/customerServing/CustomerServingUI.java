@@ -40,7 +40,7 @@ public class CustomerServingUI implements Runnable {
         System.out.println("-----You started the customer serving UI-----");
         System.out.println("---------------------------------------------");
         
-        if (hallHandler.getHallsAsList().isEmpty()) {
+        if (noHallsExist()) {
             System.out.println();
             System.out.println("No halls added yet, please add some halls first");
             System.out.println();
@@ -58,7 +58,7 @@ public class CustomerServingUI implements Runnable {
             String name = reader.nextLine();
             hall = hallHandler.findHallByName(name);
             
-            if (hallDoesntExist()) {
+            if (noHallWithGivenName()) {
                 System.out.println("Hall with that name doesn't exist");
                 continue;
             }
@@ -66,11 +66,15 @@ public class CustomerServingUI implements Runnable {
             if (name.equals("/abort")) {
                 break;
             }
-            run();                            
+            run();
         }
     }
     
-    private boolean hallDoesntExist() {
+    private boolean noHallsExist() {
+        return hallHandler.getHallsAsList().isEmpty();
+    }
+    
+    private boolean noHallWithGivenName() {
         return hall == null;
     }
 
@@ -96,8 +100,7 @@ public class CustomerServingUI implements Runnable {
         JPanel screen = new JPanel();
         screen.add(new Label("Screen here"));
         screen.setLayout(new GridLayout(2,15));
-        container.add(screen, BorderLayout.SOUTH);
-        
+        container.add(screen, BorderLayout.SOUTH);       
         
         addActionListenersToSeats(buttons, seats);
     }
@@ -105,8 +108,8 @@ public class CustomerServingUI implements Runnable {
     private void setPreferredSizeForButtons(JPanel buttons) {
         JButton b = new JButton("Just fake button");
         Dimension buttonSize = b.getPreferredSize();
-        buttons.setPreferredSize(new Dimension((int) (buttonSize.getWidth() * 8) - 20,
-                (int) (buttonSize.getHeight() * 3.5) + 20 * 2));
+        buttons.setPreferredSize(new Dimension((int) (buttonSize.getWidth() * 8),
+                (int) (buttonSize.getHeight() * 3.5)));
     }
     
     private void addActionListenersToSeats(JPanel buttons, Map<Integer, Map<Integer, Seat>> seats) {
