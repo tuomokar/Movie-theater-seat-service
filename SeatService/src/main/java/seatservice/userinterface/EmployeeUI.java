@@ -27,7 +27,7 @@ public class EmployeeUI {
         this.hallHandler = new HallHandler();
         this.reader = new Scanner(System.in);
         this.theaterManagingUI = new TheaterManagingUI(hallHandler, reader);
-        this.customerServingUI = new CustomerServingUI(hallHandler);
+        this.customerServingUI = new CustomerServingUI(hallHandler, reader);
         readHalls();
     }
 
@@ -46,7 +46,7 @@ public class EmployeeUI {
         while (true) {
             System.out.println("Do you wish to manage the theater or serve "
                     + "customers?");
-            System.out.println("Please give a number corresponding to the"
+            System.out.println("Please give a number corresponding to the "
                     + "thing you wish do to");
             
             System.out.println();
