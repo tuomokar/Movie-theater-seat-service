@@ -57,9 +57,9 @@ Started the project:
 
 **Friday 18/9/2015, 2 hours**
 
-- read about xml and did some simple practicing with it
-  - how to parse it in java and create objects out of it
-  - how to write it in java
+- read about xml and did some simple practising with it
+  - how to parse it in Java and create objects out of it
+  - how to write it in Java
 - updated the class diagram
 
 **Wednesday 23/9/2015, 1 hour**
@@ -83,3 +83,21 @@ Started the project:
   - (the problem being that at the moment it seems to unmarshal the halls currently in the xml file correctly, but for some reason all of the classes don't realize it and for example when writing new 
   halls into the xml file for the first time after the software is turned on, the already existing halls aren't remembered anymore and thus the content is reseted)
   - (was unsuccessful with fixing the problem so will keep on bumping my head to the table later)
+  
+**Wednesday 30/9/2015, 15 minutes**
+- fixed some typos
+- did some general thinking related to the project
+
+**Thursday 1/10/2015, 2 hours**
+- reminded myself on how Java Swing works and did some practising with it
+- created the basic functionality for the customer serving GUI
+  - user can choose the hall to be shown
+  - GUI shows all the seats of that hall and user can click on the seats to choose their seat
+
+**Friday 2/10/2015, 3 hours**
+- reminded myself on how sequence diagrams work
+- made a couple of sequence diagrams
+- improved the GUI slightly and did some refactoring
+- removed unnecessary bloat from the test classes (unused imports, unused methods and javadoc)
+- some minor refactoring in general
+- did some thinking related to the project
