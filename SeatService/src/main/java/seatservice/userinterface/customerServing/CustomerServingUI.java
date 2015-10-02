@@ -77,13 +77,8 @@ public class CustomerServingUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Customer serving GUI");
-       
-//        int width = hall.getAmountOfRows() * 50;
-//        int height = hall.getAmountOfSeatsWithinRow() * 50;
-
-//        frame.setPreferredSize(new Dimension(width, height));
-
         createComponents(frame.getContentPane());
+        
         frame.pack();
         frame.setVisible(true);
     }
@@ -94,15 +89,10 @@ public class CustomerServingUI implements Runnable {
         GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());
 
         JPanel buttons = new JPanel();
-        buttons.setLayout(layout);
-        
+        buttons.setLayout(layout);       
         setPreferredSizeForButtons(buttons);
-
         container.add(buttons, BorderLayout.NORTH);
-                         
-       
-//        container.add(new JSeparator(), BorderLayout.CENTER);
-        
+                                     
         JPanel screen = new JPanel();
         screen.add(new Label("Screen here"));
         screen.setLayout(new GridLayout(2,15));
