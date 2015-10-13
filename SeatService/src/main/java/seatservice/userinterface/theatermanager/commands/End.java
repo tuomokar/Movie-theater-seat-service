@@ -19,7 +19,9 @@ public class End extends Command {
      */
     @Override
     public boolean run() {
-        System.out.println("just testing");
+        System.out.println();
+        System.out.println("Ending..");
+        System.out.println();
         return false;
     }
     
