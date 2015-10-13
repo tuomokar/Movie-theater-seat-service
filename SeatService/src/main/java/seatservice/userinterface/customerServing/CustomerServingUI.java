@@ -53,21 +53,56 @@ public class CustomerServingUI implements Runnable {
             System.out.println();
             System.out.println("Which hall is the hall that shows "
                     + "the movie the customer wants to see?");
+            System.out.println("Type /abort at any time to stop");
             
             printOutNamesOfAllHalls();
-            String name = reader.nextLine();
-            hall = hallHandler.findHallByName(name);
+            String name = reader.nextLine();          
             
-            if (noHallWithGivenName()) {
-                System.out.println("Hall with that name doesn't exist");
+            if (name.equals("/abort")) {
+                System.out.println();
+                System.out.println("Aborting..");
+                System.out.println();
+                if (frame != null) {
+                    stopShowingCurrentHall();
+                }
+                break;
+            }
+            
+            if (hallIsAlreadyBeingShown(name)) {
+                System.out.println();
+                System.out.println("That hall is already being shown");
+                System.out.println();
                 continue;
             }
             
-            if (name.equals("/abort")) {
-                break;
+            hall = hallHandler.findHallByName(name);
+            
+            if (noHallWithGivenName()) {
+                System.out.println();
+                System.out.println("Hall with that name doesn't exist");
+                System.out.println();
+                continue;
             }
+            
+            if (anotherHallNameWasGiven()) {
+                stopShowingCurrentHall();
+            }
+            
+            
             run();
         }
+    }
+    
+    private boolean anotherHallNameWasGiven() {
+        return frame != null;
+    }
+    
+    private void stopShowingCurrentHall() {
+        frame.dispose();
+    }
+    
+    private boolean hallIsAlreadyBeingShown(String name) {
+        return hall != null && name.equals(hall.getName());
     }
     
     private boolean noHallsExist() {
