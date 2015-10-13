@@ -101,3 +101,10 @@ Started the project:
 - removed unnecessary bloat from the test classes (unused imports, unused methods and javadoc)
 - some minor refactoring in general
 - did some thinking related to the project
+
+**Tuesday 13/10/2015, 3 hours**
+- studied how to create tabbed panes with swing
+- studied a bunch of other things mostly related to swing
+- made the CustomerServingUI class a bit more user friendly and secure
+- added a sequence diagram and updated the class diagram
+- did some general thinking related to the project
