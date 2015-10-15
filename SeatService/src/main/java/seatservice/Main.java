@@ -4,6 +4,8 @@ package seatservice;
 import java.io.IOException;
 import seatservice.filehandling.HallParser;
 import seatservice.userinterface.EmployeeUI;
+import seatservice.userinterface.UserInterface;
+import javax.swing.SwingUtilities;
 
 /**
  * This class functions as the main class.
@@ -15,8 +17,11 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        EmployeeUI userInterface = new EmployeeUI();
-        userInterface.start();
+//        EmployeeUI userInterface = new EmployeeUI();
+//        userInterface.start();
+        
+        UserInterface userInterface = new UserInterface();
+        SwingUtilities.invokeLater(userInterface);
                             
     }
 }
