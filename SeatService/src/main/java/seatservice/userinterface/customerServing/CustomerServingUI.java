@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
 /**
@@ -112,6 +113,13 @@ public class CustomerServingUI implements Runnable {
     private boolean noHallWithGivenName() {
         return hall == null;
     }
+    
+    private void printOutNamesOfAllHalls() {
+        System.out.println("The names are: ");
+        for (Hall hall : hallHandler.getHallsAsList()) {
+            System.out.println("  " + hall.getName());
+        }
+    }
 
     @Override
     public void run() {
@@ -129,23 +137,18 @@ public class CustomerServingUI implements Runnable {
         GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());
 
         JPanel buttons = new JPanel();
-        buttons.setLayout(layout);       
-        setPreferredSizeForButtons(buttons);
-        container.add(buttons, BorderLayout.NORTH);
-                                     
+        buttons.setLayout(layout);
+                                   
         JPanel screen = new JPanel();
-        screen.add(new Label("Screen here"));
-        screen.setLayout(new GridLayout(2,15));
-        container.add(screen, BorderLayout.SOUTH);       
+        screen.add(new Label("The white screen"), BorderLayout.CENTER);
+       
+        JScrollPane scrollable = new JScrollPane(buttons);
+        scrollable.setPreferredSize(new Dimension(1200, 900));
         
+        container.add(scrollable, BorderLayout.NORTH);
+        container.add(screen, BorderLayout.SOUTH);
+             
         addActionListenersToSeats(buttons, seats);
-    }
-    
-    private void setPreferredSizeForButtons(JPanel buttons) {
-        JButton b = new JButton("Just fake button");
-        Dimension buttonSize = b.getPreferredSize();
-        buttons.setPreferredSize(new Dimension((int) (buttonSize.getWidth() * 8),
-                (int) (buttonSize.getHeight() * 3.5)));
     }
     
     private void addActionListenersToSeats(JPanel buttons, Map<Integer, Map<Integer, Seat>> seats) {
@@ -161,12 +164,5 @@ public class CustomerServingUI implements Runnable {
 
     public JFrame getFrame() {
         return frame;
-    }
-    
-    private void printOutNamesOfAllHalls() {
-        System.out.println("The names are: ");
-        for (Hall hall : hallHandler.getHallsAsList()) {
-            System.out.println("  " + hall.getName());
-        }
     }
 }
