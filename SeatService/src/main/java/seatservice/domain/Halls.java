@@ -67,6 +67,9 @@ public class Halls {
      * @return Returns true if a hall is found with the given name
      */
     public Hall findByName(String name) {
+        if (name == null) {
+            return null;
+        }
         for (Hall hall : halls) {
             if (hall.getName().equals(name)) {
                 return hall;
