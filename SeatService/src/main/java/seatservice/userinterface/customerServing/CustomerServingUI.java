@@ -1,5 +1,6 @@
 package seatservice.userinterface.customerserving;
 
+import com.sun.glass.ui.Window;
 import java.awt.BorderLayout;
 import seatservice.domain.Seat;
 import seatservice.domain.Hall;
@@ -16,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import java.awt.event.WindowEvent;
 
 /**
  * This class is responsible for handling the UI for customer
@@ -36,6 +38,7 @@ public class CustomerServingUI implements Runnable {
      * Handles the text UI and begins the GUI
      */
     public void start() {
+        resetHall();
         System.out.println();
         System.out.println("---------------------------------------------");
         System.out.println("-----You started the customer serving UI-----");
@@ -99,7 +102,8 @@ public class CustomerServingUI implements Runnable {
     }
     
     private void stopShowingCurrentHall() {
-        frame.dispose();
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+//        frame.dispose();
     }
     
     private boolean hallIsAlreadyBeingShown(String name) {
@@ -114,6 +118,10 @@ public class CustomerServingUI implements Runnable {
         return hall == null;
     }
     
+    private void resetHall() {
+        hall = null;
+    }
+    
     private void printOutNamesOfAllHalls() {
         System.out.println("The names are: ");
         for (Hall hall : hallHandler.getHallsAsList()) {
@@ -124,6 +132,7 @@ public class CustomerServingUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Customer serving GUI");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         createComponents(frame.getContentPane());
         
         frame.pack();
@@ -138,6 +147,7 @@ public class CustomerServingUI implements Runnable {
 
         JPanel buttons = new JPanel();
         buttons.setLayout(layout);
+        addSeatsToPanelAndActionListeners(buttons, seats);
                                    
         JPanel screen = new JPanel();
         screen.add(new Label("The white screen"), BorderLayout.CENTER);
@@ -148,10 +158,10 @@ public class CustomerServingUI implements Runnable {
         container.add(scrollable, BorderLayout.NORTH);
         container.add(screen, BorderLayout.SOUTH);
              
-        addActionListenersToSeats(buttons, seats);
+        
     }
     
-    private void addActionListenersToSeats(JPanel buttons, Map<Integer, Map<Integer, Seat>> seats) {
+    private void addSeatsToPanelAndActionListeners(JPanel buttons, Map<Integer, Map<Integer, Seat>> seats) {
         for (int row = seats.size(); row >= 1; row--) {
             for (int seatsPlace = 1; seatsPlace <= seats.get(1).size(); seatsPlace++) {
                 Seat seat = hall.getSeat(row, seatsPlace);
