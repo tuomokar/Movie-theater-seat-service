@@ -148,7 +148,7 @@ public class CustomerServingUI implements Runnable {
     }
     
     private void addActionListenersToSeats(JPanel buttons, Map<Integer, Map<Integer, Seat>> seats) {
-        for (int row = 1; row <= seats.size(); row++) {
+        for (int row = seats.size(); row >= 1; row--) {
             for (int seatsPlace = 1; seatsPlace <= seats.get(1).size(); seatsPlace++) {
                 Seat seat = hall.getSeat(row, seatsPlace);
                 seat.addActionListener(new ClickListener());
