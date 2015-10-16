@@ -66,4 +66,16 @@ public class HallTest {
                 "\nseats in a row: " + amountOfSeatsWithinRow + "\n";
         assertEquals(toStringShouldBe, hall.toString());
     }
+    
+    @Test
+    public void resetingSeatsWorks() {
+        assertEquals(totalAmountOfSeats, hall.getTheAmountOfAvailableSeats());
+        
+        hall.getSeatsWithinARow(1).get(1).setToUnavailable();
+        hall.getSeatsWithinARow(1).get(2).setToUnavailable();
+        assertEquals(totalAmountOfSeats - 2, hall.getTheAmountOfAvailableSeats());
+        
+        hall.resetSeatsToAvailable();
+        assertEquals(totalAmountOfSeats, hall.getTheAmountOfAvailableSeats());
+    }
 }
