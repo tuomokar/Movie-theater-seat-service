@@ -24,9 +24,9 @@ public class Halls {
     }
     
     public List<Hall> getHalls() {
-        if (halls == null) {
-            halls = new ArrayList<>();
-        }
+//        if (halls == null) {
+//            halls = new ArrayList<>();
+//        }
         return halls;
     }
 
@@ -39,6 +39,9 @@ public class Halls {
      * @param hall 
      */
     public void addHall(Hall hall) {
+        if (halls.contains(hall)) {
+            return;
+        }
         halls.add(hall);
     }
     

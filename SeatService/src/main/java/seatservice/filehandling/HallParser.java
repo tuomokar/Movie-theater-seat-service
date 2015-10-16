@@ -1,13 +1,15 @@
 package seatservice.filehandling;
 
 import seatservice.domain.Hall;
-import seatservice.domain.Halls;
-
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import seatservice.domain.Halls;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.FileSystems;
@@ -32,6 +34,7 @@ public class HallParser {
     public HallParser(String filePath, Halls halls) {
         this.filePath = filePath;
         this.halls = halls;
+
     }
 
     /**
@@ -56,22 +59,22 @@ public class HallParser {
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
             tempHalls = (Halls) jaxbUnmarshaller.unmarshal(new File(filePath));
+            halls.getHalls().clear();
+            setTempHallsToActualHalls();
 
             createSeatsForUnmarshalledHalls();
 
         } catch (JAXBException exc) {
             return false;
         }
-        addToActualHalls();
+
         return true;
     }
 
-    private void addToActualHalls() {
+    private void setTempHallsToActualHalls() {
         for (Hall hall : tempHalls.getHalls()) {
-            hall.createSeats();
             halls.addHall(hall);
         }
-        tempHalls = null;
     }
 
     private void createSeatsForUnmarshalledHalls() {

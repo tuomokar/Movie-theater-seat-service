@@ -68,6 +68,14 @@ public class Hall {
     public void setAmountOfSeatsWithinRow(int amountOfSeatsWithinRow) {
         this.amountOfSeatsWithinRow = amountOfSeatsWithinRow;
     }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Creates seats for this hall. Meaning, the method uses the information
@@ -77,6 +85,9 @@ public class Hall {
      * of the Seat class as the value.
      */
     public void createSeats() {
+        if (seats == null || !seats.isEmpty()) {
+            return;
+        }
         for (int row = 1; row <= amountOfRows; row++) {
             createASingleRow(row, amountOfSeatsWithinRow);
         }
@@ -154,10 +165,6 @@ public class Hall {
         return seats.get(row);
     }
 
-    public String getName() {
-        return name;
-    }
-
     /**
      * Returns the hall's basic info, i.e. name, amount of rows and the amount
      * of seats in a row
@@ -201,6 +208,9 @@ public class Hall {
             return false;
         }
         final Hall other = (Hall) obj;
+        if (this.name == null || other.getName() == null) {
+            return false;
+        }
         if (!this.name.equals(other.getName())) {
             return false;
         }
