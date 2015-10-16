@@ -29,6 +29,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
     public UserInterface() {
         hallHandler = new HallHandler();
+        hallHandler.readFile();     // lukee tiedoston tässä
         initComponents();
         fillHallNames();
         listener = new HallNamesListener();
@@ -455,7 +456,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         }
 
         String selectedHall = listener.getSelectedName();
-        Hall hall = hallHandler.findHallByName(selectedHall);
+        Hall hall = hallHandler.findHallByName(selectedHall);    
 
         Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
         GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());

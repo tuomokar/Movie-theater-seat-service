@@ -30,8 +30,8 @@ public class HallHandler {
         filePath = "Hall_Database.xml";
         this.halls = new Halls();
 
-        this.hallAdder = new HallAdder(filePath, halls);
         this.hallParser = new HallParser(filePath, halls);
+        this.hallAdder = new HallAdder(filePath, halls);     
         this.hallRemover = new HallRemover(hallAdder, halls);
     }
 
@@ -61,8 +61,8 @@ public class HallHandler {
     }
 
     /**
-     * Unmarshals the xml file to hall objects and adds them all to the list
-     * encapculated by the 'halls' instance variable.
+     * Unmarshals the xml file to <code>hall</code> objects and adds them all to the list
+     * encapculated by the <code>halls</code> instance variable.
      */
     public void readFile() {
         hallParser.readFile();

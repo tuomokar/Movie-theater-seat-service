@@ -12,22 +12,27 @@ import seatservice.domain.Hall;
 /**
  * This class encapsulates the halls as a list.
  */
+
 @XmlRootElement(name = "halls")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Halls {
     
+    // REMEMBER TO CHANGE THIS FROM PUBLIC
     @XmlElement(name = "hall")
-    private ArrayList<Hall> halls;
+    public List<Hall> halls;
 
     public Halls() {
         this.halls = new ArrayList<>();
     }
     
-    public ArrayList<Hall> getHalls() {
+    public List<Hall> getHalls() {
+        if (halls == null) {
+            halls = new ArrayList<>();
+        }
         return halls;
     }
 
-    public void setHalls(ArrayList<Hall> halls) {
+    public void setHalls(List<Hall> halls) {
         this.halls = halls;
     }
     
@@ -70,6 +75,7 @@ public class Halls {
         if (name == null) {
             return null;
         }
+        
         for (Hall hall : halls) {
             if (hall.getName().equals(name)) {
                 return hall;
@@ -77,5 +83,4 @@ public class Halls {
         }
         return null;
     }
- 
 }

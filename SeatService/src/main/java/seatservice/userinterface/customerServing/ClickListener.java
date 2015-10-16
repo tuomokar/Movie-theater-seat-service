@@ -11,7 +11,6 @@ public class ClickListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {       
         Seat seat = (Seat) event.getSource();
-        
         if (seat.isAvailable()) {
             seat.setToUnavailable();
         } else {

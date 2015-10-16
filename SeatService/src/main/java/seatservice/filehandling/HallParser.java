@@ -22,6 +22,7 @@ public class HallParser {
 
     private String filePath;
     private Halls halls;
+    private Halls halls2;
 
     /**
      * The constructor sets the default filepath for the xml file and sets the
@@ -33,6 +34,7 @@ public class HallParser {
     public HallParser(String filePath, Halls halls) {
         this.filePath = filePath;
         this.halls = halls;
+
     }
 
     /**
@@ -56,13 +58,21 @@ public class HallParser {
             JAXBContext jaxbContext = JAXBContext.newInstance(Halls.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            halls = (Halls) jaxbUnmarshaller.unmarshal(new File(filePath));
+            // Remember to change this (hotfix)
+            // ----------------------------------------------------------------------------------
+            //
+            halls2 = (Halls) jaxbUnmarshaller.unmarshal(new File(filePath));
+            for (Hall hall : halls2.halls){
+                halls.addHall(hall);
+            }
+            // ----------------------------------------------------------------------------
 
             createSeatsForUnmarshalledHalls();
 
         } catch (JAXBException exc) {
             return false;
         }
+
         return true;
     }
 
