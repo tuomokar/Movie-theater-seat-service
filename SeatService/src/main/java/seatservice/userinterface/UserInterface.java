@@ -43,9 +43,10 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
      */
     public UserInterface() {
         hallHandler = new HallHandler();
+        hallHandler.readFile();
         initComponents();
         fillHallNames();
-        listener = new HallNamesListener(hallHandler);
+        listener = new HallNamesListener();
         addSelectionListenerToHallNames();
         fillTable();
 
@@ -389,25 +390,23 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
         dtm.setColumnIdentifiers(header);
 
-        Object[][] hallInfo = new Object[size][columns];
         for (int i = 0; i < size; i++) {
-//            hallNamesModel.addElement(hallHandler.getHallsAsList().get(j).getName());
 
+            String[] row = new String[4];
             Hall hall = halls.get(i);
             String name = hall.getName();
-            int rows = hall.getAmountOfRows();
-            int seats = hall.getAmountOfRows();
-            int totalSeats = hall.getTheTotalAmountOfSeats();
+            Integer rows = hall.getAmountOfRows();
+            Integer seats = hall.getAmountOfRows();
+            Integer totalSeats = hall.getTheTotalAmountOfSeats();
 
-//            hallInfo[i] = {name, rows, seats, totalSeats};
-            hallInfo[i][0] = name;
-            hallInfo[i][1] = rows;
-            hallInfo[i][2] = seats;
-            hallInfo[i][3] = totalSeats;
-            dtm.addRow(hallInfo);
+            row[0] = name;
+            row[1] = rows.toString();
+            row[2] = seats.toString();
+            row[3] = totalSeats.toString();
+            dtm.addRow(row);
+            
         }
-//        dtm.addRow(hallInfo);
-        this.hallNamesTestTable.setModel(dtm);
+        hallNamesTestTable.setModel(dtm);
     }
 
     private void addSelectionListenerToHallNames() {
