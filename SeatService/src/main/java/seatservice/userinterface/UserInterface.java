@@ -5,38 +5,36 @@
  */
 package seatservice.userinterface;
 
-import java.awt.GridLayout;
 import seatservice.domain.Hall;
 import seatservice.filehandling.HallHandler;
+import seatservice.domain.Seat;
+import seatservice.userinterface.customerserving.ClickListener;
 
+import java.awt.GridLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.JList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import seatservice.domain.Seat;
-import seatservice.userinterface.customerserving.ClickListener;
 
+
+/**
+ * This class is responsible for handling the GUI
+ */
 public class UserInterface extends javax.swing.JFrame implements Runnable {
 
     private HallHandler hallHandler;
     private HallNamesListener listener;
 
-    /**
-     * Creates new form TotalGUITest
-     */
     public UserInterface() {
         hallHandler = new HallHandler();
         initComponents();
         fillHallNames();
         listener = new HallNamesListener();
         addSelectionListenerToHallNames();
-        fillTable();
+        fillNamesTable();
 
     }
 
@@ -323,10 +321,15 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
         int i = 0;
         String name = hallsNameTextField.getText().trim();
+        
         if (name.isEmpty()) {
             hallNameErrorText.setText("name must not be empty!");
             i++;
-        }
+        } else if (hallHandler.hallExists(name)) {
+            hallNameErrorText.setText("hall with that name already exists!");
+            i++;
+        }     
+        
         if (rowsTextField.getText().isEmpty()) {
             rowErrorText.setText("rows must have a value!");
             i++;
@@ -364,7 +367,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
         fillHallNames();
         emptyFields();
-        fillTable();
+        fillNamesTable();
     }//GEN-LAST:event_addHallButtonActionPerformed
 
     private void removeHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeHallButtonActionPerformed
@@ -382,19 +385,26 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
         removeSelectedHall();
         fillHallNames();
-        fillTable();
+        fillNamesTable();
     }//GEN-LAST:event_removeHallButtonActionPerformed
 
+    private boolean noHallsExist() {
+        return hallHandler.getHallsAsList().isEmpty();
+    }
+    
+    private boolean selectedNameIsNull() {
+        return listener.getSelectedName() == null;
+    }
+    
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
-        if (hallHandler.getHallsAsList().isEmpty()) {
+        if (noHallsExist()) {
             return;
-        }
-
-        String selectedHall = listener.getSelectedName();
-        if (selectedHall == null) {
+        }     
+        if (selectedNameIsNull()) {
             return;
         }
         
+        String selectedHall = listener.getSelectedName();
         Hall hall = hallHandler.findHallByName(selectedHall);
         
         Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
@@ -402,22 +412,21 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         
         JPanel buttons = new JPanel();
         buttons.setLayout(layout);
-        addSeatsToPanelAndActionListeners(buttons, seats, hall);
+        addListenersToSeatsAndSeatsToPanel(buttons, seats, hall);
         
         hallSituationScollPane.setViewportView(buttons);
         listener.resetSelection();
     }//GEN-LAST:event_showButtonActionPerformed
 
     private void resetSeatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSeatsButtonActionPerformed
-        if (hallHandler.getHallsAsList().isEmpty()) {
+        if (noHallsExist()) {
             return;
-        }
-
-        String selectedHall = listener.getSelectedName();
-        if (selectedHall == null) {
+        }     
+        if (selectedNameIsNull()) {
             return;
         }
         
+        String selectedHall = listener.getSelectedName();
         Hall hall = hallHandler.findHallByName(selectedHall);
         hall.resetSeatsToAvailable();
         Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
@@ -425,13 +434,13 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         
         JPanel buttons = new JPanel();
         buttons.setLayout(layout);
-        addSeatsToPanelAndActionListeners(buttons, seats, hall);
+        addListenersToSeatsAndSeatsToPanel(buttons, seats, hall);
         
         hallSituationScollPane.setViewportView(buttons);
         listener.resetSelection();
     }//GEN-LAST:event_resetSeatsButtonActionPerformed
 
-    private void addSeatsToPanelAndActionListeners(JPanel buttons, 
+    private void addListenersToSeatsAndSeatsToPanel(JPanel buttons, 
             Map<Integer, Map<Integer, Seat>> seats,
             Hall hall) {
     
@@ -452,7 +461,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         return response == JOptionPane.YES_OPTION;
-
     }
 
     private void fillHallNames() {
@@ -464,7 +472,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         hallNamesList2.setModel(hallNamesModel);
     }
 
-    private void fillTable() {
+    private void fillNamesTable() {
 
         List<Hall> halls = hallHandler.getHallsAsList();
         int size = hallHandler.getHallsAsList().size();
