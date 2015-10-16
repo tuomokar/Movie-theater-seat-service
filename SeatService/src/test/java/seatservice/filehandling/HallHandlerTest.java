@@ -49,7 +49,7 @@ public class HallHandlerTest {
     }
     
     @Test
-    public void addingHallWorks() {
+    public void addingHalladdsObjectToTheListOfHalls() {
         hallHandler.addNewHall("name", 2, 3);
         hallHandler.readFile();
         
@@ -60,6 +60,7 @@ public class HallHandlerTest {
     public void removingHallWorks() {
         hallHandler.addNewHall("name", 4, 3);
         
+        assertTrue(hallHandler.getHalls().getHalls().size() == 1);
         hallHandler.removeHall("name");
         assertTrue(hallHandler.getHalls().getHalls().isEmpty());
     }
@@ -77,6 +78,27 @@ public class HallHandlerTest {
         assertTrue(hallHandler.findHallByName("name") == null);
         assertTrue(hallHandler.findHallByName("name2") == null);
         assertEquals("name3", hallHandler.findHallByName("name3").getName());     
+    }
+    
+    @Test
+    public void addingAHallAddsAHallWithCorrectNameRowAndSeatsToTheListOfHalls() {
+        hallHandler.addNewHall("name", 4, 2);
+        assertEquals("name", hallHandler.getHallsAsList().get(0).getName());
+        assertEquals(4, hallHandler.getHallsAsList().get(0).getAmountOfRows());
+        assertEquals(2, hallHandler.getHallsAsList().get(0).getAmountOfSeatsWithinRow());
+    }
+    
+    @Test
+    public void updatingHallWorks() {
+        hallHandler.addNewHall("name", 7, 14);
+        assertEquals("name", hallHandler.getHallsAsList().get(0).getName());
+        assertEquals(7, hallHandler.getHallsAsList().get(0).getAmountOfRows());
+        assertEquals(14, hallHandler.getHallsAsList().get(0).getAmountOfSeatsWithinRow());
+        
+        hallHandler.updateHall("name", 2, 100);
+        assertEquals("name", hallHandler.getHallsAsList().get(0).getName());
+        assertEquals(2, hallHandler.getHallsAsList().get(0).getAmountOfRows());
+        assertEquals(100, hallHandler.getHallsAsList().get(0).getAmountOfSeatsWithinRow());
     }
     
     private void resetFileContent() throws IOException {
