@@ -15,7 +15,6 @@ public class HallsTest {
     public void setUp() {
         this.halls = new Halls();
     }
-    
 
     @Test
     public void hallIsEmptyAtStart() {
@@ -34,7 +33,7 @@ public class HallsTest {
     }
     
     @Test
-    public void containsWorksWithSomeHallsExisting() {
+    public void containsMethodWorksWithSomeHallsExisting() {
         halls.addHall(new Hall("name1", 1, 2));
         halls.addHall(new Hall("name2", 1, 2));
         
