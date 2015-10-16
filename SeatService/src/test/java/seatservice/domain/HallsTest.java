@@ -70,7 +70,7 @@ public class HallsTest {
     }
     
     @Test
-    public void findingByNameDoesntReturnAnyRandomHall() {
+    public void findingByNameReturnsTheSpecificWantedHall() {
         Hall hall1 = new Hall("name1", 1, 2);
         Hall hall2 = new Hall("name2", 3, 2);
         Hall hall3 = new Hall("name3", 4, 3);
@@ -103,7 +103,7 @@ public class HallsTest {
     }
     
     @Test
-    public void tryingToFindWithNullValueReturnsNull() {
+    public void findingByNameReturnsNullWhenGivenNullAsParameter() {
         assertNull(halls.findByName(null));
     }
     
