@@ -417,6 +417,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         if (selectedHall == null) {
             return;
         }
+        
         Hall hall = hallHandler.findHallByName(selectedHall);
         hall.resetSeatsToAvailable();
         Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
