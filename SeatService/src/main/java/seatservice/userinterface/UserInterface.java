@@ -355,23 +355,34 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }
 
     private boolean rowsValueIsFine() {
+        int rows;
         try {
-            int rows = Integer.parseInt(rowsTextField.getText());
-            return true;
+            rows = Integer.parseInt(rowsTextField.getText());
         } catch (NumberFormatException e) {
-            rowErrorText.setText("Integer value should be given");
+            rowErrorText.setText("Integer value should be given!");
             return false;
         }
+        if (rows <= 0) {
+            rowErrorText.setText("The hall must have at least one row!");
+            return false;
+        }
+        return true;
     }
 
     private boolean seatsValueIsFine() {
+        int seats;
         try {
-            int seats = Integer.parseInt(seatsTextField.getText());
-            return true;
+            seats = Integer.parseInt(seatsTextField.getText());
         } catch (NumberFormatException e) {
             seatsErrorText.setText("Integer value should be given");
             return false;
         }
+        
+        if (seats <= 0) {
+            seatsErrorText.setText("The hall must have at least one row!");
+            return false;
+        }
+        return true;
     }
 
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
@@ -380,11 +391,11 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         }
         int i = 0;
         String name = hallsNameTextField.getText().trim();
-        
+
         if (hallHandler.hallExists(name)) {
             hallNameErrorText.setText("Hall with that name already exists!");
             i++;
-        }   
+        }
 
         if (!rowsValueIsFine()) {
             i++;
@@ -403,8 +414,8 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
         hallHandler.addNewHall(name, rows, seats);
 
-        fillHallNames();
         emptyFields();
+        fillHallNames();
         fillNamesTable();
     }//GEN-LAST:event_addHallButtonActionPerformed
 
@@ -480,7 +491,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_resetSeatsButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        
+
         if (!newHallValuesAreEmpty()) {
             return;
         }
@@ -490,11 +501,9 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             hallNameErrorText.setText("No hall with that name exists!");
             return;
         }
-        
-        
-        
-        int i = 0;        
-        
+
+        int i = 0;
+
         if (!rowsValueIsFine()) {
             i++;
         }
@@ -514,7 +523,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         fillHallNames();
         fillNamesTable();
         emptyFields();
-        
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void addListenersToSeatsAndSeatsToPanel(JPanel buttons,
