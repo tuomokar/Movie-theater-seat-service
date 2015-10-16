@@ -29,7 +29,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
     public UserInterface() {
         hallHandler = new HallHandler();
-        hallHandler.readFile();     // lukee tiedoston tässä
+        hallHandler.readFile();
         initComponents();
         fillHallNames();
         listener = new HallNamesListener();
@@ -577,8 +577,11 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             Hall hall = halls.get(i);
 
             String name = hall.getName();
+            System.out.println("name is: " + name);
             Integer rows = hall.getAmountOfRows();
+            System.out.println("rows is: " + rows);
             Integer seats = hall.getAmountOfRows();
+            System.out.println("seats is: " + seats);
             Integer totalSeats = hall.getTheTotalAmountOfSeats();
 
             row[0] = name;
