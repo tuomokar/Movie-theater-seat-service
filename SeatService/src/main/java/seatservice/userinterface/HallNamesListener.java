@@ -1,8 +1,6 @@
 
 package seatservice.userinterface;
 
-import seatservice.filehandling.HallHandler;
-
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -15,13 +13,9 @@ import javax.swing.event.ListSelectionListener;
  */
 public class HallNamesListener implements ListSelectionListener {
 
-    private HallHandler hallHandler;
-    private String selectedName;
 
-    public HallNamesListener(HallHandler hallHandler) {
-        this.hallHandler = hallHandler;
-    }  
-    
+    private String selectedName;
+  
     @Override
     public void valueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
