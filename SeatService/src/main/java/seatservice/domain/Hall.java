@@ -114,7 +114,7 @@ public class Hall {
         for (int row = 1; row <= seats.size(); row++) {
             for (int seatsPlace = 1; seatsPlace <= totalAmountOfSeatsWithinRow; seatsPlace++) {
 
-                Seat seat = seats.get(row).get(seatsPlace);
+                Seat seat = getSeat(row, seatsPlace);
                 if (seat.isAvailable()) {
                     availableSeats++;
                 }
@@ -206,5 +206,20 @@ public class Hall {
         }
 
         return true;
+    }
+    
+    /**
+     * Makes all the seats in this hall available
+     */
+    public void resetSeatsToAvailable() {
+        int totalAmountOfSeatsWithinRow = seats.get(1).size();
+        
+        for (int row = 1; row <= seats.size(); row++) {
+            for (int seatsPlace = 1; seatsPlace <= totalAmountOfSeatsWithinRow; seatsPlace++) {
+
+                Seat seat = getSeat(row, seatsPlace);
+                seat.setToAvailable();
+            }
+        }
     }
 }
