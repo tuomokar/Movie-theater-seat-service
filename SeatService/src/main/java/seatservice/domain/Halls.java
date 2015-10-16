@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import seatservice.domain.Hall;
 
 /**
  * This class encapsulates the halls as a list.
@@ -17,9 +16,8 @@ import seatservice.domain.Hall;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Halls {
     
-    // REMEMBER TO CHANGE THIS FROM PUBLIC
     @XmlElement(name = "hall")
-    public List<Hall> halls;
+    private List<Hall> halls;
 
     public Halls() {
         this.halls = new ArrayList<>();
