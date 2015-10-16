@@ -392,7 +392,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         buttons.setLayout(layout);
         addSeatsToPanelAndActionListeners(buttons, seats, hall);
         
-//        hallSituationScollPane.add(buttons);
         hallSituationScollPane.setViewportView(buttons);
         listener.resetSelection();
     }//GEN-LAST:event_showButtonActionPerformed
