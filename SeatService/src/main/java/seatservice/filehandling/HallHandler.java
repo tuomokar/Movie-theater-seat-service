@@ -127,8 +127,25 @@ public class HallHandler {
         return halls.findByName(name) != null;
     }
     
+    
+    /**
+     * Returns the hall that matches the name. Returns null if no hall is found
+     * or if null value is given as the parameter
+     * @param name the name of the hall that is searched for
+     * @return the found hall object, or null if no hall is found
+     */
     public Hall findHallByName(String name) {
         return halls.findByName(name);
+    }
+    
+    public void updateHall(String name, int newRows, int newSeats) {
+        Hall hall = findHallByName(name);
+        if (hall == null) {
+            return;
+        }
+        
+        hall.setAmountOfRows(newRows);
+        hall.setAmountOfSeatsWithinRow(newSeats);
     }
 
 }
