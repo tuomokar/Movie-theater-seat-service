@@ -112,13 +112,16 @@ public class HallsTest {
         Hall hall1 = new Hall();
         
         hall1.setAmountOfRows(3);
-        hall1.setAmountOfSeatsWithinRow(2);
-        
+        hall1.setAmountOfSeatsWithinRow(2);      
+
         Hall hall2 = new Hall();
         hall2.setAmountOfRows(4);
         hall2.setAmountOfSeatsWithinRow(3);
+
         halls.addHall(hall1);
+
         halls.addHall(hall2);
+
         
         halls.createSeatsForHalls();
         

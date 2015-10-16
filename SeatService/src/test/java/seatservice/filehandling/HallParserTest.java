@@ -59,6 +59,25 @@ public class HallParserTest {
 
         assertEquals(toStringShouldBe, hallParser.getHalls().getHalls().get(0).toString());
     }
+    
+    @Test
+    public void hallSizeChangesCorrectlyWhenAddingOneHall() {
+        assertTrue(hallParser.getHalls().getHalls().size() == 0);
+        hallAdder.createNewHall("name", 2, 3);
+        assertTrue(hallParser.readFile());
+        
+        assertTrue(hallParser.getHalls().getHalls().size() == 1);
+    }
+    
+    @Test
+    public void hallSizeChangesCorrectlyWhenAddingTwoHalls() {
+        assertTrue(hallParser.getHalls().getHalls().size() == 0);
+        hallAdder.createNewHall("name1", 2, 3);
+        hallAdder.createNewHall("name2", 3, 3);
+        assertTrue(hallParser.readFile());
+        
+        assertTrue(hallParser.getHalls().getHalls().size() == 2);
+    }
 
     @Test
     public void multipleHallsAreCreatedCorrectly() throws IOException {
@@ -66,15 +85,19 @@ public class HallParserTest {
         Random random = new Random();
         int manyHalls = random.nextInt(8) + 2;
 
-        for (int i = 1; i <= manyHalls; i++) {
+        System.out.println("manyHalls is: " + manyHalls);
+        
+        for (int i = 0; i < manyHalls; i++) {
+            System.out.println("i is: " + i);
             int value = random.nextInt(4) + 1;
-            hallAdder.createNewHall("name", value, i);
+            hallAdder.createNewHall("name" + i, value, i + 1);
             hallParser.readFile();
             List<Hall> halls = this.halls.getHalls();
-         
-            String info = "name: name\nrows: " + value + "\nseats in a row: "
-                    + i + "\n";
-            assertEquals(info, halls.get(i - 1).toString());
+        
+            String info = "name: name" + i + "\nrows: " + value + "\nseats in a row: "
+                    + (i + 1) + "\n";
+            
+            assertEquals(info, halls.get(i).toString());
         }
 
         assertTrue(hallParser.getHalls().getHalls().size() == manyHalls);
