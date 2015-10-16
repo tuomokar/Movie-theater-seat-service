@@ -104,6 +104,11 @@ public class HallsTest {
     }
     
     @Test
+    public void tryingToFindWithNullValueReturnsNull() {
+        assertNull(halls.findByName(null));
+    }
+    
+    @Test
     public void creatingSeatsWorks() {
         Hall hall1 = new Hall();
         
