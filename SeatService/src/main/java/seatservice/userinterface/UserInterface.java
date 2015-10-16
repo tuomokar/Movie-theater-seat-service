@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowEvent;
 
 /**
  * This class is responsible for handling the GUI
@@ -448,6 +449,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
+        
         if (noHallsExist()) {
             return;
         }
@@ -577,11 +579,8 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             Hall hall = halls.get(i);
 
             String name = hall.getName();
-            System.out.println("name is: " + name);
             Integer rows = hall.getAmountOfRows();
-            System.out.println("rows is: " + rows);
             Integer seats = hall.getAmountOfRows();
-            System.out.println("seats is: " + seats);
             Integer totalSeats = hall.getTheTotalAmountOfSeats();
 
             row[0] = name;
