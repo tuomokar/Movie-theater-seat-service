@@ -72,6 +72,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         jScrollPane4 = new javax.swing.JScrollPane();
         hallNamesList2 = new javax.swing.JList();
         showButton = new javax.swing.JButton();
+        resetSeatsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
@@ -254,6 +255,13 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        resetSeatsButton.setText("Reset all seats to available");
+        resetSeatsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetSeatsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -262,7 +270,9 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showButton))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(resetSeatsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(hallSituationScollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
                 .addContainerGap())
@@ -275,7 +285,9 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(showButton))
+                        .addComponent(showButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(resetSeatsButton))
                     .addComponent(hallSituationScollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -396,6 +408,28 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         listener.resetSelection();
     }//GEN-LAST:event_showButtonActionPerformed
 
+    private void resetSeatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSeatsButtonActionPerformed
+        if (hallHandler.getHallsAsList().isEmpty()) {
+            return;
+        }
+
+        String selectedHall = listener.getSelectedName();
+        if (selectedHall == null) {
+            return;
+        }
+        Hall hall = hallHandler.findHallByName(selectedHall);
+        hall.resetSeatsToAvailable();
+        Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
+        GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());
+        
+        JPanel buttons = new JPanel();
+        buttons.setLayout(layout);
+        addSeatsToPanelAndActionListeners(buttons, seats, hall);
+        
+        hallSituationScollPane.setViewportView(buttons);
+        listener.resetSelection();
+    }//GEN-LAST:event_resetSeatsButtonActionPerformed
+
     private void addSeatsToPanelAndActionListeners(JPanel buttons, 
             Map<Integer, Map<Integer, Seat>> seats,
             Hall hall) {
@@ -502,6 +536,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton removeHallButton;
+    private javax.swing.JButton resetSeatsButton;
     private javax.swing.JLabel rowErrorText;
     private javax.swing.JLabel rowsLabel;
     private javax.swing.JTextField rowsTextField;

@@ -336,7 +336,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane4" min="-2" pref="167" max="-2" attributes="0"/>
-                          <Component id="showButton" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="resetSeatsButton" alignment="1" max="32767" attributes="0"/>
+                              <Component id="showButton" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="hallSituationScollPane" pref="733" max="32767" attributes="0"/>
@@ -353,6 +356,8 @@
                               <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="showButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="resetSeatsButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="hallSituationScollPane" min="-2" pref="545" max="-2" attributes="0"/>
                       </Group>
@@ -388,6 +393,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="resetSeatsButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reset all seats to available"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetSeatsButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
