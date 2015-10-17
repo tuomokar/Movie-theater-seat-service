@@ -17,9 +17,6 @@ public class HallNamesListener implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent evt) {
-        if (evt.getValueIsAdjusting()) {
-            return;
-        }
         
         JList hallNames = (JList) evt.getSource();
         if (hallNames.getSelectedValue() == null) {
