@@ -343,10 +343,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-//    private boolean newHallValuesAreNotEmpty() {
-//        return this.inputErrorHandler.newHallValuesAreNotEmpty();
-//    }
-
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
 
         emptyErrorLabels();
@@ -443,23 +439,25 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_resetSeatsButtonActionPerformed
 
     private boolean valuesAreValidWhenAddingOrUpdating(String name, Command command) {
-        int i = 0;
+      
         if (inputErrorHandler.anyNewHallValueIsEmpty(name)) {
             return false;
         }
+        
+        boolean invalidValueFound = true;
 
         boolean hallExistsAlready = inputErrorHandler.hallExistsAlready(name, command);
         if (hallExistsAlready && command == Command.ADD) {
-            i++;
+            invalidValueFound = false;
         } else if (!hallExistsAlready && command == Command.UPDATE) {
-            i++;
+            invalidValueFound = false;
         }
 
         if (!inputErrorHandler.rowsAndSeatsAreIntegersAndAboveZero()) {
-            i++;
+            invalidValueFound = false;
         }
 
-        return i == 0;
+        return invalidValueFound;
     }
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
@@ -515,9 +513,8 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 
         List<Hall> halls = hallHandler.getHallsAsList();
         int size = hallHandler.getHallsAsList().size();
-        int columns = 4;
 
-        DefaultTableModel tableModel = new DefaultTableModel(1, size);
+        DefaultTableModel tableModel = new DefaultTableModel(0, size);
 
         String header[] = new String[]{"Name", "Rows", "Seats on a row",
             "Seats in total"};

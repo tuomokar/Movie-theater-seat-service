@@ -7,8 +7,8 @@ import javax.swing.JTextField;
 import seatservice.userinterface.command.Command;
 
 /**
- * This class checks if the user input is faulty and if it is, lets the user
- * know of it
+ * This class is responsible for validating the user input and setting the
+ * corresponding error messages in case there's invalid user input.
  */
 public class InputErrorHandler {
 
