@@ -46,11 +46,13 @@
                         <param>seatservice.domain.*</param>
                         <param>seatservice.filehandling.*</param>
                         <param>seatservice.logic.*</param>
+                        <param>seatservice.userinterface.inputerrorhandler.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>seatservice.domain.*</param>
                         <param>seatservice.filehandling.*</param>
                         <param>seatservice.logic.*</param>
+                        <param>seatservice.userinterface.inputerrorhandler.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
