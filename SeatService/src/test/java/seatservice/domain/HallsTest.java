@@ -127,15 +127,15 @@ public class HallsTest {
         
         assertTrue(hall1.getSeats() != null);
         assertTrue(hall1.getSeats().size() == 3);
-        assertTrue(hall1.getSeatsWithinARow(1) != null);
-        assertTrue(hall1.getSeatsWithinARow(1).size() == 2);
-        assertThat(hall1.getSeatsWithinARow(1).get(1), instanceOf(Seat.class));
+        assertTrue(hall1.getSeatsOnRow(1) != null);
+        assertTrue(hall1.getSeatsOnRow(1).size() == 2);
+        assertThat(hall1.getSeatsOnRow(1).get(1), instanceOf(Seat.class));
         
         assertTrue(hall2.getSeats() != null);
         assertTrue(hall2.getSeats().size() == 4);
-        assertTrue(hall2.getSeatsWithinARow(1) != null);
-        assertTrue(hall2.getSeatsWithinARow(1).size() == 3);
-        assertThat(hall2.getSeatsWithinARow(1).get(1), instanceOf(Seat.class));
+        assertTrue(hall2.getSeatsOnRow(1) != null);
+        assertTrue(hall2.getSeatsOnRow(1).size() == 3);
+        assertThat(hall2.getSeatsOnRow(1).get(1), instanceOf(Seat.class));
     }   
     
     private String getRandomName() {

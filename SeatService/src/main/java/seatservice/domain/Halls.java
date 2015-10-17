@@ -10,8 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * This class encapsulates the halls as a list.
+ * 
+ * @author Tuomo Oila
  */
-
 @XmlRootElement(name = "halls")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Halls {
@@ -24,9 +25,6 @@ public class Halls {
     }
     
     public List<Hall> getHalls() {
-//        if (halls == null) {
-//            halls = new ArrayList<>();
-//        }
         return halls;
     }
 
@@ -47,7 +45,10 @@ public class Halls {
     
     
     /**
-     * Creates the seats for all the halls in case there's need for it
+     * Creates the seats for all the halls. This method is intended for use
+     * only when the this class and the halls in its list are unmarshalled in 
+     * <code>HallParser</code> class and because of that, the seats aren't
+     * created otherwise
      */
     public void createSeatsForHalls() {
         for (Hall hall : halls) {

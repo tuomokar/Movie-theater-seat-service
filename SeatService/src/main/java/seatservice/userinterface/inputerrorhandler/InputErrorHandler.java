@@ -9,6 +9,8 @@ import seatservice.userinterface.command.Command;
 /**
  * This class is responsible for validating the user input and setting the
  * corresponding error messages in case there's invalid user input.
+ * 
+ * @author Tuomo Oila
  */
 public class InputErrorHandler {
 
@@ -20,16 +22,29 @@ public class InputErrorHandler {
     private JTextField seatsTextField;
     private HallHandler hallHandler;
 
-    public InputErrorHandler(JLabel hallNameErrorErrorLabel,
-            JLabel rowErrorErrorLabel,
+    /**
+     * The constructor receives all the text fields and the error message labels
+     * in the GUI as parameter, along with an instance of <code>HallHandler</code>
+     * class
+     * 
+     * @param hallNameErrorLabel the error label for hall's name
+     * @param rowErrorLabel the error label for rows
+     * @param seatsErrorLabel the error label for seats
+     * @param hallNameTextField the text field for hall's name
+     * @param rowsTextField the text field for rows
+     * @param seatsTextField the text field for seats
+     * @param hallHandler object to see the hall situation
+     */
+    public InputErrorHandler(JLabel hallNameErrorLabel,
+            JLabel rowErrorLabel,
             JLabel seatsErrorLabel,
             JTextField hallNameTextField,
             JTextField rowsTextField,
             JTextField seatsTextField,
             HallHandler hallHandler) {
 
-        this.hallNameErrorLabel = hallNameErrorErrorLabel;
-        this.rowsErrorLabel = rowErrorErrorLabel;
+        this.hallNameErrorLabel = hallNameErrorLabel;
+        this.rowsErrorLabel = rowErrorLabel;
         this.seatsErrorLabel = seatsErrorLabel;
         this.hallNameTextField = hallNameTextField;
         this.rowsTextField = rowsTextField;
@@ -41,14 +56,14 @@ public class InputErrorHandler {
      * Checks if any of the values in the text fields are empty. If any empty
      * values are found, the method sets the corresponding error message to the
      * error label and once all the error messages are set, the method returns
-     * false. If no empty values are found, then the method returns true. The
+     * true. If no empty values are found, then the method returns false. The
      * name is the only parameter that the method gets as the other values are
      * needed to be parsed to integers elsewhere, whereas the name is not needed
      * to be parsed, and thus it's simpler to give the name as the parameter to
      * avoid having to get it from the text field and trim it at every point
      *
      * @param name the name of the hall to be added or updated
-     * @return true if no empty values in the text fields are found
+     * @return false if no empty values in the text fields are found
      */
     public boolean anyNewHallValueIsEmpty(String name) {
         boolean invalidValueFound = false;
@@ -71,14 +86,16 @@ public class InputErrorHandler {
     }
 
     /**
-     * The method checks that the values of the rows and seats text fields are
-     * fine - that is, the values must be integers and they must be above zero.
-     * If these terms don't match for either of the values of the text fields,
-     * the corresponding error messages are set for each false value and the
-     * method returns false. If no false value is found, then the method returns
+     * The method checks that the values of the <code>rowsTextField</code> and 
+     * <code>seatsTextField</code>
+     * are fine - that is, the values must be integers and they must be above 
+     * zero. If these terms don't match for either of the values of the text 
+     * fields, the corresponding error messages are set for each false value and 
+     * the method returns false. If no false value is found, then the method returns
      * true.
-     * The if and else if statements are there so that the method doesn't check
-     * for the value being above zero if it's not an integer to begin with.
+     * The <code>if</code> and <code>else if</code> statements are there so that 
+     * the method doesn't check for the value being above zero if it's not an 
+     * integer to begin with.
      *
      * @return true if both the rows and seats text fields have values that are
      * integer and above zero
@@ -106,9 +123,9 @@ public class InputErrorHandler {
      * This method checks if there already exists a hall with the given name.
      * The method is intended for use when either adding a new hall or trying to
      * update an already existing hall. The <code>Command</code> parameter 
-     * defines how the method is used. If a hall is found the method checks
-     * if the given command is <code>ADD</code>, and in case it is, the 
-     * corresponding error message is given to the user and the method returns 
+     * defines how the method is used (update or add). If a hall is found the 
+     * method checks if the given command is <code>ADD</code>, and in case it is, 
+     * the corresponding error message is given to the user and the method returns 
      * true. If the command is not <code>ADD</code>, then true is simply 
      * returned as there is no need to do anything else.
      * If no hall is found the method checks if the command was <code>UPDATE</code>.

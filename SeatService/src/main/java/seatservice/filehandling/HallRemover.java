@@ -2,19 +2,13 @@
 package seatservice.filehandling;
 
 import seatservice.domain.Hall;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.xml.bind.JAXBException;
 import seatservice.domain.Halls;
 
 /**
  * This class is responsible for removing any wanted halls from the
- * xml file database
+ * xml database file
+ * 
+ * @author Tuomo Oila
  */
 public class HallRemover {
     
@@ -32,8 +26,8 @@ public class HallRemover {
      * all the remaining halls to the file. The method returns true if
      * the writing of the remaining halls was successful
      * 
-     * @param hall
-     * @return 
+     * @param hall the hall that is to be removed
+     * @return true if the removal action was successful, otherwise false
      */
     public boolean removeHall(Hall hall) {
         removeHallFromList(hall);

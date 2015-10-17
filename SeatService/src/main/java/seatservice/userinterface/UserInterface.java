@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * This class is responsible for handling the GUI
+ * 
+ * @author Tuomo Oila
  */
 public class UserInterface extends javax.swing.JFrame implements Runnable {
 

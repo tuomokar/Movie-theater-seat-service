@@ -44,8 +44,8 @@ public class HallTest {
     
     @Test
     public void hasTheCorrectAmountOfAvailableSeatsAfterSettingSomeUnAvailable() {
-        Seat seat1 = hall.getSeatsWithinARow(1).get(1);
-        Seat seat2 = hall.getSeatsWithinARow(2).get(1);
+        Seat seat1 = hall.getSeatsOnRow(1).get(1);
+        Seat seat2 = hall.getSeatsOnRow(2).get(1);
         
         seat1.setToUnavailable();
         seat2.setToUnavailable();
@@ -56,8 +56,8 @@ public class HallTest {
     
     @Test
     public void rowsHaveCorrectAmountOfSeats() {
-        assertEquals(3, hall.getSeatsWithinARow(1).size());
-        assertEquals(3, hall.getSeatsWithinARow(2).size());
+        assertEquals(3, hall.getSeatsOnRow(1).size());
+        assertEquals(3, hall.getSeatsOnRow(2).size());
     }
     
     @Test
@@ -71,8 +71,8 @@ public class HallTest {
     public void resetingSeatsWorks() {
         assertEquals(totalAmountOfSeats, hall.getTheAmountOfAvailableSeats());
         
-        hall.getSeatsWithinARow(1).get(1).setToUnavailable();
-        hall.getSeatsWithinARow(1).get(2).setToUnavailable();
+        hall.getSeatsOnRow(1).get(1).setToUnavailable();
+        hall.getSeatsOnRow(1).get(2).setToUnavailable();
         assertEquals(totalAmountOfSeats - 2, hall.getTheAmountOfAvailableSeats());
         
         hall.resetSeatsToAvailable();

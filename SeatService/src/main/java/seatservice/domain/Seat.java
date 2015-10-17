@@ -8,6 +8,8 @@ import java.awt.Color;
 * This class represents a single seat within a hall of the movie theater
 * The seat is represented as a button, which changes its color depending on its
 * state of availability
+* 
+* @author Tuomo Oila
 */
 public class Seat extends JButton {
       

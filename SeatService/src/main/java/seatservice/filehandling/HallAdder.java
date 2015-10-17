@@ -1,15 +1,18 @@
 package seatservice.filehandling;
 
+import seatservice.domain.Hall;
+import seatservice.domain.Halls;
+
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import seatservice.domain.Hall;
-import seatservice.domain.Halls;
 
 /**
  * This class is responsible for adding new halls to the movie theater's
  * database (which is an xml file)
+ * 
+ * @author Tuomo Oila
  */
 public class HallAdder {
 
@@ -18,10 +21,11 @@ public class HallAdder {
 
     /**
      * Sets name of the xml file containing the information on the halls and
-     * also sets the 'halls' instance variable to the one given as the parameter
+     * also sets the <code>halls</code> instance variable to the one given 
+     * as the parameter
      *
      * @param filePath the file path that the class uses
-     * @param halls an instance of the Halls class
+     * @param halls an instance of the <code>Halls</code> class
      */
     public HallAdder(String filePath, Halls halls) {
         this.filePath = filePath;
@@ -45,7 +49,6 @@ public class HallAdder {
         halls.addHall(hall);
         boolean success = writeAllTheHallsToTheFile();
         return success;
-        
     }
 
     /**
@@ -53,7 +56,7 @@ public class HallAdder {
      * xml file by using JAXB. Returns false if an error is encountered during
      * the marshalling and otherwise returns true.
      * 
-     * @return returns true if marshalling all the currently known files was 
+     * @return returns true if marshalling all the currently known halls was 
      * successful and false if an error was encountered
      */
     public boolean writeAllTheHallsToTheFile() {

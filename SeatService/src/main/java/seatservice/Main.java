@@ -2,10 +2,11 @@ package seatservice;
 
 import javax.swing.SwingUtilities;
 import seatservice.userinterface.UserInterface;
-import seatservice.userinterface.UserInterface;
 
 /**
  * This class functions as the main class.
+ * 
+ * @author Tuomo Oila
  */
 public class Main {
 

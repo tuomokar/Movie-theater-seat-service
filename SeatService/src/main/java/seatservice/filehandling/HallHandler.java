@@ -1,17 +1,16 @@
 package seatservice.filehandling;
 
-import java.io.IOException;
+
 import seatservice.domain.Hall;
-import seatservice.filehandling.HallAdder;
-import seatservice.filehandling.HallParser;
-import java.util.List;
-import javax.xml.bind.JAXBException;
 import seatservice.domain.Halls;
-import seatservice.filehandling.HallRemover;
+
+import java.util.List;
 
 /**
  * This class abstracts the HallAdder, HallParser and HallRemover classes so
  * that they're all used through this single class
+ * 
+ * @author Tuomo Oila
  */
 public class HallHandler {
 
@@ -23,8 +22,7 @@ public class HallHandler {
 
     /**
      * Sets a default file path and initializes all the other instance
-     * variables. Note that the 'halls' instance variable is not initialized
-     * here, but the value for it is set only when the file is read elsewhere.
+     * variables.
      */
     public HallHandler() {
         filePath = "Hall_Database.xml";
@@ -37,10 +35,10 @@ public class HallHandler {
 
     /**
      * The method changes the current file path to the new one given as
-     * the parameter. The file path is changed for both hallAdder and
-     * hallParser.
+     * the parameter. The file path is changed for both <code>hallAdder</code> and
+     * <code>hallParser</code>.
      *
-     * @param filePath
+     * @param filePath the new filepath to be used
      */
     public void changeFilePath(String filePath) {
         this.filePath = filePath;
@@ -52,17 +50,17 @@ public class HallHandler {
     /**
      * Adds a new hall's information to the text file database.
      *
-     * @param name
-     * @param rows
-     * @param seatsOnARow
+     * @param name the name of the new hall-to-be
+     * @param rows the amount of rows of the new hall-to-be
+     * @param seatsOnARow the amount of seats on a row of the new hall-to-be
      */
     public void addNewHall(String name, int rows, int seatsOnARow) {
         hallAdder.createNewHall(name, rows, seatsOnARow);
     }
 
     /**
-     * Unmarshals the xml file to <code>hall</code> objects and adds them all to the list
-     * encapculated by the <code>halls</code> instance variable.
+     * Unmarshals the xml file to <code>Hall</code> objects and adds them all to 
+     * the list encapculated by the <code>halls</code> instance variable.
      */
     public void readFile() {
         hallParser.readFile();
@@ -76,6 +74,7 @@ public class HallHandler {
     public List<Hall> getHallsAsList() {
         return halls.getHalls();
     }
+    
     
     public Halls getHalls() {
         return halls;
@@ -96,18 +95,18 @@ public class HallHandler {
 
     /**
      * Removes a hall. The hall to be removed is decided by the name given as
-     * the parameter. The method finds the matching hall, which is null in case
-     * a matching hall isn't found. In that case, the method returns false and
-     * doesn't do anything. If the hall is found, the hall is removed and if
-     * the removing works, true is returned.
+     * the parameter. The method finds the matching hall and tries to remove it.
+     * If the removal action is successful, the method returns true.
+     * If no matching hall is found, i.e. <code>hall</code> is set to null,
+     * the method returns false without trying to remove it.
      *
-     * @param name
+     * @param name the name of the hall to be removed
      * @return true if the hall is found and removed successfully. If there
      * was found no hall matching the name searched by or if the removing isn't
      * successful other, false is returned
      */
     public boolean removeHall(String name) {
-        Hall hall = halls.findByName(name);
+        Hall hall = findHallByName(name);
 
         if (hall == null) {
             return false;
@@ -119,8 +118,8 @@ public class HallHandler {
     }
     
     /**
-     * Checks that that there is no hall with the given name yet.
-     * @param name
+     * Checks that that there is no hall with the given name yet
+     * @param name the name of the hall to be searched for
      * @return true if there exists a hall with the given name
      */
     public boolean hallExists(String name) {
@@ -129,8 +128,8 @@ public class HallHandler {
     
     
     /**
-     * Returns the hall that matches the name. Returns null if no hall is found
-     * or if null value is given as the parameter
+     * Returns the hall that matches the name given as the parameter. Returns 
+     * null if no hall is found or if null value is given as the parameter
      * @param name the name of the hall that is searched for
      * @return the found hall object, or null if no hall is found
      */
@@ -138,14 +137,24 @@ public class HallHandler {
         return halls.findByName(name);
     }
     
+    /**
+     * Updates a single hall in the database file. The method receives
+     * the name of the hall to be updated and searches for the hall with that
+     * name. If a matching hall is found, the amount of rows and amount of seats
+     * on a row is updated for that hall and the database file is updated
+     * by rewriting the current halls to it.
+     * @param name the name of the hall to be searched for
+     * @param newRows the new amount of rows
+     * @param newSeats the new amount of seats
+     */
     public void updateHall(String name, int newRows, int newSeats) {
         Hall hall = findHallByName(name);
         if (hall == null) {
             return;
         }
         
-        hall.setAmountOfRows(newRows);
-        hall.setAmountOfSeatsWithinRow(newSeats);
+        hall.updateRowsAndSeats(newRows, newSeats);
+        hallAdder.writeAllTheHallsToTheFile();
     }
 
 }
