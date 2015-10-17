@@ -51,23 +51,23 @@ public class InputErrorHandler {
      * @return true if no empty values in the text fields are found
      */
     public boolean anyNewHallValueIsEmpty(String name) {
-        int i = 0;
+        boolean invalidValueFound = false;
 
         if (name.isEmpty()) {
             hallNameErrorLabel.setText("Name must not be empty!");
-            i++;
+            invalidValueFound = true;
         }
 
         if (rowsTextField.getText().isEmpty()) {
             rowsErrorLabel.setText("Rows must have a value!");
-            i++;
+            invalidValueFound = true;
         }
         if (seatsTextField.getText().isEmpty()) {
             seatsErrorLabel.setText("Seats must have a value!");
-            i++;
+            invalidValueFound = true;
         }
 
-        return i > 0;
+        return invalidValueFound;
     }
 
     /**
@@ -77,38 +77,45 @@ public class InputErrorHandler {
      * the corresponding error messages are set for each false value and the
      * method returns false. If no false value is found, then the method returns
      * true.
+     * The if and else if statements are there so that the method doesn't check
+     * for the value being above zero if it's not an integer to begin with.
      *
      * @return true if both the rows and seats text fields have values that are
      * integer and above zero
      */
     public boolean rowsAndSeatsAreIntegersAndAboveZero() {
-        int i = 0;
+        boolean invalidValueNotFound = true;
         
         if (!rowsValueIsInteger()) {
-            i++;
+            invalidValueNotFound = false;
         } else if (!rowsValueIsAboveZero()) {
-            i++;
+            invalidValueNotFound = false;
         }
 
         if (!seatsValueIsInteger()) {
-            i++;
+            invalidValueNotFound = false;
         } else if (!seatsValueIsAboveZero()) {
-            i++;
+            invalidValueNotFound = false;
         }
-
-        return i == 0;
+        
+        return invalidValueNotFound;
+        
     }
 
     /**
      * This method checks if there already exists a hall with the given name.
      * The method is intended for use when either adding a new hall or trying to
      * update an already existing hall. The <code>Command</code> parameter 
-     * defines this
+     * defines how the method is used. If a hall is found the method checks
+     * if the given command is <code>ADD</code>, and in case it is, the 
+     * corresponding error message is given to the user and the method returns 
+     * true. If the command is not <code>ADD</code>, then true is simply 
+     * returned as there is no need to do anything else.
+     * If no hall is found the method checks if the command was <code>UPDATE</code>.
+     * In that case the corresponding error message is given to the user before
+     * ending the method by returning true. If the command is not <code>UPDATE</code>,
+     * the method simply returns true.
      * 
-     * The method is intended for use when adding a new hall. If a hall with the
-     * given name already exists, corresponding error message is set and true is
-     * returned. If not, then false is returned
-     *
      * @param name the name of the hall to be searched for
      * @param command enum that defines whether the method is called when adding
      * or updating a hall
@@ -136,7 +143,6 @@ public class InputErrorHandler {
             rowsErrorLabel.setText("Integer value should be given!");
             return false;
         }
-
         return true;
     }
 

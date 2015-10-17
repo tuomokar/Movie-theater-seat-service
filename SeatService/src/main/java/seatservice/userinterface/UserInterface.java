@@ -348,6 +348,8 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
 //    }
 
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
+
+        emptyErrorLabels();
         int i = 0;
         String name = hallsNameTextField.getText().trim();
 
@@ -364,7 +366,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_addHallButtonActionPerformed
 
     private void updateFieldsListAndTables() {
-        emptyFields();
+        emptyAllFieldsAndLabels();
         fillHallNames();
         fillNamesTable();
     }
@@ -446,13 +448,12 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             return false;
         }
 
-
         boolean hallExistsAlready = inputErrorHandler.hallExistsAlready(name, command);
         if (hallExistsAlready && command == Command.ADD) {
             i++;
         } else if (!hallExistsAlready && command == Command.UPDATE) {
             i++;
-        }      
+        }
 
         if (!inputErrorHandler.rowsAndSeatsAreIntegersAndAboveZero()) {
             i++;
@@ -462,7 +463,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-
+        emptyErrorLabels();
         String name = hallsNameTextField.getText().trim();
 
         if (!valuesAreValidWhenAddingOrUpdating(name, Command.UPDATE)) {
@@ -475,7 +476,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         hallHandler.updateHall(name, newRows, newSeats);
         fillHallNames();
         fillNamesTable();
-        emptyFields();
+        emptyAllFieldsAndLabels();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void addListenersToSeatsAndSeatsToPanel(JPanel buttons,
@@ -549,14 +550,22 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         hallNamesList2.addListSelectionListener(listener);
     }
 
-    private void emptyFields() {
+    private void emptyTextFields() {
         hallsNameTextField.setText("");
         rowsTextField.setText("");
         seatsTextField.setText("");
+    }
 
+    private void emptyErrorLabels() {
         hallNameErrorLabel.setText("");
         rowsErrorLabel.setText("");
         seatsErrorLabel.setText("");
+    }
+
+    private void emptyAllFieldsAndLabels() {
+        emptyTextFields();
+        emptyErrorLabels();
+
     }
 
     private void removeSelectedHall() {
