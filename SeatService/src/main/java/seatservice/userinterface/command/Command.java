@@ -1,5 +1,5 @@
 
-package seatservice.userinterface;
+package seatservice.userinterface.command;
 
 
 public enum Command {
