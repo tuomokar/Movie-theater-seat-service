@@ -1,5 +1,5 @@
 
-package seatservice.userinterface;
+package seatservice.userinterface.listeners;
 
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
