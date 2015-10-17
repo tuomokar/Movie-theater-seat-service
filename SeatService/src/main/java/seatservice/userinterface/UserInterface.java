@@ -178,15 +178,12 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         }
 
         hallNameErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        hallNameErrorLabel.setText("ss");
         hallNameErrorLabel.setFocusable(false);
 
         rowsErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        rowsErrorLabel.setText("ss");
         rowsErrorLabel.setFocusable(false);
 
         seatsErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        seatsErrorLabel.setText("ss");
         seatsErrorLabel.setFocusable(false);
 
         updateButton.setText("Update!");
