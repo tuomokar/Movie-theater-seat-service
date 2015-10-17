@@ -50,6 +50,7 @@
     <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
@@ -77,8 +78,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Hall informaton, adding and removing">
-                <Property name="tabTitle" type="java.lang.String" value="Hall informaton, adding and removing"/>
+              <JTabbedPaneConstraints tabName="Administration">
+                <Property name="tabTitle" type="java.lang.String" value="Administration"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -214,6 +215,8 @@
             <Component class="javax.swing.JButton" name="addHallButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add hall!"/>
+                <Property name="toolTipText" type="java.lang.String" value="Give a new hall&apos;s name, amount of rows and seats on a row"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addHallButtonActionPerformed"/>
@@ -247,6 +250,8 @@
             <Component class="javax.swing.JButton" name="removeHallButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remove hall"/>
+                <Property name="toolTipText" type="java.lang.String" value="Choose a hall to be removed"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeHallButtonActionPerformed"/>
@@ -328,6 +333,8 @@
             <Component class="javax.swing.JButton" name="updateButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update!"/>
+                <Property name="toolTipText" type="java.lang.String" value="Give an existing hall&apos;s name and new rows and seats"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateButtonActionPerformed"/>
@@ -349,17 +356,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="167" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="resetSeatsButton" alignment="1" max="32767" attributes="0"/>
-                              <Component id="showButton" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane4" pref="167" max="32767" attributes="0"/>
                           <Component id="emptyFieldButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="showButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="resetSeatsButton" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="hallSituationScrollPane" pref="733" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="334" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -379,7 +389,8 @@
                           </Group>
                           <Component id="hallSituationScrollPane" min="-2" pref="545" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -408,6 +419,8 @@
             <Component class="javax.swing.JButton" name="showButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show"/>
+                <Property name="toolTipText" type="java.lang.String" value="Choose a hall from the above list to show its seats"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showButtonActionPerformed"/>
@@ -416,6 +429,11 @@
             <Component class="javax.swing.JButton" name="resetSeatsButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reset all seats to available"/>
+                <Property name="toolTipText" type="java.lang.String" value="Reset all seats in the shown hall to available"/>
+                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="resetSeatsButton"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetSeatsButtonActionPerformed"/>
@@ -424,10 +442,21 @@
             <Component class="javax.swing.JButton" name="emptyFieldButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Empty field"/>
+                <Property name="toolTipText" type="java.lang.String" value="Empty the hall view"/>
+                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="showButton"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emptyFieldButtonActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="The White Screen"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
