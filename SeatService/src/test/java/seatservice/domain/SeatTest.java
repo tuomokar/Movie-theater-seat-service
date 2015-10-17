@@ -32,8 +32,11 @@ public class SeatTest {
         assertEquals(false, seat.isAvailable());
         
         seat.setToAvailable();
-        assertEquals(true, seat.isAvailable());
-        
-        
+        assertEquals(true, seat.isAvailable());     
+    }
+    
+    @Test
+    public void isNoTFocusableAtStart() {
+        assertFalse(seat.isFocusable());
     }
 }
