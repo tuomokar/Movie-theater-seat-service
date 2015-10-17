@@ -14,11 +14,12 @@ import java.awt.Color;
 public class Seat extends JButton {
       
     /**
-     * The constructor sets the default state of this seat to available
+     * The constructor sets the default state of this seat to available and any
+     * text it contains to non focusable
      */
     public Seat() {
         setToAvailable();
-        setNonFocusable();
+        setToNonFocusable();
     }   
     
     /**
@@ -45,7 +46,7 @@ public class Seat extends JButton {
         return getBackground().equals(Color.green);
     }
     
-    private void setNonFocusable() {
+    private void setToNonFocusable() {
         this.setFocusable(false);
     }
 }
