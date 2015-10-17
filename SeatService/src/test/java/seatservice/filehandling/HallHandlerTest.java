@@ -50,10 +50,8 @@ public class HallHandlerTest {
     @Test
     public void addingHalladdsObjectToTheListOfHalls() {
         hallHandler.addNewHall("name", 2, 3);
-        System.out.println(hallHandler.getHallsAsList());
         hallHandler.readFile();
 
-        System.out.println(hallHandler.getHallsAsList());
         assertTrue(hallHandler.getHalls().getHalls().size() == 1);
     }
 

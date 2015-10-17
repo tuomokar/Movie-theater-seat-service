@@ -84,11 +84,8 @@ public class HallParserTest {
 
         Random random = new Random();
         int manyHalls = random.nextInt(8) + 2;
-
-        System.out.println("manyHalls is: " + manyHalls);
         
         for (int i = 0; i < manyHalls; i++) {
-            System.out.println("i is: " + i);
             int value = random.nextInt(4) + 1;
             hallAdder.createNewHall("name" + i, value, i + 1);
             hallParser.readFile();
