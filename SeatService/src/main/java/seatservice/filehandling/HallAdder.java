@@ -85,5 +85,9 @@ public class HallAdder {
     public String getFilePath() {
         return filePath;
     }
+    
+    public Halls getHalls() {
+        return halls;
+    }
 
 }
