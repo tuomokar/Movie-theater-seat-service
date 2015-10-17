@@ -18,6 +18,7 @@ public class Seat extends JButton {
      */
     public Seat() {
         setToAvailable();
+        setNonFocusable();
     }   
     
     /**
@@ -42,5 +43,9 @@ public class Seat extends JButton {
      */
     public boolean isAvailable() {
         return getBackground().equals(Color.green);
+    }
+    
+    private void setNonFocusable() {
+        this.setFocusable(false);
     }
 }
