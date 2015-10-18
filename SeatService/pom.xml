@@ -52,7 +52,7 @@
                         <param>seatservice.domain.*</param>
                         <param>seatservice.filehandling.*</param>
                         <param>seatservice.logic.*</param>
-                        <param>seatservice.userinterface.logic.InputErrorHandler</param>
+                        <param>seatservice.userinterface.logic.InputErrorHandlerTest</param>
                     </targetTests>
                 </configuration>
             </plugin>
