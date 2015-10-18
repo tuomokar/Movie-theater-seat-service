@@ -1,6 +1,4 @@
-
 package seatservice.userinterface.logic;
-
 
 import seatservice.filehandling.HallHandler;
 import seatservice.userinterface.inputerrorhandler.InputErrorHandler;
@@ -8,7 +6,10 @@ import seatservice.userinterface.listeners.HallNamesListener;
 import seatservice.domain.Hall;
 import seatservice.domain.Seat;
 import seatservice.userinterface.command.Command;
+import seatservice.userinterface.listeners.ClickListener;
 
+import java.util.List;
+import java.util.Map;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,27 +20,24 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
-import seatservice.userinterface.listeners.ClickListener;
-
 
 /**
  * This class is responsible for handling the logic of the user interface. The
- * class handles any possible error messages by using an instance of the 
- * <code>InputErrorHandler</code> class and makes other checks, such as has
- * the user selected any hall when trying to show the visual representation of
- * the halls in the customer serving tab in the UI.
+ * class handles any possible error messages by using an instance of the
+ * <code>InputErrorHandler</code> class and makes other checks, such as has the
+ * user selected any hall when trying to show the visual representation of the
+ * halls in the customer serving tab in the UI.
+ *
  * @author Tuomo Oila
  */
 public class UILogicHandler {
-    
+
     private HallHandler hallHandler;
     private InputErrorHandler inputErrorHandler;
-    private HallNamesListener listener;
-    
+    private HallNamesListener hallNamesListener;
+
     private JTable hallInfoTable;
     private JLabel hallNameErrorLabel;
     private JList hallNamesList1;
@@ -50,9 +48,9 @@ public class UILogicHandler {
     private JTextField rowsTextField;
     private JLabel seatsErrorLabel;
     private JTextField seatsTextField;
-    
+
     /**
-     * 
+     *
      * @param hallInfoTable
      * @param hallNameErrorLabel
      * @param hallNamesList1
@@ -62,23 +60,25 @@ public class UILogicHandler {
      * @param rowsErrorLabel
      * @param rowsTextField
      * @param seatsErrorLabel
-     * @param seatsTextField 
+     * @param seatsTextField
+     * @param hallNamesListener
      */
-    public UILogicHandler( 
-            JTable hallInfoTable, 
-            JLabel hallNameErrorLabel, 
-            JList hallNamesList1, 
-            JList hallNamesList2, 
-            JScrollPane hallSituationScrollPane, 
-            JTextField hallsNameTextField, 
-            JLabel rowsErrorLabel, 
-            JTextField rowsTextField, 
-            JLabel seatsErrorLabel, 
-            JTextField seatsTextField) {
-        
+    public UILogicHandler(
+            JTable hallInfoTable,
+            JLabel hallNameErrorLabel,
+            JList hallNamesList1,
+            JList hallNamesList2,
+            JScrollPane hallSituationScrollPane,
+            JTextField hallsNameTextField,
+            JLabel rowsErrorLabel,
+            JTextField rowsTextField,
+            JLabel seatsErrorLabel,
+            JTextField seatsTextField,
+            HallNamesListener hallNamesListener) {
+
         hallHandler = new HallHandler();
-        hallHandler.readFile();             
-        
+        hallHandler.readFile();
+
         this.hallInfoTable = hallInfoTable;
         this.hallNameErrorLabel = hallNameErrorLabel;
         this.hallNamesList1 = hallNamesList1;
@@ -89,23 +89,22 @@ public class UILogicHandler {
         this.rowsTextField = rowsTextField;
         this.seatsErrorLabel = seatsErrorLabel;
         this.seatsTextField = seatsTextField;
-        
-        listener = new HallNamesListener();
+        this.hallNamesListener = hallNamesListener;
         addSelectionListenerToHallNames();
-        
+
         createInputErrorHandler();
-        
+
         fillHallNames();
         fillNamesTable();
-        
+
     }
-    
+
     /**
-     * Adds a hall with the information the user gave. The method starts out
-     * by emptying any former input error labels and then trims the hall-to-be's
-     * name and takes into a variable. The method then checks that all the values
-     * are valid, i.e. that any of the values given are not empty and that
-     * the rows and seats are integers and above zero. If these checks are
+     * Adds a hall with the information the user gave. The method starts out by
+     * emptying any former input error labels and then trims the hall-to-be's
+     * name and takes into a variable. The method then checks that all the
+     * values are valid, i.e. that any of the values given are not empty and
+     * that the rows and seats are integers and above zero. If these checks are
      * passed, the method adds a new hall with the given values and finally
      * updates all the necessary fields to reflect the new situation of having
      * one more hall.
@@ -125,7 +124,7 @@ public class UILogicHandler {
 
         updateFieldsListAndTables();
     }
-    
+
     private boolean valuesAreValidWhenAddingOrUpdating(String name, Command command) {
         if (inputErrorHandler.anyNewHallValueIsEmpty(name)) {
             return false;
@@ -146,23 +145,23 @@ public class UILogicHandler {
 
         return invalidValueFound;
     }
-    
+
     /**
-     * Removes the hall that was chosen by the user. The method firsts
-     * checks if there are any halls to begin with and if not, returns. Then
-     * the method checks if the user has selected any hall and again, returns
-     * if not. Then the method confirms that the user really wants to remove
-     * the hall and if the user either closes the window or presses no, the 
-     * method returns. If the method gets through all these checks, then
-     * the selected hall is removed and the appropriate fields are updated
-     * to reflect the new situation having one less hall to be shown.
+     * Removes the hall that was chosen by the user. The method firsts checks if
+     * there are any halls to begin with and if not, returns. Then the method
+     * checks if the user has selected any hall and again, returns if not. Then
+     * the method confirms that the user really wants to remove the hall and if
+     * the user either closes the window or presses no, the method returns. If
+     * the method gets through all these checks, then the selected hall is
+     * removed and the appropriate fields are updated to reflect the new
+     * situation having one less hall to be shown.
      */
     public void removeHall() {
         if (hallHandler.getHallsAsList().isEmpty()) {
             return;
         }
 
-        if (listener.getSelectedName() == null) {
+        if (hallNamesListener.getSelectedName() == null) {
             return;
         }
 
@@ -172,24 +171,25 @@ public class UILogicHandler {
 
         removeSelectedHall();
         updateFieldsListAndTables();
-    }  
-    
+    }
+
     /**
-     * This method is responsible for showing the chosen hall's seats as a 
+     * This method is responsible for showing the chosen hall's seats as a
      * visual representation. The method start by reseting the viewport view to
      * null. Then checks are made for halls not existing and user not having
-     * chosen any hall to be shown. If either of these terms are true, the method
-     * returns. If not, the method checks if the method caller wants to reset
-     * the seats of the hall to available state and if so, does it. The method
-     * then continues by finding the hall that matches the name that
-     * the user chose and removes any possible action listeners that it might have
-     * to make sure there are no duplicate listeners. The method then creates
-     * a grid layout with the necessary size to show every seat of the hall and
+     * chosen any hall to be shown. If either of these terms are true, the
+     * method returns. If not, the method checks if the method caller wants to
+     * reset the seats of the hall to available state and if so, does it. The
+     * method then continues by finding the hall that matches the name that the
+     * user chose and removes any possible action listeners that it might have
+     * to make sure there are no duplicate listeners. The method then creates a
+     * grid layout with the necessary size to show every seat of the hall and
      * sets this layout for the <code>buttons</code> <code>JPanel</code>. Then
-     * the method adds an action listener for each seat and puts the seats
-     * into the <code>buttons</code> <code>JPanel</code>. Finally, the 
-     * <code>JPanel</code> is set as the viewport view of the appropriate 
+     * the method adds an action listener for each seat and puts the seats into
+     * the <code>buttons</code> <code>JPanel</code>. Finally, the
+     * <code>JPanel</code> is set as the viewport view of the appropriate
      * <code>JScrollPane</code>
+     *
      * @param command enum that defines the use purpose of this method, i.e. is
      * the method called to simply show the chosen hall's seats or is it meant
      * to reset the hall's seats to available
@@ -202,16 +202,16 @@ public class UILogicHandler {
         if (selectedNameIsNull()) {
             return;
         }
-        
-        String selectedHall = listener.getSelectedName();
+
+        String selectedHall = hallNamesListener.getSelectedName();
         Hall hall = hallHandler.findHallByName(selectedHall);
-        
+
         if (command == Command.RESET) {
             hall.resetSeatsToAvailable();
         }
         setViewportView(hall);
     }
-    
+
     /**
      * This method is responsible for updating a hall's information. The method
      * starts out by trimming the given hall's name and taking it to variable.
@@ -237,9 +237,9 @@ public class UILogicHandler {
         int newSeats = Integer.parseInt(seatsTextField.getText());
 
         hallHandler.updateHall(name, newRows, newSeats);
-        updateFieldsListAndTables(); 
+        updateFieldsListAndTables();
     }
-    
+
     private void setViewportView(Hall hall) {
         Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
 
@@ -252,7 +252,7 @@ public class UILogicHandler {
 
         hallSituationScrollPane.setViewportView(buttons);
     }
-    
+
     private void removeListeners(
             Map<Integer, Map<Integer, Seat>> seats,
             Hall hall) {
@@ -269,7 +269,7 @@ public class UILogicHandler {
             }
         }
     }
-    
+
     private void addListenersToSeatsAndSeatsToPanel(JPanel buttons,
             Map<Integer, Map<Integer, Seat>> seats,
             Hall hall) {
@@ -283,39 +283,39 @@ public class UILogicHandler {
             }
         }
     }
-    
+
     private boolean noHallsExist() {
         return hallHandler.getHallsAsList().isEmpty();
     }
 
     private boolean selectedNameIsNull() {
-        return listener.getSelectedName() == null;
+        return hallNamesListener.getSelectedName() == null;
     }
-    
+
     private boolean confirmUsersAction(Command command) {
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = 9999991;
-        
+
         if (command == Command.UPDATE) {
             response = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to update this hall?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            
+
         } else if (command == Command.REMOVE) {
-            
+
             response = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to remove this hall?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         }
         return response == JOptionPane.YES_OPTION;
     }
-    
+
     private void updateFieldsListAndTables() {
         emptyAllFieldsAndLabels();
         fillHallNames();
         fillNamesTable();
     }
-    
+
     private void fillHallNames() {
         DefaultListModel hallNamesModel = new DefaultListModel();
         for (int i = 0; i < hallHandler.getHallsAsList().size(); i++) {
@@ -324,12 +324,12 @@ public class UILogicHandler {
         hallNamesList1.setModel(hallNamesModel);
         hallNamesList2.setModel(hallNamesModel);
     }
-    
+
     private void emptyAllFieldsAndLabels() {
         emptyTextFields();
         emptyErrorLabels();
     }
-    
+
     private void fillNamesTable() {
 
         List<Hall> halls = hallHandler.getHallsAsList();
@@ -362,25 +362,25 @@ public class UILogicHandler {
         hallInfoTable.getColumnModel().getColumn(0).setResizable(true);
         hallInfoTable.setModel(tableModel);
     }
-    
+
     private void removeSelectedHall() {
-        String selectedHall = this.listener.getSelectedName();
+        String selectedHall = this.hallNamesListener.getSelectedName();
         hallHandler.removeHall(selectedHall);
-        listener.resetSelection();
+        hallNamesListener.resetSelection();
     }
-    
+
     private void emptyTextFields() {
         hallsNameTextField.setText("");
         rowsTextField.setText("");
         seatsTextField.setText("");
     }
-    
+
     private void emptyErrorLabels() {
         hallNameErrorLabel.setText("");
         rowsErrorLabel.setText("");
         seatsErrorLabel.setText("");
     }
-    
+
     private void createInputErrorHandler() {
         inputErrorHandler = new InputErrorHandler(
                 hallNameErrorLabel,
@@ -391,11 +391,10 @@ public class UILogicHandler {
                 seatsTextField,
                 hallHandler);
     }
-    
+
     private void addSelectionListenerToHallNames() {
-        hallNamesList1.addListSelectionListener(listener);
-        hallNamesList2.addListSelectionListener(listener);
+        hallNamesList1.addListSelectionListener(hallNamesListener);
+        hallNamesList2.addListSelectionListener(hallNamesListener);
     }
-    
-    
+
 }
