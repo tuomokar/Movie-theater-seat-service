@@ -1,7 +1,7 @@
 package seatservice.userinterface;
 
 import seatservice.userinterface.command.Command;
-import seatservice.userinterface.inputerrorhandler.InputErrorHandler;
+import seatservice.userinterface.logic.InputErrorHandler;
 import seatservice.userinterface.listeners.HallNamesListener;
 import seatservice.domain.Hall;
 import seatservice.filehandling.HallHandler;
@@ -412,10 +412,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_emptyFieldButtonActionPerformed
 
     private void customerServingTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServingTabMouseClicked
-//        listener.resetSelection();
-//        hallNamesList1.clearSelection();
-//        hallNamesList2.clearSelection();
-//        hallSituationScrollPane.setViewportView(null);
+
     }//GEN-LAST:event_customerServingTabMouseClicked
 
 
