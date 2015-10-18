@@ -49,18 +49,20 @@ public class UILogicHandler {
     private JTextField seatsTextField;
 
     /**
-     *
-     * @param hallInfoTable
-     * @param hallNameErrorLabel
-     * @param hallNamesList1
-     * @param hallNamesList2
-     * @param hallSituationScrollPane
-     * @param hallsNameTextField
-     * @param rowsErrorLabel
-     * @param rowsTextField
-     * @param seatsErrorLabel
-     * @param seatsTextField
-     * @param hallNamesListener
+     * Initializes all the instance variables and fills all the appropriate
+     * fields
+     * 
+     * @param hallInfoTable table for hall information
+     * @param hallNameErrorLabel label for errors for hall name input
+     * @param hallNamesList1 list containing all the hall names
+     * @param hallNamesList2 list containg all the hall names
+     * @param hallSituationScrollPane pane showing all the seats in a hall
+     * @param hallsNameTextField text field for hall name
+     * @param rowsErrorLabel label for errors for row input
+     * @param rowsTextField text field for rows
+     * @param seatsErrorLabel label for errors for seats input
+     * @param seatsTextField text field for seats
+     * @param hallNamesListener listener for the lists containing the hall names
      */
     public UILogicHandler(
             JTable hallInfoTable,
