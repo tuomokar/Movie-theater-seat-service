@@ -1,6 +1,7 @@
 #Hour bookkeeping
 
 *Note that an hour contains about 5 to 10 minutes of breaks in average*
+*The times are not 100% accurate obviously*
 
 *Time format is dd/mm/yyyy*
 
@@ -108,3 +109,19 @@ Started the project:
 - made the CustomerServingUI class a bit more user friendly and secure
 - added a sequence diagram and updated the class diagram
 - did some general thinking related to the project
+
+**Thursday 15/10/2015, 4 hours**
+- ditched the text UI and moved to complete GUI
+
+**Friday 16/10/2015, 6 hours**
+- added functionality the GUI and wrestled with some bugs
+
+**Saturday 17/10/2015, 10 hours**
+- added functionality the GUI and wrestled with some bugs
+- added class to handle any input errors and wrote tests for it
+- went through every class and did some refactoring and updated javadoc
+
+**Sunday 18/10/2015, (hours to be added)**
+- squashed any remaining bugs and finished the GUI
+- separated the logic from the UI better with class UILogicHandler
+- ..
