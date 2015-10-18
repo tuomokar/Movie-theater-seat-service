@@ -1,13 +1,10 @@
-package seatservice.userinterface.inputerrorhandler;
+package seatservice.userinterface.logic;
 
 import seatservice.userinterface.command.Command;
-import seatservice.userinterface.inputerrorhandler.InputErrorHandler;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import seatservice.domain.Halls;

@@ -1,4 +1,4 @@
-package seatservice.userinterface.inputerrorhandler;
+package seatservice.userinterface.logic;
 
 import seatservice.filehandling.HallHandler;
 
