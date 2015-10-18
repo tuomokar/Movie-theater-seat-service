@@ -91,7 +91,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         showButton = new javax.swing.JButton();
         resetSeatsButton = new javax.swing.JButton();
         emptyFieldButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        whiteScreenLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
@@ -287,6 +287,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        hallNamesList2.setFocusable(false);
         jScrollPane4.setViewportView(hallNamesList2);
 
         showButton.setText("Show");
@@ -318,8 +319,8 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        jLabel1.setText("The White Screen");
-        jLabel1.setFocusable(false);
+        whiteScreenLabel.setText("The White Screen");
+        whiteScreenLabel.setFocusable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -337,7 +338,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(whiteScreenLabel)
                 .addGap(334, 334, 334))
         );
         jPanel2Layout.setVerticalGroup(
@@ -355,7 +356,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
                         .addComponent(emptyFieldButton))
                     .addComponent(hallSituationScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(whiteScreenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         customerServingTab.addTab("Customer serving", jPanel2);
@@ -529,8 +530,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         hallHandler.updateHall(name, newRows, newSeats);
         fillHallNames();
         fillNamesTable();
-        emptyAllFieldsAndLabels();
-        hallSituationScrollPane.setViewportView(null);
+        emptyAllFieldsAndLabels();       
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void emptyFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyFieldButtonActionPerformed
@@ -541,6 +541,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         listener.resetSelection();
         hallNamesList1.clearSelection();
         hallNamesList2.clearSelection();
+        hallSituationScrollPane.setViewportView(null);
     }//GEN-LAST:event_customerServingTabMouseClicked
 
     private void removeListeners(
@@ -676,7 +677,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     private javax.swing.JList hallNamesList2;
     private javax.swing.JScrollPane hallSituationScrollPane;
     private javax.swing.JTextField hallsNameTextField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -692,6 +692,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField seatsTextField;
     private javax.swing.JButton showButton;
     private javax.swing.JButton updateButton;
+    private javax.swing.JLabel whiteScreenLabel;
     // End of variables declaration//GEN-END:variables
 
     @Override
