@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  * UI that shows all the seats of halls visually
  * @author Tuomo Oila
  */
-public class ClickListener implements ActionListener {
+public class SeatClickListener implements ActionListener {
          
     /**
      * The method listens to any mouse clicks. If the clicked seat is

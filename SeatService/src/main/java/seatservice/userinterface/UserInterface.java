@@ -1,12 +1,7 @@
 package seatservice.userinterface;
 
 import seatservice.userinterface.command.Command;
-import seatservice.userinterface.logic.InputErrorHandler;
 import seatservice.userinterface.listeners.HallNamesListener;
-import seatservice.domain.Hall;
-import seatservice.filehandling.HallHandler;
-import seatservice.domain.Seat;
-import seatservice.userinterface.listeners.ClickListener;
 import seatservice.userinterface.logic.UILogicHandler;
 
 /**

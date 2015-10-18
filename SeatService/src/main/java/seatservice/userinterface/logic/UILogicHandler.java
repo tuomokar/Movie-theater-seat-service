@@ -5,7 +5,7 @@ import seatservice.userinterface.listeners.HallNamesListener;
 import seatservice.domain.Hall;
 import seatservice.domain.Seat;
 import seatservice.userinterface.command.Command;
-import seatservice.userinterface.listeners.ClickListener;
+import seatservice.userinterface.listeners.SeatClickListener;
 
 import java.util.List;
 import java.util.Map;
@@ -278,7 +278,7 @@ public class UILogicHandler {
         for (int row = seats.size(); row >= 1; row--) {
             for (int seatsPlace = 1; seatsPlace <= seats.get(1).size(); seatsPlace++) {
                 Seat seat = hall.getSeat(row, seatsPlace);
-                seat.addActionListener(new ClickListener());
+                seat.addActionListener(new SeatClickListener());
                 seat.setText("<html>r" + row + "<br>" + seatsPlace + "</html");
                 buttons.add(seat);
             }
