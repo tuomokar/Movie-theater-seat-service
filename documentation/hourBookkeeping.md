@@ -1,7 +1,6 @@
 #Hour bookkeeping
 
-*Note that an hour contains about 5 to 10 minutes of breaks in average*
-*The times are not 100% accurate obviously*
+*Note that an hour contains about 5 to 10 minutes of breaks in average. The times are not 100% accurate obviously*
 
 *Time format is dd/mm/yyyy*
 
