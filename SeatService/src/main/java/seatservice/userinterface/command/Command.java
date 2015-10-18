@@ -12,5 +12,6 @@ public enum Command {
     
     UPDATE,
     ADD,
-    REMOVE;
+    REMOVE,
+    RESET;
 }
