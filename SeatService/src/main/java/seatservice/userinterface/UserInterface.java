@@ -389,7 +389,6 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
 
         emptyErrorLabels();
-        int i = 0;
         String name = hallsNameTextField.getText().trim();
 
         if (!valuesAreValidWhenAddingOrUpdating(name, Command.ADD)) {
@@ -531,6 +530,7 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         fillHallNames();
         fillNamesTable();
         emptyAllFieldsAndLabels();
+        hallSituationScrollPane.setViewportView(null);
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void emptyFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyFieldButtonActionPerformed
