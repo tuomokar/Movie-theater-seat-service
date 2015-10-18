@@ -123,4 +123,6 @@ Started the project:
 **Sunday 18/10/2015, (hours to be added)**
 - squashed any remaining bugs and finished the GUI
 - separated the logic from the UI better with class UILogicHandler
-- ..
+- updated diagrams
+- finished documentation
+- finished the project
