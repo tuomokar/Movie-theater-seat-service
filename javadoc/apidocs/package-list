@@ -1,0 +1,7 @@
+seatservice
+seatservice.domain
+seatservice.filehandling
+seatservice.userinterface
+seatservice.userinterface.command
+seatservice.userinterface.listeners
+seatservice.userinterface.logic
