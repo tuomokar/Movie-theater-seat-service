@@ -84,16 +84,16 @@ an instance of the <code>HallNamesListener</code> is also initialized. Once thes
 The class gets all the needed tables, lists, panes, labels and text fields it needs to check input, give error messages, show halls visually and such.
 
 In the constructor of <code>UILogicHandler</code> an instance of <code>HallHandler</code> is initialized, which initializes the <code>HallAdder</code>,
-<code>HallParser</code>, <code>HallRemover</code> and <code>Halls</code> classes. After that in the <code>UILogicHandler</code> class <code>HallHandler</code>
-is used to parse any possibly existing halls in the xml database file to objects. To do that, the HallHandler class uses an instance of <code>HallParser</code> class,
-which uses JAXB (Java Architecture for XML Binding) to unmarshal the file. Any hall unmarshalled gets its seats also initialized.
+<code>HallParser</code>, <code>HallRemover</code> and <code>Halls</code> classes. After that in the <code>UILogicHandler</code> class, <code>HallHandler</code>
+is used to parse any possibly existing halls in the xml database file to objects. To do that, the <code>HallHandler</code> class uses an instance of <code>HallParser</code> class,
+which uses <code>JAXB</code> (Java Architecture for XML Binding) to unmarshal the file. Any hall unmarshalled gets its seats also initialized.
 
 Once the file is parsed the constructor of <code>UILogicHandler</code> continues with initializing all the tables, lists, panes and such and then adds
-action listeners to the appropriate variables. After doing this all the constructor creates an in instance of <code>InputErrorHandler</code> which too
-receives all the necessary fields it needs to check for input values and give proper error messages related to them. After <code>InputErrorHandler</code>
+action listeners to the appropriate variables. After doing this all, the constructor creates an instance of <code>InputErrorHandler</code>, which too
+receives all the necessary fields it needs to check input values and give proper error messages related to them. After <code>InputErrorHandler</code>
 having initialized everything it needs to, the constructor of <code>UILogicHandler</code> finally fills all the appropriate fields in the GUI with the
-information it has on any possible unmarshalled <code>Hall/<code> objects.
+information it has on any possible unmarshalled <code>Hall</code> objects.
 
-Now, everything having been initialized, the UI simply sees what the user does and uses the instance of <code>UILogicHandler</code> to do what is needed,
+Now, everything having been initialized, the UI simply listens to what the user does and uses the instance of <code>UILogicHandler</code> to do what is needed,
 whether it's to show the halls in a visual representation, add new hall, update an existing hall, reset the hall view or remove a hall. The 
 <code>UILogicHandler</code> uses <code>HallHandler</code> and <code>InputErrorHandler</code> as needed.
