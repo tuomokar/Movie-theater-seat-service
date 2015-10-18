@@ -3,8 +3,8 @@ package seatservice.userinterface.command;
 
 /**
  * This is a simple enum class, intended for use to determine the purpose of
- * use for a method in the InputErrorHandler class and another one in the 
- * UserInterface class.
+ * use for a method in the InputErrorHandler class and a couple of methods in
+ * the UILogicHandler class
  * 
  * @author Tuomo Oila
  */
