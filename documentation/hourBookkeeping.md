@@ -120,7 +120,7 @@ Started the project:
 - added class to handle any input errors and wrote tests for it
 - went through every class and did some refactoring and updated javadoc
 
-**Sunday 18/10/2015, (hours to be added)**
+**Sunday 18/10/2015, 7 hours**
 - squashed any remaining bugs and finished the GUI
 - separated the logic from the UI better with class UILogicHandler
 - updated diagrams
