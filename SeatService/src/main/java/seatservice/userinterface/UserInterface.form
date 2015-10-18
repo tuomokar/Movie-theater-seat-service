@@ -60,6 +60,10 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerServingTabMouseClicked"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTabbedPane()"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="customerServingTab.addChangeListener(new javax.swing.event.ChangeListener() {&#xa;    &#xa;    @Override&#xa;    public void stateChanged(javax.swing.event.ChangeEvent e) {&#xa;        javax.swing.JTabbedPane pane = (javax.swing.JTabbedPane) e.getSource();&#xa;        hallSituationScrollPane.setViewportView(null);&#xa;        hallNamesListener.resetSelection();&#xa;        hallNamesList1.clearSelection();&#xa;        hallNamesList2.clearSelection();&#xa;        &#xa;    }&#xa;});"/>
+      </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>

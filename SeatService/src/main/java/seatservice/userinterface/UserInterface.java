@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seatservice.userinterface;
 
 import seatservice.userinterface.command.Command;
@@ -12,16 +7,7 @@ import seatservice.domain.Hall;
 import seatservice.filehandling.HallHandler;
 import seatservice.domain.Seat;
 import seatservice.userinterface.listeners.ClickListener;
-
-import java.awt.GridLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import java.util.List;
-import java.util.Map;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
+import seatservice.userinterface.logic.UILogicHandler;
 
 /**
  * This class is responsible for handling the GUI
@@ -30,30 +16,32 @@ import java.awt.event.ActionListener;
  */
 public class UserInterface extends javax.swing.JFrame implements Runnable {
 
-    private HallHandler hallHandler;
-    private HallNamesListener listener;
-    private InputErrorHandler inputErrorHandler;
+    private UILogicHandler uiLogicHandler;
+    private HallNamesListener hallNamesListener;
 
+    /**
+     * The constructor initializes <code>hallNamesListener</code> and all the 
+     * generated code and creates the <code>uiLogicHandler</code>
+     */
     public UserInterface() {
-        hallHandler = new HallHandler();
-        hallHandler.readFile();
+        hallNamesListener = new HallNamesListener();
         initComponents();
-        fillHallNames();
-        listener = new HallNamesListener();
-        addSelectionListenerToHallNames();
-        fillNamesTable();
-        createInputErrorHandler();
+        createUILogicHandler();
     }
 
-    private void createInputErrorHandler() {
-        this.inputErrorHandler = new InputErrorHandler(
+    private void createUILogicHandler() {
+        uiLogicHandler = new UILogicHandler(
+                hallInfoTable,
                 hallNameErrorLabel,
-                rowsErrorLabel,
-                seatsErrorLabel,
+                hallNamesList1,
+                hallNamesList2,
+                hallSituationScrollPane,
                 hallsNameTextField,
+                rowsErrorLabel,
                 rowsTextField,
+                seatsErrorLabel,
                 seatsTextField,
-                hallHandler);
+                hallNamesListener);
     }
 
     /**
@@ -108,6 +96,18 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
         customerServingTab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 customerServingTabMouseClicked(evt);
+            }
+        });
+        customerServingTab.addChangeListener(new javax.swing.event.ChangeListener() {
+
+            @Override
+            public void stateChanged(javax.swing.event.ChangeEvent e) {
+                javax.swing.JTabbedPane pane = (javax.swing.JTabbedPane) e.getSource();
+                hallSituationScrollPane.setViewportView(null);
+                hallNamesListener.resetSelection();
+                hallNamesList1.clearSelection();
+                hallNamesList2.clearSelection();
+
             }
         });
 
@@ -388,149 +388,23 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void addHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHallButtonActionPerformed
-
-        emptyErrorLabels();
-        String name = hallsNameTextField.getText().trim();
-
-        if (!valuesAreValidWhenAddingOrUpdating(name, Command.ADD)) {
-            return;
-        }
-
-        int rows = Integer.parseInt(rowsTextField.getText());
-        int seats = Integer.parseInt(seatsTextField.getText());
-
-        hallHandler.addNewHall(name, rows, seats);
-
-        updateFieldsListAndTables();
+        uiLogicHandler.addHall();
     }//GEN-LAST:event_addHallButtonActionPerformed
 
-    private void updateFieldsListAndTables() {
-        emptyAllFieldsAndLabels();
-        fillHallNames();
-        fillNamesTable();
-    }
-
     private void removeHallButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeHallButtonActionPerformed
-        if (hallHandler.getHallsAsList().isEmpty()) {
-            return;
-        }
-
-        if (listener.getSelectedName() == null) {
-            return;
-        }
-
-        if (!confirmUserWantsToRemoveHall(Command.REMOVE)) {
-            return;
-        }
-
-        removeSelectedHall();
-        updateFieldsListAndTables();
+        uiLogicHandler.removeHall();
     }//GEN-LAST:event_removeHallButtonActionPerformed
 
-    private boolean noHallsExist() {
-        return hallHandler.getHallsAsList().isEmpty();
-    }
-
-    private boolean selectedNameIsNull() {
-        return listener.getSelectedName() == null;
-    }
-
-
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
-
-        hallSituationScrollPane.setViewportView(null);
-        if (noHallsExist()) {
-            return;
-        }
-        if (selectedNameIsNull()) {
-            return;
-        }
-
-        hallSituationScrollPane.getViewport().revalidate();
-        hallSituationScrollPane.getViewport().repaint();
-
-        String selectedHall = listener.getSelectedName();
-        Hall hall = hallHandler.findHallByName(selectedHall);
-
-        Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
-
-        removeListeners(seats, hall);
-
-        GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());
-
-        JPanel buttons = new JPanel();
-        buttons.setLayout(layout);
-        addListenersToSeatsAndSeatsToPanel(buttons, seats, hall);
-
-        hallSituationScrollPane.setViewportView(buttons);
+        uiLogicHandler.showOrResetView(Command.SHOW);
     }//GEN-LAST:event_showButtonActionPerformed
 
     private void resetSeatsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSeatsButtonActionPerformed
-        hallSituationScrollPane.setViewportView(null);
-        if (noHallsExist()) {
-            return;
-        }
-        if (selectedNameIsNull()) {
-            return;
-        }
-
-        String selectedHall = listener.getSelectedName();
-
-        Hall hall = hallHandler.findHallByName(selectedHall);
-        hall.resetSeatsToAvailable();
-        Map<Integer, Map<Integer, Seat>> seats = hall.getSeats();
-
-        removeListeners(seats, hall);
-        GridLayout layout = new GridLayout(seats.size(), seats.get(1).size());
-
-        JPanel buttons = new JPanel();
-        buttons.setLayout(layout);
-        addListenersToSeatsAndSeatsToPanel(buttons, seats, hall);
-
-        hallSituationScrollPane.setViewportView(buttons);
+        uiLogicHandler.showOrResetView(Command.RESET);
     }//GEN-LAST:event_resetSeatsButtonActionPerformed
 
-    private boolean valuesAreValidWhenAddingOrUpdating(String name, Command command) {
-
-        if (inputErrorHandler.anyNewHallValueIsEmpty(name)) {
-            return false;
-        }
-
-        boolean invalidValueFound = true;
-
-        boolean hallExistsAlready = inputErrorHandler.hallExistsAlready(name, command);
-        if (hallExistsAlready && command == Command.ADD) {
-            invalidValueFound = false;
-        } else if (!hallExistsAlready && command == Command.UPDATE) {
-            invalidValueFound = false;
-        }
-
-        if (!inputErrorHandler.rowsAndSeatsAreIntegersAndAboveZero()) {
-            invalidValueFound = false;
-        }
-
-        return invalidValueFound;
-    }
-
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        emptyErrorLabels();
-        String name = hallsNameTextField.getText().trim();
-
-        if (!valuesAreValidWhenAddingOrUpdating(name, Command.UPDATE)) {
-            return;
-        }
-
-        if (!confirmUserWantsToRemoveHall(Command.UPDATE)) {
-            return;
-        }
-
-        int newRows = Integer.parseInt(rowsTextField.getText());
-        int newSeats = Integer.parseInt(seatsTextField.getText());
-
-        hallHandler.updateHall(name, newRows, newSeats);
-        fillHallNames();
-        fillNamesTable();
-        emptyAllFieldsAndLabels();       
+        uiLogicHandler.updateHallsInformation();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void emptyFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyFieldButtonActionPerformed
@@ -538,131 +412,11 @@ public class UserInterface extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_emptyFieldButtonActionPerformed
 
     private void customerServingTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerServingTabMouseClicked
-        listener.resetSelection();
-        hallNamesList1.clearSelection();
-        hallNamesList2.clearSelection();
-        hallSituationScrollPane.setViewportView(null);
+//        listener.resetSelection();
+//        hallNamesList1.clearSelection();
+//        hallNamesList2.clearSelection();
+//        hallSituationScrollPane.setViewportView(null);
     }//GEN-LAST:event_customerServingTabMouseClicked
-
-    private void removeListeners(
-            Map<Integer, Map<Integer, Seat>> seats,
-            Hall hall) {
-
-        for (int row = seats.size(); row >= 1; row--) {
-            for (int seatsPlace = 1; seatsPlace <= seats.get(1).size(); seatsPlace++) {
-                Seat seat = hall.getSeat(row, seatsPlace);
-                if (seat.getActionListeners().length == 0) {
-                    break;
-                }
-
-                ActionListener listener = seat.getActionListeners()[0];
-                seat.removeActionListener(listener);
-            }
-        }
-    }
-
-    private void addListenersToSeatsAndSeatsToPanel(JPanel buttons,
-            Map<Integer, Map<Integer, Seat>> seats,
-            Hall hall) {
-
-        for (int row = seats.size(); row >= 1; row--) {
-            for (int seatsPlace = 1; seatsPlace <= seats.get(1).size(); seatsPlace++) {
-                Seat seat = hall.getSeat(row, seatsPlace);
-                seat.addActionListener(new ClickListener());
-                seat.setText("<html>r" + row + "<br>" + seatsPlace + "</html");
-                buttons.add(seat);
-            }
-        }
-    }
-
-    private boolean confirmUserWantsToRemoveHall(Command command) {
-        JDialog.setDefaultLookAndFeelDecorated(true);
-        int response = 9999991;
-        
-        if (command == Command.UPDATE) {
-            response = JOptionPane.showConfirmDialog(null,
-                    "Are you sure you want to update this hall?", "Confirm",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            
-        } else if (command == Command.REMOVE) {
-            
-            response = JOptionPane.showConfirmDialog(null,
-                    "Are you sure you want to remove this hall?", "Confirm",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        }
-        return response == JOptionPane.YES_OPTION;
-    }
-
-    private void fillHallNames() {
-        DefaultListModel hallNamesModel = new DefaultListModel();
-        for (int i = 0; i < hallHandler.getHallsAsList().size(); i++) {
-            hallNamesModel.addElement(hallHandler.getHallsAsList().get(i).getName());
-        }
-        hallNamesList1.setModel(hallNamesModel);
-        hallNamesList2.setModel(hallNamesModel);
-    }
-
-    private void fillNamesTable() {
-
-        List<Hall> halls = hallHandler.getHallsAsList();
-        int size = hallHandler.getHallsAsList().size();
-
-        DefaultTableModel tableModel = new DefaultTableModel(0, size);
-
-        String header[] = new String[]{"Name", "Rows", "Seats on a row",
-            "Seats in total"};
-
-        tableModel.setColumnIdentifiers(header);
-
-        for (int i = 0; i < size; i++) {
-
-            String[] row = new String[4];
-            Hall hall = halls.get(i);
-
-            String name = hall.getName();
-            Integer rows = hall.getAmountOfRows();
-            Integer seats = hall.getAmountOfRows();
-            Integer totalSeats = hall.getTheTotalAmountOfSeats();
-
-            row[0] = name;
-            row[1] = rows.toString();
-            row[2] = seats.toString();
-            row[3] = totalSeats.toString();
-            tableModel.addRow(row);
-
-        }
-        hallInfoTable.getColumnModel().getColumn(0).setResizable(true);
-        hallInfoTable.setModel(tableModel);
-    }
-
-    private void addSelectionListenerToHallNames() {
-        hallNamesList1.addListSelectionListener(listener);
-        hallNamesList2.addListSelectionListener(listener);
-    }
-
-    private void emptyTextFields() {
-        hallsNameTextField.setText("");
-        rowsTextField.setText("");
-        seatsTextField.setText("");
-    }
-
-    private void emptyErrorLabels() {
-        hallNameErrorLabel.setText("");
-        rowsErrorLabel.setText("");
-        seatsErrorLabel.setText("");
-    }
-
-    private void emptyAllFieldsAndLabels() {
-        emptyTextFields();
-        emptyErrorLabels();
-
-    }
-
-    private void removeSelectedHall() {
-        String selectedHall = this.listener.getSelectedName();
-        hallHandler.removeHall(selectedHall);
-        listener.resetSelection();
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
