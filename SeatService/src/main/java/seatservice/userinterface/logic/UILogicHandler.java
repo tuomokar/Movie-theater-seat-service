@@ -1,7 +1,6 @@
 package seatservice.userinterface.logic;
 
 import seatservice.filehandling.HallHandler;
-import seatservice.userinterface.inputerrorhandler.InputErrorHandler;
 import seatservice.userinterface.listeners.HallNamesListener;
 import seatservice.domain.Hall;
 import seatservice.domain.Seat;
