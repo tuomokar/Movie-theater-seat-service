@@ -34,7 +34,7 @@ public class Halls {
     
     /**
      * Adds a hall to the database
-     * @param hall 
+     * @param hall hall to be added to the database file
      */
     public void addHall(Hall hall) {
         if (halls.contains(hall)) {
@@ -58,7 +58,7 @@ public class Halls {
     
     /**
      * Checks if the list of the halls contains the hall given as the parameter
-     * @param hall
+     * @param hall hall to be checked if it's contained in the database or not
      * @return Returns true if the list of the halls contains the hall given
      * as the parameter
      */
@@ -70,7 +70,7 @@ public class Halls {
      * Searches for a hall that would have the name that is the search parameter
      * In case a matching hall is found, that hall is returned. If no matching
      * hall is found, the method returns null.
-     * @param name
+     * @param name the name of the hall to be searched for
      * @return Returns true if a hall is found with the given name
      */
     public Hall findByName(String name) {

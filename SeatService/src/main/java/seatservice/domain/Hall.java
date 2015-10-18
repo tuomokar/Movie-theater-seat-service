@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * This class presents a single hall in the movie theater. Each hall has a name
+ * This class represents a single hall in the movie theater. Each hall has a name
  * and a certain amount of seats, which is known through the amount of rows
  * and amount of seats on the rows. 
  * 

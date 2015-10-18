@@ -88,7 +88,7 @@ public class HallParser {
     /**
      * Changes the current file path to the new path given as the parameter
      *
-     * @param newPath
+     * @param newPath the new file path to be used
      */
     public void changeFilePath(String newPath) {
         filePath = newPath;
